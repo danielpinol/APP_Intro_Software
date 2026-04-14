@@ -42,7 +42,7 @@ body {
 }
 
 
-/* Titulo de toda la landing page */
+/* Titulo de la landing page */
 /* ----------------------------------- */
 .main_title {
   font-size: clamp(5.5rem, 19vw, 15rem);
@@ -56,4 +56,16 @@ body {
   background-clip: text;
   color: transparent;
   margin-bottom: 36px;
+}
+
+/* Animacion: el titulo aparece de abajo hacia arriba */
+.aparecer {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.aparecer.listo {
+  opacity: 1;
+  transform: translateY(0);
 }

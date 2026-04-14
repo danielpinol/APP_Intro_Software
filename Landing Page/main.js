@@ -86,3 +86,19 @@ function dibujarParticulas() {
 }
 
 dibujarParticulas();
+
+
+// TRANSICION DE TEXTO (APARECE DE ABAJO HACIA ARRIBA)
+// ----------------------------------------------------
+const revealEls = document.querySelectorAll('.aparecer');
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('listo');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+revealEls.forEach(el => revealObserver.observe(el));
