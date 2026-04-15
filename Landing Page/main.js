@@ -63,7 +63,7 @@ function dibujarParticulas() {
     const alpha = (1 - p.z) * 0.55;
 
     // Dibuja la linea de movimiento (estela)
-    const pz2 = p.z + p.speed * 40;
+    const pz2 = p.z + p.speed * 45;
     const sc2 = 1 / pz2;
     const tx  = (p.x - 0.5) * sc2 * W + cx;
     const ty  = (p.y - 0.5) * sc2 * H + cy;

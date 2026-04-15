@@ -10,6 +10,7 @@ body {
   font-family: 'Space Grotesk', -apple-system, sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  cursor: none;
 }
 
 /* CURSOR, todo lo relacionado al cursor en la landing */
