@@ -152,3 +152,35 @@ body {
   100% { opacity: 0; transform: translateX(-50%) translateY(16px); }
 }
 
+/* ── Estilo para el indicador scroll ── */
+.indicador_scroll {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  animation: bounce 2s infinite;
+  transition: opacity 0.4s;
+}
+
+.indicador_scroll span {
+  display: block;
+  width: 24px;
+  height: 40px;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  position: relative;
+}
+
+.indicador_scroll span::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: #00d4ff;
+  border-radius: 2px;
+  animation: scrolldot 2s infinite;
+}
