@@ -95,47 +95,28 @@ body {
   transform: translateY(0);
 }
 
-/* Texto que se escribe solo debajo del titulo */
-/* ----------------------------------- */
-#escribe_solo {
-  color: #00d4ff;
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.55), 0 0 2px rgba(0, 212, 255, 0.9);
-}
-
-.cursor_blink {
-  display: inline-block;
-  width: 2px;
-  height: 1.1em;
-  background: #00d4ff;
-  box-shadow: 0 0 6px rgba(0, 212, 255, 0.8);
-  vertical-align: middle;
-  margin-left: 3px;
-  animation: caret 1s step-end infinite;
-}
-
-@keyframes caret { 50% { opacity: 0; } }
-
-/* CURSOR PERSONALIZADO */
-/* ----------------------------------- */
-.cursor {
+/* ── Dots laterales ── */
+.barra_vertical {
   position: fixed;
-  width: 10px;
-  height: 10px;
-  background: #00d4ff;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease;
+  background: #222;
+  transition: all 0.35s;
 }
 
-.cursor.expandido {
-  width: 20px;
+.dot.activo {
+  background: #00d4ff;
   height: 20px;
-}
-
-.cursor.clic {
-  width: 25px;
-  height: 25px;
+  border-radius: 2px;
 }
