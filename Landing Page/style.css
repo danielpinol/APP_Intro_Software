@@ -71,6 +71,26 @@ body {
   transform: translateY(0);
 }
 
+/* Texto que se escribe solo debajo del titulo */
+/* ----------------------------------- */
+#escribe_solo {
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.55), 0 0 2px rgba(0, 212, 255, 0.9);
+}
+
+.cursor_blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #00d4ff;
+  box-shadow: 0 0 6px rgba(0, 212, 255, 0.8);
+  vertical-align: middle;
+  margin-left: 3px;
+  animation: caret 1s step-end infinite;
+}
+
+@keyframes caret { 50% { opacity: 0; } }
+
 /* CURSOR PERSONALIZADO */
 /* ----------------------------------- */
 .cursor {
