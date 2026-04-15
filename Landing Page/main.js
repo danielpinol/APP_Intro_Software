@@ -102,3 +102,35 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 
 revealEls.forEach(el => revealObserver.observe(el));
+
+
+// CURSOR PERSONALIZADO
+// ----------------------------------------------------
+const cursor = document.getElementById('cursor');
+let curX = 0, curY = 0;
+let mouseX = 0, mouseY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// El cursor sigue al mouse con un pequeño retraso (0.14 = velocidad de seguimiento)
+function animarCursor() {
+  curX += (mouseX - curX) * 0.14;
+  curY += (mouseY - curY) * 0.14;
+  cursor.style.left = curX + 'px';
+  cursor.style.top  = curY + 'px';
+  requestAnimationFrame(animarCursor);
+}
+animarCursor();
+
+// Se expande cuando el mouse esta sobre elementos clickeables
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expandido'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expandido'));
+});
+
+// Se agranda al hacer clic
+document.addEventListener('mousedown', () => cursor.classList.add('clic'));
+document.addEventListener('mouseup',   () => cursor.classList.remove('clic'));

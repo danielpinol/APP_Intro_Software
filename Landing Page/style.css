@@ -10,6 +10,7 @@ body {
   font-family: 'Space Grotesk', -apple-system, sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  cursor: none;
 }
 
 /* CANVAS DEL FONDO  */
@@ -68,4 +69,29 @@ body {
 .aparecer.listo {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* CURSOR PERSONALIZADO */
+/* ----------------------------------- */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #00d4ff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.cursor.expandido {
+  width: 20px;
+  height: 20px;
+}
+
+.cursor.clic {
+  width: 25px;
+  height: 25px;
 }
