@@ -102,3 +102,18 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 
 revealEls.forEach(el => revealObserver.observe(el));
+
+// Detecta la slide que esta visible y activa el dot que corresponde 
+const slides = document.querySelectorAll('[data-s]');
+const pips   = document.querySelectorAll('.nav-pip');
+
+const slideObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = parseInt(e.target.dataset.s);
+      pips.forEach((p, i) => p.classList.toggle('on', i === idx));
+    }
+  });
+}, { threshold: 0.5 });
+
+slides.forEach(s => slideObserver.observe(s));
