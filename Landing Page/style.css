@@ -142,6 +142,98 @@ body {
 @keyframes caret { 50% { opacity: 0; } }
 
 
+/* SLIDE 2 - Validacion de mercado */
+/* ----------------------------------- */
+.subtitle_slide {
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #00d4ff;
+  margin-bottom: 8px;
+}
+
+.texto_stat {
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: #888;
+  letter-spacing: 0.04em;
+  margin-bottom: 64px;
+}
+
+.texto_stat::before {
+  content: '$ ';
+  color: #00d4ff;
+}
+
+.fila_stat {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.bloque_stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 44px;
+}
+
+.bloque_stat:first-child { padding-left: 0; }
+.bloque_stat:last-child  { padding-right: 0; }
+
+.nombre_stat {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #555;
+  letter-spacing: 0.06em;
+}
+
+.numero_stat {
+  font-size: clamp(3.8rem, 7vw, 6rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.contador_stat {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.unidad_stat {
+  font-size: 0.38em;
+  color: #00d4ff;
+  font-weight: 700;
+  vertical-align: super;
+}
+
+.descripcion_stat {
+  font-size: 0.85rem;
+  color: #00d4ff;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.divisor_stat {
+  width: 1px;
+  background: #1e1e1e;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.conclusion_stat {
+  margin-top: 60px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #00d4ff;
+  opacity: 0.45;
+  letter-spacing: 0.02em;
+}
+
+
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50%       { transform: translateX(-50%) translateY(6px); }
