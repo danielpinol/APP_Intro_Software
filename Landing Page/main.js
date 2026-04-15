@@ -103,37 +103,20 @@ const revealObserver = new IntersectionObserver(entries => {
 
 revealEls.forEach(el => revealObserver.observe(el));
 
+// Detecta la slide que esta visible y activa el dot que corresponde (DOTS)
+const slides = document.querySelectorAll('[data-s]');
+const pips   = document.querySelectorAll('.dot');
 
-// CURSOR PERSONALIZADO
-// ----------------------------------------------------
-const cursor = document.getElementById('cursor');
-let curX = 0, curY = 0;
-let mouseX = 0, mouseY = 0;
+const slideObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = parseInt(e.target.dataset.s);
+      pips.forEach((p, i) => p.classList.toggle('activo', i === idx));
+    }
+  });
+}, { threshold: 0.5 });
 
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-
-// El cursor sigue al mouse con un pequeño retraso (0.14 = velocidad de seguimiento)
-function animarCursor() {
-  curX += (mouseX - curX) * 0.14;
-  curY += (mouseY - curY) * 0.14;
-  cursor.style.left = curX + 'px';
-  cursor.style.top  = curY + 'px';
-  requestAnimationFrame(animarCursor);
-}
-animarCursor();
-
-// Se expande cuando el mouse esta sobre elementos clickeables
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('expandido'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('expandido'));
-});
-
-// Se agranda al hacer clic
-document.addEventListener('mousedown', () => cursor.classList.add('clic'));
-document.addEventListener('mouseup',   () => cursor.classList.remove('clic'));
+slides.forEach(s => slideObserver.observe(s));
 
 
 // VISUAL QUE ESCRIBE SOLO. CURSOR TITILANDO

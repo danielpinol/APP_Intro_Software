@@ -95,6 +95,32 @@ body {
   transform: translateY(0);
 }
 
+/* ── Dots laterales ── */
+.barra_vertical {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #222;
+  transition: all 0.35s;
+}
+
+.dot.activo {
+  background: #00d4ff;
+  height: 20px;
+  border-radius: 2px;
+}
+
 /* Texto que se escribe solo debajo del titulo */
 /* ----------------------------------- */
 #escribe_solo {
@@ -115,27 +141,3 @@ body {
 
 @keyframes caret { 50% { opacity: 0; } }
 
-/* CURSOR PERSONALIZADO */
-/* ----------------------------------- */
-.cursor {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: #00d4ff;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease;
-}
-
-.cursor.expandido {
-  width: 20px;
-  height: 20px;
-}
-
-.cursor.clic {
-  width: 25px;
-  height: 25px;
-}
