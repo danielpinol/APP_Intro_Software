@@ -145,79 +145,91 @@ body {
 /* SLIDE 2 - Validacion de mercado */
 /* ----------------------------------- */
 .subtitle_slide {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #00d4ff;
   margin-bottom: 8px;
 }
 
 .texto_stat {
-  font-size: 0.85rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: #888;
+  letter-spacing: 0.04em;
+  margin-bottom: 64px;
+}
+
+.texto_stat::before {
+  content: '$ ';
   color: #00d4ff;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 56px;
-  opacity: 0.7;
 }
 
 .fila_stat {
   display: flex;
-  align-items: flex-start;
-  gap: 0;
-  margin-bottom: 40px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .bloque_stat {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 44px;
 }
 
+.bloque_stat:first-child { padding-left: 0; }
+.bloque_stat:last-child  { padding-right: 0; }
+
 .nombre_stat {
-  display: block;
-  font-size: 0.75rem;
-  color: #00d4ff;
-  letter-spacing: 0.1em;
-  margin-bottom: 10px;
-  opacity: 0.6;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #555;
+  letter-spacing: 0.06em;
 }
 
 .numero_stat {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  margin-bottom: 10px;
+  font-size: clamp(3.8rem, 7vw, 6rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .contador_stat {
-  font-size: clamp(3rem, 7vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .unidad_stat {
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  font-weight: 700;
+  font-size: 0.38em;
   color: #00d4ff;
+  font-weight: 700;
+  vertical-align: super;
 }
 
 .descripcion_stat {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.5;
+  font-size: 0.85rem;
+  color: #00d4ff;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 .divisor_stat {
   width: 1px;
-  height: 100px;
-  background: rgba(0, 212, 255, 0.15);
-  margin: 0 48px;
-  align-self: center;
+  background: #1e1e1e;
+  flex-shrink: 0;
+  align-self: stretch;
 }
 
 .conclusion_stat {
-  font-size: 0.85rem;
-  color: rgba(0, 212, 255, 0.45);
-  letter-spacing: 0.05em;
-  margin-top: 16px;
+  margin-top: 60px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #00d4ff;
+  opacity: 0.45;
+  letter-spacing: 0.02em;
 }
 
