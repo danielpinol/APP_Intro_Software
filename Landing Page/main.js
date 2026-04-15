@@ -117,3 +117,78 @@ const slideObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 
 slides.forEach(s => slideObserver.observe(s));
+
+
+// VISUAL QUE ESCRIBE SOLO. CURSOR TITILANDO
+// ----------------------------------------------------
+const tagline   = 'Tu auto limpio mientras estudias.';
+const twEl      = document.getElementById('escribe_solo');
+const glyphPool = '01!?@#$%&<>{}[]|\\/=+-*^~_░▒▓';
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function scrambleChar(prefix, realChar) {
+  // Escribe 3 caracteres random antes de escribir la letra real
+  for (let k = 0; k < 3; k++) {
+    twEl.textContent = prefix + glyphPool[Math.floor(Math.random() * glyphPool.length)];
+    await sleep(32);
+  }
+  twEl.textContent = prefix + realChar;
+}
+
+async function startTypewriterLoop() {
+  await sleep(400);
+
+  while (true) {
+    // Escribe hacia adelante
+    for (let i = 0; i < tagline.length; i++) {
+      await scrambleChar(tagline.slice(0, i), tagline[i]);
+      await sleep(45 + Math.random() * 30);
+    }
+
+    // Espera 5 segundos
+    await sleep(5000);
+
+    // Borra hacia atras
+    for (let i = tagline.length; i >= 0; i--) {
+      twEl.textContent = tagline.slice(0, i);
+      await sleep(25 + Math.random() * 15);
+    }
+
+    // Pausa antes de volver a escribir
+    await sleep(600);
+  }
+}
+
+startTypewriterLoop();
+
+// CURSOR PERSONALIZADO
+// ----------------------------------------------------
+const cursor = document.getElementById('cursor');
+let curX = 0, curY = 0;
+let mouseX = 0, mouseY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// El cursor sigue al mouse con un pequeño retraso (0.14 = velocidad de seguimiento)
+function animarCursor() {
+  curX += (mouseX - curX) * 0.14;
+  curY += (mouseY - curY) * 0.14;
+  cursor.style.left = curX + 'px';
+  cursor.style.top  = curY + 'px';
+  requestAnimationFrame(animarCursor);
+}
+animarCursor();
+
+// Se expande cuando el mouse esta sobre elementos clickeables
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expandido'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expandido'));
+});
+
+// Se agranda al hacer clic
+document.addEventListener('mousedown', () => cursor.classList.add('clic'));
+document.addEventListener('mouseup',   () => cursor.classList.remove('clic'));
