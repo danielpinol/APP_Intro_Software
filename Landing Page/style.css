@@ -12,6 +12,30 @@ body {
   scroll-behavior: smooth;
 }
 
+/* CURSOR, todo lo relacionado al cursor en la landing */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #00d4ff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.cursor.expanded {
+  width: 20px;
+  height: 20px;
+}
+
+.cursor.clicked {
+  width: 25px;
+  height: 25px;
+}
+
 /* CANVAS DEL FONDO  */
 /* ----------------------------------- */
 #grid_canvas {
