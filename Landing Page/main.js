@@ -117,3 +117,47 @@ const slideObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 
 slides.forEach(s => slideObserver.observe(s));
+
+
+// VISUAL QUE ESCRIBE SOLO. CURSOR TITILANDO
+// ----------------------------------------------------
+const tagline   = 'Tu auto limpio mientras estudias.';
+const twEl      = document.getElementById('escribe_solo');
+const glyphPool = '01!?@#$%&<>{}[]|\\/=+-*^~_░▒▓';
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function scrambleChar(prefix, realChar) {
+  // Escribe 3 caracteres random antes de escribir la letra real
+  for (let k = 0; k < 3; k++) {
+    twEl.textContent = prefix + glyphPool[Math.floor(Math.random() * glyphPool.length)];
+    await sleep(32);
+  }
+  twEl.textContent = prefix + realChar;
+}
+
+async function startTypewriterLoop() {
+  await sleep(400);
+
+  while (true) {
+    // Escribe hacia adelante
+    for (let i = 0; i < tagline.length; i++) {
+      await scrambleChar(tagline.slice(0, i), tagline[i]);
+      await sleep(45 + Math.random() * 30);
+    }
+
+    // Espera 5 segundos
+    await sleep(5000);
+
+    // Borra hacia atras
+    for (let i = tagline.length; i >= 0; i--) {
+      twEl.textContent = tagline.slice(0, i);
+      await sleep(25 + Math.random() * 15);
+    }
+
+    // Pausa antes de volver a escribir
+    await sleep(600);
+  }
+}
+
+startTypewriterLoop();
