@@ -192,3 +192,13 @@ document.querySelectorAll('a, button').forEach(el => {
 // Se agranda al hacer clic
 document.addEventListener('mousedown', () => cursor.classList.add('clic'));
 document.addEventListener('mouseup',   () => cursor.classList.remove('clic'));
+
+
+// Indicador SCROLL
+const scrollIndicator = document.querySelector('.indicador_scroll');
+
+window.addEventListener('scroll', () => {
+  scrollIndicator.style.opacity = window.scrollY > 100 ? '0' : '1';
+});
+
+
