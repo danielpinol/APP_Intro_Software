@@ -202,3 +202,32 @@ window.addEventListener('scroll', () => {
 });
 
 
+
+
+// ANIMACION DE CONTADORES (sube el numero desde 0 hasta el valor real)
+// ----------------------------------------------------
+function animarContador(el) {
+  const objetivo = parseInt(el.dataset.target);
+  const duracion = 1200;
+  const inicio   = performance.now();
+
+  function paso(ahora) {
+    const progreso = Math.min((ahora - inicio) / duracion, 1);
+    el.textContent = Math.floor(progreso * objetivo);
+    if (progreso < 1) requestAnimationFrame(paso);
+    else el.textContent = objetivo;
+  }
+
+  requestAnimationFrame(paso);
+}
+
+const observador_contadores = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animarContador(e.target);
+      observador_contadores.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.contador_stat').forEach(el => observador_contadores.observe(el));
