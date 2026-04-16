@@ -1,0 +1,3 @@
+Uwash Landing Page
+
+This is the landing page for Uwash, a car wash service designed for UFM students. The page is built with plain HTML, CSS, and JavaScript, with no frameworks or dependencies other than the Space Grotesk font loaded from Google Fonts. It contains four slides: a hero slide with an animated typewriter effect, a market validation slide with real survey data and animated counters, a business model slide explaining the three step process, and a call to action slide with a button that links to the Uwash app. The page also includes a custom cursor, a particle background animation, scroll reveal effects, and side navigation dots. To run it, simply open the index.html file in any modern browser. No build step or server is required.
