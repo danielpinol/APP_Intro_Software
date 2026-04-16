@@ -290,3 +290,63 @@ body {
   border-radius: 2px;
   animation: scrolldot 2s infinite;
 }
+
+
+/* ── SLIDE 3 MODELO DE NEGOCIOS ── */
+.slides.Slide_3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.etiqueta {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #00d4ff;
+  margin-bottom: 28px;
+}
+
+/* ── PASOS ── */
+.flujo-pasos {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 64px;
+  max-width: 1000px;
+}
+
+.tarjeta-paso {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.numero-paso {
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  font-weight: 800;
+  color: #00d4ff;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  opacity: 0.85;
+  text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+}
+
+.texto-paso {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: #666;
+  font-weight: 300;
+  line-height: 1.65;
+  max-width: 220px;
+}
+
+.separador-paso {
+  color: #444;
+  font-size: 1.8rem;
+  padding: 0 clamp(16px, 3vw, 40px);
+  padding-top: 24px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
