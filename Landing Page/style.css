@@ -276,3 +276,22 @@ body {
   border-radius: 2px;
   animation: scrolldot 2s infinite;
 }
+
+
+/* ── SLIDE 3 MODELO DE NEGOCIOS ── */
+.slides.Slide_3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.etiqueta {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #00d4ff;
+  margin-bottom: 28px;
+}
+
+
