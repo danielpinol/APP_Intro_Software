@@ -231,3 +231,21 @@ const observador_contadores = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 
 document.querySelectorAll('.contador_stat').forEach(el => observador_contadores.observe(el));
+
+
+// BOTON MAGNETICO (slide 4)
+// ----------------------------------------------------
+const btn_cta = document.getElementById('btn_cta');
+
+btn_cta.addEventListener('mousemove', e => {
+  const rect    = btn_cta.getBoundingClientRect();
+  const centroX = rect.left + rect.width  / 2;
+  const centroY = rect.top  + rect.height / 2;
+  const dx = (e.clientX - centroX) * 0.25;
+  const dy = (e.clientY - centroY) * 0.25;
+  btn_cta.style.transform = `translate(${dx}px, ${dy}px)`;
+});
+
+btn_cta.addEventListener('mouseleave', () => {
+  btn_cta.style.transform = 'translate(0, 0)';
+});
