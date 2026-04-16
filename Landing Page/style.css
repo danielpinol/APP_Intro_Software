@@ -111,6 +111,7 @@ body {
 }
 
 /* ── Dots laterales ── */
+/* ----------------------------------- */
 .barra_vertical {
   position: fixed;
   right: 28px;
@@ -260,6 +261,7 @@ body {
 }
 
 /* ── Estilo para el indicador scroll ── */
+/* ----------------------------------- */
 .indicador_scroll {
   position: fixed;
   bottom: 30px;
@@ -294,6 +296,7 @@ body {
 
 
 /* ── SLIDE 3 MODELO DE NEGOCIOS ── */
+/* ----------------------------------- */
 .nombre_stat_pasos {
   font-family: 'Courier New', monospace;
   font-size: 0.78rem;
@@ -334,7 +337,6 @@ body {
   max-width: 220px;
 }
 
-
 .separador-paso {
   color: #444;
   font-size: 1.8rem;
@@ -343,4 +345,54 @@ body {
   flex-shrink: 0;
   align-self: flex-start;
 }
+
+
+/* ── SLIDE 4 CALL TO ACTION ── */
+/* ----------------------------------- */
+.Slide_4 {
+  padding-left: clamp(70px, 13vw, 220px);
+}
+
+.precio_etiqueta {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.titulo_cta {
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  margin-bottom: 60px;
+}
+
+.btn_solicitar {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 42px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #1c1c1c;
+  font-family: inherit;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: border-color 0.3s, color 0.3s, transform 0.2s ease;
+  will-change: transform;
+}
+
+.btn_solicitar .btn_flecha { transition: transform 0.3s; }
+
+.btn_solicitar:hover {
+  border-color: #00d4ff;
+  color: #00d4ff;
+}
+
+.btn_solicitar:hover .btn_flecha { transform: translateX(5px); }
+
 
