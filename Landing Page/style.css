@@ -67,7 +67,8 @@ body {
 }
 
 .Slide_1,
-.Slide_2 {
+.Slide_2,
+.Slide_3 {
   padding-left: clamp(70px, 13vw, 220px);
 }
 
@@ -293,19 +294,11 @@ body {
 
 
 /* ── SLIDE 3 MODELO DE NEGOCIOS ── */
-.slides.Slide_3 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.etiqueta {
-  font-size: 0.65rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: #00d4ff;
-  margin-bottom: 28px;
+.nombre_stat_pasos {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #555;
+  letter-spacing: 0.06em;
 }
 
 /* ── PASOS ── */
@@ -335,7 +328,7 @@ body {
 
 .texto-paso {
   font-size: clamp(0.9rem, 1.4vw, 1.05rem);
-  color: #666;
+  color: #9ecfdb;
   font-weight: 300;
   line-height: 1.65;
   max-width: 220px;
