@@ -27,12 +27,12 @@ body {
   transition: width 0.3s ease, height 0.3s ease;
 }
 
-.cursor.expanded {
+.cursor.expandido {
   width: 20px;
   height: 20px;
 }
 
-.cursor.clicked {
+.cursor.clic {
   width: 25px;
   height: 25px;
 }
@@ -66,6 +66,11 @@ body {
   box-shadow: none;
 }
 
+.Slide_1,
+.Slide_2 {
+  padding-left: clamp(70px, 13vw, 220px);
+}
+
 
 /* Titulo de la landing page */
 /* ----------------------------------- */
@@ -81,6 +86,15 @@ body {
   background-clip: text;
   color: transparent;
   margin-bottom: 36px;
+}
+
+/* Texto debajo del titulo (typewriter) */
+.texto_abajo_de_titulo {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: #222;
+  font-weight: 300;
+  max-width: 520px;
+  line-height: 1.75;
 }
 
 /* Animacion: el titulo aparece de abajo hacia arriba */
