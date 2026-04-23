@@ -1,136 +1,327 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uwash</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uwash</title>
+
+    <!-- Fonts -->
+    <!-- Les hacemos preconnet antes para que se conecte a los servers de google y no hayan fallos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles & Scripts Externos -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="main.js" defer></script>
+
+    <!-- Tailwind Config -->
+    <!-- Configuramos tailwind para tener nuestras clases ya predefinidas -->
+    <!-- Escogemos extended porque queremos agregar mas clases a las que ya hay -->
+     <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#080805',
+                        foreground: '#ffffff',
+                        accent: '#00E5FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 20s ease-in-out infinite',
+                        'float-reverse': 'float-reverse 25s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s infinite linear',
+                        'glow-pulse': 'glow-pulse 4s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' },
+                        },
+                        'glow-pulse': {
+                            '0%, 100%': { opacity: '0.3', filter: 'blur(15px)' },
+                            '50%': { opacity: '0.6', filter: 'blur(25px)' },
+                        },
+                        drip: {
+                            '0%': { transform: 'translateY(-10px) scale(0.9)', opacity: '0' },
+                            '30%': { transform: 'translateY(0) scale(1)', opacity: '1' },
+                            '70%': { transform: 'translateY(5px) scale(1)', opacity: '1' },
+                            '100%': { transform: 'translateY(15px) scale(0.8)', opacity: '0' },
+                        },
+                        splash: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.2) rotate(15deg)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        'spin-slow': {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                            '50%': { transform: 'translate(100px, 50px) scale(1.1)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                            '50%': { transform: 'translate(-100px, -50px) scale(0.9)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
 
-<!-- Fondo solo de HTML no hace nada. Se necesita de JS y se puede dibujar lo que sea -->
-<canvas id="grid_canvas"></canvas>
+<!-- Cuando selecciones texto de la pagina se vera de estos colores -->
+<body class="selection:bg-accent selection:text-black">
 
-<!-- Cursor totalmente personalizado -->
-<div class="cursor" id="cursor"></div>
+<!-- SCROLL PROGRESS BAR -->
+    <div id="progress-bar"
+
+        class="fixed top-0 left-0 h-[3px] bg-accent z-[100] transition-all duration-150 shadow-[0_0_10px_rgba(0,229,255,0.5)]"
+        style="width: 0%"></div>
+        <!-- Fijo al hacer scroll, sin margen arriba e izquierda, altura 3, arriba de otros objetos, cambia fluido hace transiciones
+         fluidas y no cambia de golpe, la transicion dura 0.15 milisegundos, sombra de la barra  -->
+
+<!-- BACKGROUND EFFECTS -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <!-- inset = todos los margins son 0, si algo se sale del borde entonces se oculta y ya no se ve.
+        no deja que se hagan clics y esta en la capa 0 osea esta atras de todo -->
+
+<!-- Giant glowing orb 1 -->
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-accent opacity-[0.15] blur-[150px] animate-float">
+        </div>
+        <!-- Esta clase se posiciona adentro de su padre se hace el circulo adentro del contenedor,
+        se muevo para arriba, se mueve iquierda, ancho, alto, hace que sea redondo, color, un poco opaco,
+        lo pone un poco borroso, animacion flotante -->
+
+<!-- Giant glowing orb 2 -->
+        <div
+        class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0055ff] opacity-[0.1] blur-[180px] animate-float-reverse">
+        </div>
+        <!-- Igual que la esfera 1 solo que que se mueve alreves que la 1.Esta es un poco mas grande -->
+
+<!-- Grid overlay -->
+        <div
+            class="absolute inset-0 grid-bg opacity-50">
+        </div>
+
+<!-- JS Particles Container -->
+        <div id="particles-container"></div>
+    </div>
 
 
- <!-- Dots laterales -->
-  <div class="barra_vertical">
-    <div class="dot activo"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-  
-  
-  <!-- indicador de scroll en el bottom -->
-  <div class="indicador_scroll">
-    <span></span>
-  </div>
+<!-- NAVBAR -->
+<div class="fixed top-4 md:top-6 left-0 w-full px-4 md:px-8 z-50 flex justify-center">
+
+<!-- Barra de navegación con fondo semitransparente + blur (efecto glassmorphism) -->
+    <nav
+        class="w-full max-w-[1600px] flex items-center justify-between bg-[#1a1a1a]/70 backdrop-blur-xl border border-white/10 rounded-full px-6 md:px-8 py-3.5 shadow-2xl transition-all relative">
+        <!-- ocupa todo el ancho disponible, ancho maximo, layout flexible, centra verticalmente,
+         separa izquierda y derecha, fondo semitransparente, blur detras, borde, borde blanco transparente, redondos,
+         padding horizontal, mas padding en desktop, padding vertical, sombre fuerte, transicion suave, 
+         modifica dentro del navbar -->
+        
+<!-- Left: Logo -->
+        <div class="flex items-center gap-2.5 z-10">
+
+<!-- Logo + nombre -->
+            <div class="w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(0,229,255,0.4)]"></div>
+            <span class="font-bold text-xl tracking-wide text-white">Uwash</span>
+        </div>
+
+<!-- Center: Links -->
+        <div
+            class="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8 text-sm text-white/70 font-medium">
+        <!-- se relaciona con relative, se centra perfectamente, oculto en mobile, visible desktop -->
+
+            <a href="#como-funciona" class="hover:text-accent transition-colors ">
+                ¿Cómo funciona?
+            </a>
+            <a href="#precios" class="hover:text-accent transition-colors ">Precios</a>
+            <a href="#beneficios" class="hover:text-accent transition-colors ">Beneficios</a>
+        </div>
+
+        <!-- Right: Login / Sign Up -->
+        <div class="flex items-center gap-6 text-sm text-white/70 font-medium z-10">
+            
+            <!-- Línea separadora (solo en desktop) -->
+            <div class="hidden md:block w-[1px] h-4 bg-white/20"></div>
+
+            <!-- Botón Login -->
+            <a href="#" class="hover:text-accent transition-colors flex items-center gap-2">
+                <!--group = permite efecto en hijos-->
+
+                <iconify-icon icon="solar:user-linear"
+                    class="text-lg text-accent transition-transform"></iconify-icon>
+                Log in
+            </a> <!-- iconify-icon libreria para mostrar iconos-->
 
 
-<!-- Slide1 - Titulo principal de landing page y subtitulo que se escribe solo -->
-<div class="slides" data-s="0">
-  <h1 class="main_title aparecer">Uwash</h1>
-  <p class="texto_abajo_de_titulo">
-    <span id="escribe_solo"></span><span class="cursor_blink"></span>
-  </p>
+            <!-- Botón Sign Up (CTA principal) -->
+            <a href="#"
+                class="bg-accent text-background px-5 py-2 rounded-full hover:bg-white hover:-translate-y-0.5 transition-all duration-300 font-bold flex items-center gap-2">
+                <iconify-icon icon="solar:user-plus-linear" class="text-lg"></iconify-icon>
+                Sign Up
+            </a>
+        </div>
+
+    </nav>
 </div>
 
-<!-- slide 2: Validacion de mercado (Resultados de las encuestas a estudiantes de la UFM) -->
-<div class = "slides Slide_1" data-s = "1">
-  
-<!-- Titulo de la diapositiva -->
-  <p class="subtitle_slide aparecer">Validación de Mercado</p>
-  <p class="texto_stat aparecer" style="transition-delay:.05s">encuesta · 35 personas respondieron</p>
+<!-- === SECCION COMO FUNCIONA === -->
+<section id="como-funciona" class="relative z-10 w-full py-32 md:py-40 px-6 md:px-16">
+    <!-- relative para controlar capas, el z-10 sirve para que el elemento esta encima del fondo, w-full ocupa todo el ancho del contenedor
+        py-32 padding-top espacio arriba de un elemento, px para espacio horizontal de un elemento   -->
 
-  <div class="fila_stat">
-    <div class="bloque_stat aparecer" style="transition-delay:.1s">
-      <span class="nombre_stat_pasos">wash_frequency</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="29">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">lava su auto solo<br>1 vez al mes</span>
-    </div>
-    <div class="divisor_stat aparecer" style="transition-delay:.2s"></div>
-    <div class="bloque_stat aparecer" style="transition-delay:.3s">
-      <span class="nombre_stat_pasos">desired_frequency</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="31">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">dice que no tiene tiempo<br>para lavarlo</span>
-    </div>
-    <div class="divisor_stat aparecer" style="transition-delay:.4s"></div>
-    <div class="bloque_stat aparecer" style="transition-delay:.5s">
-      <span class="nombre_stat_pasos">main_barrier</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="49">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">quiere lavarlo 1 vez<br>por semana o más</span>
-    </div>
-    <div class="divisor_stat aparecer" style="transition-delay:.6s"></div>
-    <div class="bloque_stat aparecer" style="transition-delay:.7s">
-      <span class="nombre_stat_pasos">price_range</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="66">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">pagaría entre Q50 – Q100<br>por lavado básico</span>
-    </div>
-  </div>
-
-  <p class="conclusion_stat aparecer" style="transition-delay:.7s">// no falta demanda — falta conveniencia.</p>
-
-</div>
-
-<!-- slide 3: Modelo de negocio -->
-<div class="slides Slide_3" data-s="2">
-    <p class="subtitle_slide">Modelo de Negocio</p>
-
-    <div class="flujo-pasos">
-
-    <div class="tarjeta-paso" style="transition-delay:.1s">
-      <span class="nombre_stat_pasos">paso_</span>
-      <span class="numero-paso">01</span>
-      <p class="texto-paso">Solicitas desde la app en 45 segundos</p>
-    </div>
-
-    <span class="separador-paso" style="transition-delay:.28s">→</span>
-
-    <div class="tarjeta-paso" style="transition-delay:.46s">
-      <span class="nombre_stat_pasos">paso_</span>
-      <span class="numero-paso">02</span>
-      <p class="texto-paso">Vamos directamente a tu parqueo mientras estás en clase</p>
-    </div>
-
-    <span class="separador-paso" style="transition-delay:.64s">→</span>
-
-    <div class="tarjeta-paso" style="transition-delay:.82s">
-      <span class="nombre_stat_pasos">paso_</span>
-      <span class="numero-paso">03</span>
-      <p class="texto-paso">Notificación cuando está listo + pago automático. Tú ni te moviste.</p>
-    </div>
-  </div>
-</div>
+    <div class="w-full max-w-[1400px] mx-auto">
+        <!-- 
+        - max-w: limita el ancho para que no se vea muy estirado, mx-auto centrar un elemento horizontalmente -->
 
 
-<!-- slide 4: Call to action -->
-<div class="slides Slide_4" data-s="3">
-  <p class="precio_etiqueta aparecer">Desde Q70 · Paquetes disponibles</p>
-  <h2 class="titulo_cta aparecer" style="transition-delay:.1s">Pruébalo.<br>Que esperas?</h2>
-  <button class="btn_solicitar aparecer" style="transition-delay:.2s" id="btn_cta"
-    onclick="window.location.href='http://localhost:4200/solicitar-lavado'">
-    Solicitar Ahora <span class="btn_flecha">→</span>
-  </button>
-</div>
+        <!-- Título de Sección -->
+        <div class="mb-20 md:mb-28 text-center" data-scroll-reveal>
+            <!-- mb: espacio debajo del elemento (diferente a padding), text-center: todo centrado, data-scroll-reveal: activa animación al hacer scroll -->
 
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15]">
+                <!-- Título principal responsive, fonto-bold texto en negritas, tracking-tight espacio reducido entre letras, 
+                 leading controla el espacio entre lines de texto -->
 
+                Tres pasos.<br>
+                <span class="text-accent">Sin complicaciones</span>
+                <!-- Parte resaltada con color -->
+            </h2>
 
-<script src="main.js"></script>
+            <p class="mt-4 text-white/40 text-sm md:text-base font-mono tracking-widest">// no te tienes que mover</p>
+            <!-- estilo "código" con font-mono, mt es margin top, text y todo lo relacionado es responsive y el texto es blanco con opacidad de 40,
+                tracking-widest: letras separadas
+            -->
+        </div>
+
+        <!-- Grid de 3 Tarjetas + Línea Conectoras -->
+            <div class="relative">
+                <!-- Permite que las lineas puedan posicionarse en un bloque (relative) -->
+
+                <!-- Línea Conectora SVG (solo desktop) -->
+                <svg class="connector-line hidden md:block absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 z-0 pointer-events-none"
+                    viewBox="0 0 1400 2" preserveAspectRatio="none" data-scroll-reveal>
+                    <line x1="0" y1="1" x2="1400" y2="1" stroke="#00E5FF" stroke-width="2" stroke-opacity="0.2"
+                        stroke-dasharray="1400" stroke-dashoffset="1400" class="connector-path" /></svg>
+                <!-- svg se usa para un formato de imagen vectorial o sea para dibujar lineas o iconos en este caso una linea, 
+                 hidden para que la linea no aparezca, absolute para posicionarlo dentro del relative, top-1/2 la baja a la mitad de la altura del contenedor
+                left-0 la pega al borde izquierdo, h-[2px] altura de 2 píxeles, 
+                translate-y-1/2 corrige la posición para arriba para centrarla bien, 
+                z-0 La linea se posiciona detras de otro elementos, pointer-events-none la linea no bloquea clics ni hover-->
+                
+                <!-- Viewbox define el espacio del svg, preserve aspect ratio se adapta al ancho del bloque, line define el inicio y final de la linea
+                 strokes y todo lo relacionado: color grosor opacidad dibujada oculta al inicio toda la linea. -->
+
+            <!-- Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative z-10">
+                        <!-- Defini el numero de columnas (tambien es responsive) y el espacio entre ellas -->
+                
+                <!-- PASO 01 -->
+                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
+                        data-scroll-reveal data-delay="0.3">
+                        <!-- overflow-hidden oculta cualquier contenido afuera del elemento, rounded borde redondeado, 
+                         bg-white background blanco, blur borroso, transition efecto smooth, hover cambia todo cuanto interactua con el cursor, bg-clip-text solo aplica el fondo al texto -->
+
+                        <!-- Número Gigante de Fondo -->
+                        <span
+                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
+                            data-scroll-reveal data-delay="0.6">01</span>
+                            <!-- pointer no recibe clicks, bg-gradient gradiente vertical-->
+
+                        <!-- Icono -->
+                        <div class="relative z-10 mb-8">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                                <iconify-icon icon="solar:smartphone-linear"
+                                    class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                        </div>
+
+                        <!-- Contenido -->
+                        <div class="relative z-10">
+                            <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Solicitá</p>
+                            <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">45 segundos para pedir</h3>
+                            <!-- leading-snug altura de linea de texto mas compacta -->
+                            <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
+                                <!-- leading-relaxed mas espacio y font-light texto mas delgado -->
+                                Abrís la app, elegís tu ubicación (Sótano 1-2), tipo de lavado, y listo. Pago automático
+                                con tarjeta.
+                            </p>
+                        </div>
+                    </div>
+
+                <!-- PASO 02 -->
+                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
+                        data-scroll-reveal data-delay="0.7">
+
+                        <span
+                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
+                            data-scroll-reveal data-delay="1.0">02</span>
+
+                        <div class="relative z-10 mb-8">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                                <iconify-icon icon="solar:book-2-linear" class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Estudia
+                                tranquilo</p>
+                            <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">Nosotros vamos a ti</h3>
+                            <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
+                                Mientras estás en clase, nuestro equipo va directo a tu parqueo. Lavado profesional.
+                                Fotos antes y después.
+                            </p>
+                        </div>
+                    </div>
+                
+                <!-- PASO 03 -->
+                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
+                        data-scroll-reveal data-delay="1.1">
+
+                        <span
+                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
+                            data-scroll-reveal data-delay="1.4">03</span>
+
+                        <div class="relative z-10 mb-8">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                                <iconify-icon icon="solar:bell-bing-linear" class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Recibí
+                                notificación</p>
+                            <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">Auto listo, tú ni te moviste
+                            </h3>
+                            <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
+                                Te avisamos cuando terminamos. Sales de clase y tu auto está impecable esperándote. Cero
+                                complicaciones.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 </body>
 </html>
