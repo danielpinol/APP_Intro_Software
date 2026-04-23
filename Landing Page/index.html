@@ -221,11 +221,107 @@
                  hidden para que la linea no aparezca, absolute para posicionarlo dentro del relative, top-1/2 la baja a la mitad de la altura del contenedor
                 left-0 la pega al borde izquierdo, h-[2px] altura de 2 píxeles, 
                 translate-y-1/2 corrige la posición para arriba para centrarla bien, 
-                z-0 
-                -->
+                z-0 La linea se posiciona detras de otro elementos, pointer-events-none la linea no bloquea clics ni hover-->
                 
-                <!-- 
-                -->
+                <!-- Viewbox define el espacio del svg, preserve aspect ratio se adapta al ancho del bloque, line define el inicio y final de la linea
+                 strokes y todo lo relacionado: color grosor opacidad dibujada oculta al inicio toda la linea. -->
+
+            <!-- Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative z-10">
+                        <!-- Defini el numero de columnas (tambien es responsive) y el espacio entre ellas -->
+                
+                <!-- PASO 01 -->
+                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
+                        data-scroll-reveal data-delay="0.3">
+                        <!-- overflow-hidden oculta cualquier contenido afuera del elemento, rounded borde redondeado, 
+                         bg-white background blanco, blur borroso, transition efecto smooth, hover cambia todo cuanto interactua con el cursor, bg-clip-text solo aplica el fondo al texto -->
+
+                        <!-- Número Gigante de Fondo -->
+                        <span
+                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
+                            data-scroll-reveal data-delay="0.6">01</span>
+                            <!-- pointer no recibe clicks, bg-gradient gradiente vertical-->
+
+                        <!-- Icono -->
+                        <div class="relative z-10 mb-8">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                                <iconify-icon icon="solar:smartphone-linear"
+                                    class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                        </div>
+
+                        <!-- Contenido -->
+                        <div class="relative z-10">
+                            <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Solicitá</p>
+                            <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">45 segundos para pedir</h3>
+                            <!-- leading-snug altura de linea de texto mas compacta -->
+                            <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
+                                <!-- leading-relaxed mas espacio y font-light texto mas delgado -->
+                                Abrís la app, elegís tu ubicación (Sótano 1-2), tipo de lavado, y listo. Pago automático
+                                con tarjeta.
+                            </p>
+                        </div>
+                    </div>
+
+                <!-- PASO 02 -->
+                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
+                        data-scroll-reveal data-delay="0.7">
+
+                        <span
+                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
+                            data-scroll-reveal data-delay="1.0">02</span>
+
+                        <div class="relative z-10 mb-8">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                                <iconify-icon icon="solar:book-2-linear" class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Estudia
+                                tranquilo</p>
+                            <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">Nosotros vamos a ti</h3>
+                            <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
+                                Mientras estás en clase, nuestro equipo va directo a tu parqueo. Lavado profesional.
+                                Fotos antes y después.
+                            </p>
+                        </div>
+                    </div>
+                
+                <!-- PASO 03 -->
+                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
+                        data-scroll-reveal data-delay="1.1">
+
+                        <span
+                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
+                            data-scroll-reveal data-delay="1.4">03</span>
+
+                        <div class="relative z-10 mb-8">
+                            <div
+                                class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                                <iconify-icon icon="solar:bell-bing-linear" class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Recibí
+                                notificación</p>
+                            <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">Auto listo, tú ni te moviste
+                            </h3>
+                            <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
+                                Te avisamos cuando terminamos. Sales de clase y tu auto está impecable esperándote. Cero
+                                complicaciones.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 </body>
 </html>
