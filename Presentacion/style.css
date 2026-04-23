@@ -1,0 +1,611 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+/* CURSOR, todo lo relacionado al cursor en la landing */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #00d4ff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.cursor.expandido {
+  width: 20px;
+  height: 20px;
+}
+
+.cursor.clic {
+  width: 25px;
+  height: 25px;
+}
+
+/* CANVAS DEL FONDO  */
+/* ----------------------------------- */
+#grid_canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* Estructura de todas las slides */
+/* ----------------------------------- */
+.slides {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px clamp(32px, 8vw, 120px);
+  border-top: 1px solid #00d4ff;
+  box-shadow: inset 0 2px 0 0 rgba(0, 212, 255, 0.12);
+}
+
+.slides:first-of-type {
+  border-top: none;
+  box-shadow: none;
+}
+
+.Slide_1,
+.Slide_2,
+.Slide_3 {
+  padding-left: clamp(70px, 13vw, 220px);
+}
+
+
+/* Titulo de la landing page */
+/* ----------------------------------- */
+.main_title {
+  font-size: clamp(5.5rem, 19vw, 15rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+  display: inline-block;
+  background: linear-gradient(135deg, #ffffff 0%, #7dd9ff 55%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 36px;
+}
+
+/* Texto debajo del titulo (typewriter) */
+.texto_abajo_de_titulo {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: #222;
+  font-weight: 300;
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+/* Animacion: el titulo aparece de abajo hacia arriba */
+.aparecer {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.aparecer.listo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Dots laterales ── */
+/* ----------------------------------- */
+.barra_vertical {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #222;
+  transition: all 0.35s;
+}
+
+.dot.activo {
+  background: #00d4ff;
+  height: 20px;
+  border-radius: 2px;
+}
+
+/* Texto que se escribe solo debajo del titulo */
+/* ----------------------------------- */
+#escribe_solo {
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.55), 0 0 2px rgba(0, 212, 255, 0.9);
+}
+
+.cursor_blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #00d4ff;
+  box-shadow: 0 0 6px rgba(0, 212, 255, 0.8);
+  vertical-align: middle;
+  margin-left: 3px;
+  animation: caret 1s step-end infinite;
+}
+
+@keyframes caret { 50% { opacity: 0; } }
+
+
+/* SLIDE 2 - Validacion de mercado */
+/* ----------------------------------- */
+.subtitle_slide {
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #00d4ff;
+  margin-bottom: 8px;
+}
+
+.texto_stat {
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: #888;
+  letter-spacing: 0.04em;
+  margin-bottom: 64px;
+}
+
+.texto_stat::before {
+  content: '$ ';
+  color: #00d4ff;
+}
+
+.fila_stat {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.bloque_stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 44px;
+}
+
+.bloque_stat:first-child { padding-left: 0; }
+.bloque_stat:last-child  { padding-right: 0; }
+
+.nombre_stat {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #555;
+  letter-spacing: 0.06em;
+}
+
+.numero_stat {
+  font-size: clamp(3.8rem, 7vw, 6rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.contador_stat {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.unidad_stat {
+  font-size: 0.38em;
+  color: #00d4ff;
+  font-weight: 700;
+  vertical-align: super;
+}
+
+.descripcion_stat {
+  font-size: 0.85rem;
+  color: #00d4ff;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.divisor_stat {
+  width: 1px;
+  background: #1e1e1e;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.conclusion_stat {
+  margin-top: 60px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #00d4ff;
+  opacity: 0.45;
+  letter-spacing: 0.02em;
+}
+
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+@keyframes scrolldot {
+  0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(16px); }
+}
+
+/* ── Estilo para el indicador scroll ── */
+/* ----------------------------------- */
+.indicador_scroll {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  animation: bounce 2s infinite;
+  transition: opacity 0.4s;
+}
+
+.indicador_scroll span {
+  display: block;
+  width: 24px;
+  height: 40px;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  position: relative;
+}
+
+.indicador_scroll span::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: #00d4ff;
+  border-radius: 2px;
+  animation: scrolldot 2s infinite;
+}
+
+
+/* ── SLIDE 3 MODELO DE NEGOCIOS ── */
+/* ----------------------------------- */
+.nombre_stat_pasos {
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #555;
+  letter-spacing: 0.06em;
+}
+
+/* ── PASOS ── */
+.flujo-pasos {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 64px;
+  max-width: 1000px;
+}
+
+.tarjeta-paso {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.numero-paso {
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  font-weight: 800;
+  color: #00d4ff;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  opacity: 0.85;
+  text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+}
+
+.texto-paso {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: #9ecfdb;
+  font-weight: 300;
+  line-height: 1.65;
+  max-width: 220px;
+}
+
+.separador-paso {
+  color: #444;
+  font-size: 1.8rem;
+  padding: 0 clamp(16px, 3vw, 40px);
+  padding-top: 24px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+
+/* ── SLIDE 4 CALL TO ACTION ── */
+/* ----------------------------------- */
+.Slide_4 {
+  padding-left: clamp(70px, 13vw, 220px);
+}
+
+.precio_etiqueta {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: #555;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.titulo_cta {
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  margin-bottom: 60px;
+}
+
+.btn_solicitar {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 42px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #1c1c1c;
+  font-family: inherit;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: border-color 0.3s, color 0.3s, transform 0.2s ease;
+  will-change: transform;
+}
+
+.btn_solicitar .btn_flecha { transition: transform 0.3s; }
+
+.btn_solicitar:hover {
+  border-color: #00d4ff;
+  color: #00d4ff;
+}
+
+.btn_solicitar:hover .btn_flecha { transform: translateX(5px); }
+
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET  (≤ 1100px)
+   cubre iPad Pro (1024px) y similares
+   ═══════════════════════════════════════ */
+@media (max-width: 1100px) {
+
+  .Slide_1, .Slide_2, .Slide_3, .Slide_4 {
+    padding-left: clamp(20px, 5vw, 70px);
+  }
+
+  /* Stats: 2 columnas */
+  .fila_stat {
+    flex-wrap: wrap;
+    gap: 48px 0;
+    max-width: 100%;
+  }
+
+  .bloque_stat {
+    flex: 1 1 45%;
+    padding: 0 28px;
+  }
+
+  .bloque_stat:nth-child(1) { padding-left: 0; }
+  .bloque_stat:nth-child(7) { padding-left: 0; }
+
+  /* Ocultar el divisor central para que queden 2x2 limpios */
+  .divisor_stat:nth-child(4) { display: none; }
+
+  /* Pasos: flechas más compactas */
+  .separador-paso {
+    padding: 0 clamp(10px, 2vw, 24px);
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET MEDIANA  (601px – 1100px)
+   Surface Pro 7 (912px), iPad (768px), etc.
+   ═══════════════════════════════════════ */
+@media (min-width: 601px) and (max-width: 1100px) {
+
+  /* Slides ocupan más del ancho disponible */
+  .slides {
+    padding: 80px clamp(24px, 4vw, 60px);
+  }
+
+  .Slide_1, .Slide_2, .Slide_3, .Slide_4 {
+    padding-left: clamp(24px, 4vw, 60px);
+  }
+
+  /* Números de stats más grandes */
+  .numero_stat {
+    font-size: clamp(4.5rem, 9vw, 7rem);
+  }
+
+  /* Subtítulo y texto más legibles */
+  .subtitle_slide {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  }
+
+  .descripcion_stat {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  }
+
+  /* Que los bloques de stats usen más espacio */
+  .bloque_stat {
+    padding: 0 32px;
+    gap: 16px;
+  }
+
+  .fila_stat {
+    max-width: 100%;
+    gap: 52px 0;
+  }
+
+  /* Pasos más grandes */
+  .numero-paso {
+    font-size: clamp(5rem, 9vw, 7rem);
+  }
+
+  .texto-paso {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    max-width: 260px;
+  }
+
+  /* CTA */
+  .titulo_cta {
+    font-size: clamp(4rem, 10vw, 8rem);
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — MÓVIL  (≤ 600px)
+   ═══════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* Cursor nativo en touch */
+  body   { cursor: auto; }
+  .cursor { display: none; }
+
+  /* Dots laterales: se ocultan */
+  .barra_vertical { display: none; }
+
+  /* Padding general: poco margen para que el contenido llene la pantalla */
+  .slides {
+    padding: 60px 20px;
+    min-height: 100svh;
+    align-items: center;
+  }
+
+  .Slide_1, .Slide_2, .Slide_3, .Slide_4 {
+    padding-left: 20px;
+  }
+
+  /* Todo el texto centrado */
+  .subtitle_slide,
+  .texto_stat,
+  .conclusion_stat,
+  .precio_etiqueta,
+  .titulo_cta,
+  .nombre_stat_pasos,
+  .descripcion_stat,
+  .numero_stat {
+    text-align: center;
+  }
+
+  /* ── Stats: una columna centrada y ancha ── */
+  .fila_stat {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .bloque_stat {
+    flex: unset;
+    padding: 0;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Divisores horizontales a todo el ancho */
+  .divisor_stat {
+    display: block;
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+  }
+
+  /* ── Pasos: una columna centrada ── */
+  .flujo-pasos {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .tarjeta-paso {
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .nombre_stat_pasos { text-align: center; }
+
+  .separador-paso {
+    display: inline-block;
+    transform: rotate(90deg);
+    padding: 4px 0;
+    font-size: 1.4rem;
+    align-self: center;
+  }
+
+  .texto-paso {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  /* ── CTA centrado ── */
+  .titulo_cta {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .btn_solicitar {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — MÓVIL PEQUEÑO  (≤ 380px)
+   ═══════════════════════════════════════ */
+@media (max-width: 380px) {
+
+  .slides {
+    padding: 48px 16px;
+  }
+
+  .Slide_1, .Slide_2, .Slide_3, .Slide_4 {
+    padding-left: 16px;
+  }
+
+  .numero_stat {
+    font-size: clamp(3rem, 14vw, 4rem);
+  }
+}

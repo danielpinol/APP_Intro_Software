@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uwash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Fondo solo de HTML no hace nada. Se necesita de JS y se puede dibujar lo que sea -->
+<canvas id="grid_canvas"></canvas>
+
+<!-- Cursor totalmente personalizado -->
+<div class="cursor" id="cursor"></div>
+
+
+ <!-- Dots laterales -->
+  <div class="barra_vertical">
+    <div class="dot activo"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+  
+  
+  <!-- indicador de scroll en el bottom -->
+  <div class="indicador_scroll">
+    <span></span>
+  </div>
+
+
+<!-- Slide1 - Titulo principal de landing page y subtitulo que se escribe solo -->
+<div class="slides" data-s="0">
+  <h1 class="main_title aparecer">Uwash</h1>
+  <p class="texto_abajo_de_titulo">
+    <span id="escribe_solo"></span><span class="cursor_blink"></span>
+  </p>
+</div>
+
+<!-- slide 2: Validacion de mercado (Resultados de las encuestas a estudiantes de la UFM) -->
+<div class = "slides Slide_1" data-s = "1">
+  
+<!-- Titulo de la diapositiva -->
+  <p class="subtitle_slide aparecer">Validación de Mercado</p>
+  <p class="texto_stat aparecer" style="transition-delay:.05s">encuesta · 35 personas respondieron</p>
+
+  <div class="fila_stat">
+    <div class="bloque_stat aparecer" style="transition-delay:.1s">
+      <span class="nombre_stat_pasos">wash_frequency</span>
+      <div class="numero_stat">
+        <span class="contador_stat" data-target="29">0</span><span class="unidad_stat">%</span>
+      </div>
+      <span class="descripcion_stat">lava su auto solo<br>1 vez al mes</span>
+    </div>
+    <div class="divisor_stat aparecer" style="transition-delay:.2s"></div>
+    <div class="bloque_stat aparecer" style="transition-delay:.3s">
+      <span class="nombre_stat_pasos">desired_frequency</span>
+      <div class="numero_stat">
+        <span class="contador_stat" data-target="31">0</span><span class="unidad_stat">%</span>
+      </div>
+      <span class="descripcion_stat">dice que no tiene tiempo<br>para lavarlo</span>
+    </div>
+    <div class="divisor_stat aparecer" style="transition-delay:.4s"></div>
+    <div class="bloque_stat aparecer" style="transition-delay:.5s">
+      <span class="nombre_stat_pasos">main_barrier</span>
+      <div class="numero_stat">
+        <span class="contador_stat" data-target="49">0</span><span class="unidad_stat">%</span>
+      </div>
+      <span class="descripcion_stat">quiere lavarlo 1 vez<br>por semana o más</span>
+    </div>
+    <div class="divisor_stat aparecer" style="transition-delay:.6s"></div>
+    <div class="bloque_stat aparecer" style="transition-delay:.7s">
+      <span class="nombre_stat_pasos">price_range</span>
+      <div class="numero_stat">
+        <span class="contador_stat" data-target="66">0</span><span class="unidad_stat">%</span>
+      </div>
+      <span class="descripcion_stat">pagaría entre Q50 – Q100<br>por lavado básico</span>
+    </div>
+  </div>
+
+  <p class="conclusion_stat aparecer" style="transition-delay:.7s">// no falta demanda — falta conveniencia.</p>
+
+</div>
+
+<!-- slide 3: Modelo de negocio -->
+<div class="slides Slide_3" data-s="2">
+    <p class="subtitle_slide">Modelo de Negocio</p>
+
+    <div class="flujo-pasos">
+
+    <div class="tarjeta-paso" style="transition-delay:.1s">
+      <span class="nombre_stat_pasos">paso_</span>
+      <span class="numero-paso">01</span>
+      <p class="texto-paso">Solicitas desde la app en 45 segundos</p>
+    </div>
+
+    <span class="separador-paso" style="transition-delay:.28s">→</span>
+
+    <div class="tarjeta-paso" style="transition-delay:.46s">
+      <span class="nombre_stat_pasos">paso_</span>
+      <span class="numero-paso">02</span>
+      <p class="texto-paso">Vamos directamente a tu parqueo mientras estás en clase</p>
+    </div>
+
+    <span class="separador-paso" style="transition-delay:.64s">→</span>
+
+    <div class="tarjeta-paso" style="transition-delay:.82s">
+      <span class="nombre_stat_pasos">paso_</span>
+      <span class="numero-paso">03</span>
+      <p class="texto-paso">Notificación cuando está listo + pago automático. Tú ni te moviste.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- slide 4: Call to action -->
+<div class="slides Slide_4" data-s="3">
+  <p class="precio_etiqueta aparecer">Desde Q70 · Paquetes disponibles</p>
+  <h2 class="titulo_cta aparecer" style="transition-delay:.1s">Pruébalo.<br>Que esperas?</h2>
+  <button class="btn_solicitar aparecer" style="transition-delay:.2s" id="btn_cta"
+    onclick="window.location.href='http://localhost:4200/solicitar-lavado'">
+    Solicitar Ahora <span class="btn_flecha">→</span>
+  </button>
+</div>
+
+
+
+<script src="main.js"></script>
+
+</body>
+</html>
