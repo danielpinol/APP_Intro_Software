@@ -1,19 +1,23 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uwash</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uwash</title>
 
-<body>
+    <!-- Fonts -->
+    <!-- Les hacemos preconnet antes para que se conecte a los servers de google y no hayan fallos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Fondo solo de HTML no hace nada. Se necesita de JS y se puede dibujar lo que sea -->
-<canvas id="grid_canvas"></canvas>
+    <!-- Styles & Scripts Externos -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="main.js" defer></script>
 
     <!-- Tailwind Config -->
     <!-- Configuramos tailwind para tener nuestras clases ya predefinidas -->
@@ -80,85 +84,40 @@
 <!-- Cuando selecciones texto de la pagina se vera de estos colores -->
 <body class="selection:bg-accent selection:text-black">
 
+<!-- SCROLL PROGRESS BAR -->
+    <div id="progress-bar"
 
- <!-- Dots laterales -->
-  <div class="barra_vertical">
-    <div class="dot activo"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-  
-  
-  <!-- indicador de scroll en el bottom -->
-  <div class="indicador_scroll">
-    <span></span>
-  </div>
+        class="fixed top-0 left-0 h-[3px] bg-accent z-[100] transition-all duration-150 shadow-[0_0_10px_rgba(0,229,255,0.5)]"
+        style="width: 0%"></div>
+        <!-- Fijo al hacer scroll, sin margen arriba e izquierda, altura 3, arriba de otros objetos, cambia fluido hace transiciones
+         fluidas y no cambia de golpe, la transicion dura 0.15 milisegundos, sombra de la barra  -->
 
+<!-- BACKGROUND EFFECTS -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <!-- inset = todos los margins son 0, si algo se sale del borde entonces se oculta y ya no se ve.
+        no deja que se hagan clics y esta en la capa 0 osea esta atras de todo -->
 
-<!-- Slide1 - Titulo principal de landing page y subtitulo que se escribe solo -->
-<div class="slides" data-s="0">
-  <h1 class="main_title aparecer">Uwash</h1>
-  <p class="texto_abajo_de_titulo">
-    <span id="escribe_solo"></span><span class="cursor_blink"></span>
-  </p>
-</div>
+<!-- Giant glowing orb 1 -->
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-accent opacity-[0.15] blur-[150px] animate-float">
+        </div>
+        <!-- Esta clase se posiciona adentro de su padre se hace el circulo adentro del contenedor,
+        se muevo para arriba, se mueve iquierda, ancho, alto, hace que sea redondo, color, un poco opaco,
+        lo pone un poco borroso, animacion flotante -->
 
-<!-- slide 2: Validacion de mercado (Resultados de las encuestas a estudiantes de la UFM) -->
-<div class = "slides Slide_1" data-s = "1">
-  
-<!-- Titulo de la diapositiva -->
-  <p class="subtitle_slide aparecer">Validación de Mercado</p>
-  <p class="texto_stat aparecer" style="transition-delay:.05s">encuesta · 35 personas respondieron</p>
+<!-- Giant glowing orb 2 -->
+        <div
+        class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0055ff] opacity-[0.1] blur-[180px] animate-float-reverse">
+        </div>
+        <!-- Igual que la esfera 1 solo que que se mueve alreves que la 1.Esta es un poco mas grande -->
 
-  <div class="fila_stat">
-    <div class="bloque_stat aparecer" style="transition-delay:.1s">
-      <span class="nombre_stat_pasos">wash_frequency</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="29">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">lava su auto solo<br>1 vez al mes</span>
-    </div>
-    <div class="divisor_stat aparecer" style="transition-delay:.2s"></div>
-    <div class="bloque_stat aparecer" style="transition-delay:.3s">
-      <span class="nombre_stat_pasos">desired_frequency</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="31">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">dice que no tiene tiempo<br>para lavarlo</span>
-    </div>
-    <div class="divisor_stat aparecer" style="transition-delay:.4s"></div>
-    <div class="bloque_stat aparecer" style="transition-delay:.5s">
-      <span class="nombre_stat_pasos">main_barrier</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="49">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">quiere lavarlo 1 vez<br>por semana o más</span>
-    </div>
-    <div class="divisor_stat aparecer" style="transition-delay:.6s"></div>
-    <div class="bloque_stat aparecer" style="transition-delay:.7s">
-      <span class="nombre_stat_pasos">price_range</span>
-      <div class="numero_stat">
-        <span class="contador_stat" data-target="66">0</span><span class="unidad_stat">%</span>
-      </div>
-      <span class="descripcion_stat">pagaría entre Q50 – Q100<br>por lavado básico</span>
-    </div>
-  </div>
+<!-- Grid overlay -->
+        <div
+            class="absolute inset-0 grid-bg opacity-50">
+        </div>
 
-  <p class="conclusion_stat aparecer" style="transition-delay:.7s">// no falta demanda — falta conveniencia.</p>
-
-</div>
-
-<!-- slide 3: Modelo de negocio -->
-<div class="slides Slide_3" data-s="2">
-    <p class="subtitle_slide">Modelo de Negocio</p>
-
-    <div class="flujo-pasos">
-
-    <div class="tarjeta-paso" style="transition-delay:.1s">
-      <span class="nombre_stat_pasos">paso_</span>
-      <span class="numero-paso">01</span>
-      <p class="texto-paso">Solicitas desde la app en 45 segundos</p>
+<!-- JS Particles Container -->
+        <div id="particles-container"></div>
     </div>
 
 
@@ -219,6 +178,37 @@
 
     </nav>
 </div>
+
+<!-- === SECCION COMO FUNCIONA === -->
+<section id="como-funciona" class="relative z-10 w-full py-32 md:py-40 px-6 md:px-16">
+    <!-- relative para controlar capas, el z-10 sirve para que el elemento esta encima del fondo, w-full ocupa todo el ancho del contenedor
+        py-32 padding-top espacio arriba de un elemento, px para espacio horizontal de un elemento   -->
+
+    <div class="w-full max-w-[1400px] mx-auto">
+        <!-- 
+        - max-w: limita el ancho para que no se vea muy estirado, mx-auto centrar un elemento horizontalmente -->
+
+
+        <!-- Título de Sección -->
+        <div class="mb-20 md:mb-28 text-center" data-scroll-reveal>
+            <!-- mb: espacio debajo del elemento (diferente a padding), text-center: todo centrado, data-scroll-reveal: activa animación al hacer scroll -->
+
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15]">
+                <!-- Título principal responsive, fonto-bold texto en negritas, tracking-tight espacio reducido entre letras, 
+                 leading controla el espacio entre lines de texto -->
+
+                Tres pasos.<br>
+                <span class="text-accent">Sin complicaciones</span>
+                <!-- Parte resaltada con color -->
+            </h2>
+
+            <p class="mt-4 text-white/40 text-sm md:text-base font-mono tracking-widest">
+                // no te tienes que mover
+            </p>
+            <!-- estilo "código" con font-mono, mt es margin top, text y todo lo relacionado es responsive y el texto es blanco con opacidad de 40,
+                tracking-widest: letras separadas
+            -->
+        </div>
 
 </body>
 </html>
