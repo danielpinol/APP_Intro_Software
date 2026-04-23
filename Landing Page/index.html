@@ -202,13 +202,30 @@
                 <!-- Parte resaltada con color -->
             </h2>
 
-            <p class="mt-4 text-white/40 text-sm md:text-base font-mono tracking-widest">
-                // no te tienes que mover
-            </p>
+            <p class="mt-4 text-white/40 text-sm md:text-base font-mono tracking-widest">// no te tienes que mover</p>
             <!-- estilo "código" con font-mono, mt es margin top, text y todo lo relacionado es responsive y el texto es blanco con opacidad de 40,
                 tracking-widest: letras separadas
             -->
         </div>
+
+        <!-- Grid de 3 Tarjetas + Línea Conectoras -->
+            <div class="relative">
+                <!-- Permite que las lineas puedan posicionarse en un bloque (relative) -->
+
+                <!-- Línea Conectora SVG (solo desktop) -->
+                <svg class="connector-line hidden md:block absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 z-0 pointer-events-none"
+                    viewBox="0 0 1400 2" preserveAspectRatio="none" data-scroll-reveal>
+                    <line x1="0" y1="1" x2="1400" y2="1" stroke="#00E5FF" stroke-width="2" stroke-opacity="0.2"
+                        stroke-dasharray="1400" stroke-dashoffset="1400" class="connector-path" /></svg>
+                <!-- svg se usa para un formato de imagen vectorial o sea para dibujar lineas o iconos en este caso una linea, 
+                 hidden para que la linea no aparezca, absolute para posicionarlo dentro del relative, top-1/2 la baja a la mitad de la altura del contenedor
+                left-0 la pega al borde izquierdo, h-[2px] altura de 2 píxeles, 
+                translate-y-1/2 corrige la posición para arriba para centrarla bien, 
+                z-0 
+                -->
+                
+                <!-- 
+                -->
 
 </body>
 </html>
