@@ -5,6 +5,8 @@ html {
     scroll-behavior: smooth;
 }
 
+
+/* Color base of the landing */ 
 body {
     background-color: #080805;
     color: #ffffff;
