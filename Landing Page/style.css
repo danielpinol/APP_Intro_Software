@@ -1,0 +1,9 @@
+/* ==== ESTILOS PRINCIPALES DE LA PAGINA UWASH ==== */
+
+/* 1. BASE de todo el background de la pagina */
+body {
+    background-color: #080805;
+    color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
