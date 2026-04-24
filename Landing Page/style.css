@@ -2,16 +2,16 @@
 /* GENERAL STYLES */
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 
 /* Color base of the landing */ 
 body {
-    background-color: #080805;
-    color: #ffffff;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+  background-color: #080805;
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* HERO SECTION */
@@ -24,8 +24,8 @@ body {
 }
 
 .text-gradient {
-    background: linear-gradient(to right, #ffffff, #a1a1aa);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  background: linear-gradient(to right, #ffffff, #a1a1aa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
