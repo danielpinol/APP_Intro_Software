@@ -1,7 +1,4 @@
-/**
- * UWASH — SCRIPTS PRINCIPALES
- * Este archivo contiene únicamente la lógica para la barra de progreso de lectura.
- */
+
 
 document.addEventListener("DOMContentLoaded", () => {
     initProgressBar();
