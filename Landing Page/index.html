@@ -248,16 +248,13 @@
             <div class="relative">
                 <!-- Permite que las lineas puedan posicionarse en un bloque (relative) -->
 
-                <!-- Línea Conectora SVG (solo desktop) -->
+                <!-- Línea Conectora (solo desktop) -->
                 <div class="hidden md:block absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 z-0 pointer-events-none bg-[#00E5FF] opacity-20"></div>
-                <!-- svg se usa para un formato de imagen vectorial o sea para dibujar lineas o iconos en este caso una linea, 
-                 hidden para que la linea no aparezca, absolute para posicionarlo dentro del relative, top-1/2 la baja a la mitad de la altura del contenedor
+                <!-- hidden para que la linea no aparezca en mobile, absolute para posicionarlo dentro del relative, top-1/2 la baja a la mitad de la altura del contenedor
                 left-0 la pega al borde izquierdo, h-[2px] altura de 2 píxeles, 
                 translate-y-1/2 corrige la posición para arriba para centrarla bien, 
                 z-0 La linea se posiciona detras de otro elementos, pointer-events-none la linea no bloquea clics ni hover-->
                 
-                <!-- Viewbox define el espacio del svg, preserve aspect ratio se adapta al ancho del bloque, line define el inicio y final de la linea
-                 strokes y todo lo relacionado: color grosor opacidad dibujada oculta al inicio toda la linea. -->
 
             <!-- Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative z-10">
@@ -286,7 +283,8 @@
                         <div class="relative z-10">
                             <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Solicitá</p>
                             <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">45 segundos para pedir</h3>
-                            <!-- leading-snug altura de linea de texto mas compacta -->
+                            <!-- leading-snug = altura de linea de texto mas compacta -->
+
                             <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
                                 <!-- leading-relaxed mas espacio y font-light texto mas delgado -->
                                 Abrís la app, elegís tu ubicación (Sótano 1-2), tipo de lavado, y listo. Pago automático
