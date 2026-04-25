@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './mis-pedidos.html',
   styleUrl: './mis-pedidos.css',
 })
-export class MisPedidos {}
+export class MisPedidos { }
