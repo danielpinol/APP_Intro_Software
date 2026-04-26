@@ -1,29 +1,6 @@
 <div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
 
-  <!-- Orbs de fondo -->
-  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-    <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#00E5FF] opacity-[0.07] blur-[150px] animate-float"></div>
-    <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0055ff] opacity-[0.06] blur-[180px] animate-float-reverse"></div>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="relative z-10 flex items-center px-10 py-3 bg-[#080805]">
-    <a routerLink="/" class="w-1/4 hover:opacity-80 transition-opacity">
-      <img src="logo.png" alt="Uwash logo" class="h-28 w-auto">
-    </a>
-
-    <ul class="flex flex-1 justify-center items-center gap-14 text-base font-black uppercase tracking-widest text-white/70">
-      <li><a routerLink="/solicitar" class="hover:text-[#00E5FF] transition-colors">Solicitar</a></li>
-      <li><a routerLink="/paquetes" class="hover:text-[#00E5FF] transition-colors">Paquetes</a></li>
-      <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
-    </ul>
-
-    <div class="w-1/4 flex justify-end">
-      <button routerLink="/login" class="px-12 py-5 text-base font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
-        Login
-      </button>
-    </div>
-  </nav>
+  <app-navbar />
 
   <!-- Hero -->
   <main class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-8">

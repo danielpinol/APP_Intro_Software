@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Navbar } from '../navbar/navbar';
 
 @Component({
   selector: 'app-log-in',
-  standalone: true,
-  imports: [],
+  imports: [Navbar],
   templateUrl: './log-in.html',
-  styleUrl: './log-in.css'
+  styleUrl: './log-in.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogIn {
-
-   mostrarPassword: boolean = false;
+  mostrarPassword = false;
 
   togglePassword() {
     this.mostrarPassword = !this.mostrarPassword;
   }
-  
 }
