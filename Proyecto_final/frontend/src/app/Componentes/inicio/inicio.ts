@@ -7,6 +7,6 @@ import { Navbar } from '../navbar/navbar';
   imports: [RouterLink, Navbar],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush // Revisa si hubo algun cambio en los datos dinamicos en el html y lo actualiza
 })
 export class Inicio {}

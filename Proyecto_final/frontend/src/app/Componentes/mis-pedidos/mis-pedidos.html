@@ -1,1 +1,70 @@
-<p>mis-pedidos works!</p>
+<div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+<!-- Altura de toda la pagina, fondo, texto blanco, layout vertical -->
+
+  <app-navbar />
+
+  <main class="flex-1 flex flex-col items-center justify-center px-8 gap-12">
+<!-- Ocupa todo el espacio restante, layout vertical, centra horizontal, centra vertical, padding horizontal-->
+
+    <!-- Título -->
+    <div class="text-center">
+      <h1 class="text-7xl font-black uppercase tracking-tight">Rastrear mi lavado</h1>
+      <p class="text-white/40 mt-4 text-xl">Ingresa tu nombre para ver el estado.</p>
+    </div>
+
+    <!-- Búsqueda -->
+    <div class="w-full max-w-2xl flex gap-4">
+      <input #nombreInput type="text" placeholder="Tu nombre completo"
+        class="flex-1 bg-white/5 border border-white/10 rounded-xl px-8 py-6 text-xl text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+
+        
+        <!-- Cuando hago click en el boton manda a llamar a buscar() de .ts -->
+      <button (click)="buscar(nombreInput.value)"
+        class="px-12 py-6 bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-lg rounded-xl hover:bg-[#00c8e0] transition-colors">
+        Buscar
+      </button>
+    </div>
+
+    <!-- Resultado encontrado -->
+    @if (pedidoEncontrado(); as pedido) {
+      <div class="w-full max-w-2xl bg-white/5 border border-white/10 rounded-2xl p-14 flex flex-col gap-12">
+
+        <div>
+          <p class="text-white/40 text-sm font-black uppercase tracking-widest">Tu lavado</p>
+          <p class="text-3xl font-black mt-2">{{ pedido.tipo }} · {{ pedido.placa }}</p>
+        </div>
+
+        <!-- Tracker de pasos -->
+        <div class="flex items-center">
+          @for (paso of pasos; track paso; let i = $index) {
+
+            <div class="flex flex-col items-center gap-3">
+              <div class="w-16 h-16 rounded-full border-2 flex items-center justify-center font-black text-lg"
+                [class]="i <= pasoIndex() ? 'bg-[#00E5FF] border-[#00E5FF] text-[#080805]' : 'border-white/20 text-white/20'">
+                {{ i + 1 }}
+              </div>
+              <p class="text-sm font-black uppercase tracking-widest text-center"
+                [class]="i <= pasoIndex() ? 'text-[#00E5FF]' : 'text-white/20'">
+                {{ paso }}
+              </p>
+            </div>
+
+            @if (i < pasos.length - 1) {
+              <div class="flex-1 h-0.5 mx-6 mb-8"
+                [class]="i < pasoIndex() ? 'bg-[#00E5FF]' : 'bg-white/10'"></div>
+            }
+
+          }
+        </div>
+
+      </div>
+    }
+
+    <!-- No encontrado -->
+    @if (buscado() && !pedidoEncontrado()) {
+      <p class="text-white/40 text-xl font-black uppercase tracking-widest">No encontramos tu pedido.</p>
+    }
+
+  </main>
+
+</div>
