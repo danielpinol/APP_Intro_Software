@@ -1,0 +1,109 @@
+ <!-- Navbar -->
+  <nav class="relative z-10 flex items-center px-10 py-3 bg-[#080805]">
+    <a routerLink="/" class="w-1/4 hover:opacity-80 transition-opacity">
+      <img src="logo.png" alt="Uwash logo" class="h-28 w-auto">
+    </a>
+
+    <ul class="flex flex-1 justify-center items-center gap-14 text-base font-black uppercase tracking-widest text-white/70">
+      <li><a routerLink="/solicitar" class="hover:text-[#00E5FF] transition-colors">Solicitar</a></li>
+      <li><a routerLink="/paquetes" class="hover:text-[#00E5FF] transition-colors">Paquetes</a></li>
+      <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
+    </ul>
+
+    <div class="w-1/4 flex justify-end">
+      <button class="px-12 py-5 text-base font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
+        Login
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- Contenido (paquetes basico, medium y premium) -->
+  <div class="min-h-screen bg-gradient-to-br from-black to-[#021b1f] text-white flex items-center justify-center p-6">
+
+  <div class="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
+
+    <!-- BASICO -->
+    <div class="bg-white/5 border border-cyan-500/10 rounded-2xl p-6 backdrop-blur-md 
+                hover:scale-105 transition duration-300">
+
+      <p class="text-sm text-gray-400 mb-2">BÁSICO</p>
+
+      <h2 class="text-5xl font-bold mb-2">Q 65</h2>
+      <p class="text-gray-400 mb-6">Lavado exterior rápido</p>
+
+      <hr class="border-gray-700 mb-6">
+
+      <ul class="space-y-3 text-sm text-gray-300">
+        <li>✔ Lavado exterior completo</li>
+        <li>✔ Enjuague con agua a presión</li>
+        <li>✔ Secado con microfibra</li>
+        <li>✔ Fotos antes y después</li>
+        <li class="text-gray-600 line-through">✖ Aspirado interior</li>
+        <li class="text-gray-600 line-through">✖ Encerado protector</li>
+      </ul>
+
+      <button class="mt-8 w-full py-3 rounded-xl border border-gray-600 hover:border-cyan-400 transition">
+        Seleccionar
+      </button>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="relative bg-gradient-to-b from-[#021b1f] to-black border border-cyan-400/40 rounded-2xl p-6 
+                shadow-[0_0_40px_rgba(0,212,212,0.25)] scale-105">
+
+      <!-- Badge -->
+      <span class="absolute top-4 right-4 text-xs bg-cyan-400 text-black px-3 py-1 rounded-full font-semibold">
+        RECOMENDADO
+      </span>
+
+      <p class="text-sm text-cyan-400 mb-2">MEDIUM</p>
+
+      <h2 class="text-5xl font-bold mb-2">Q 110</h2>
+      <p class="text-gray-400 mb-6">Exterior + interior impecable</p>
+
+      <hr class="border-gray-700 mb-6">
+
+      <ul class="space-y-3 text-sm text-gray-300">
+        <li>✔ Lavado exterior completo</li>
+        <li>✔ Enjuague con agua a presión</li>
+        <li>✔ Secado con microfibra</li>
+        <li>✔ Fotos antes y después</li>
+        <li>✔ Aspirado interior completo</li>
+        <li class="text-gray-600 line-through">✖ Encerado protector</li>
+      </ul>
+
+      <button class="mt-8 w-full py-3 rounded-xl bg-cyan-400 text-black font-semibold 
+                     hover:bg-cyan-300 transition shadow-lg shadow-cyan-500/20">
+        Seleccionar
+      </button>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="bg-white/5 border border-cyan-500/10 rounded-2xl p-6 backdrop-blur-md 
+                hover:scale-105 transition duration-300">
+
+      <p class="text-sm text-gray-400 mb-2">PREMIUM</p>
+
+      <h2 class="text-5xl font-bold mb-2">Q 170</h2>
+      <p class="text-gray-400 mb-6">El tratamiento completo</p>
+
+      <hr class="border-gray-700 mb-6">
+
+      <ul class="space-y-3 text-sm text-gray-300">
+        <li>✔ Lavado exterior completo</li>
+        <li>✔ Enjuague con agua a presión</li>
+        <li>✔ Secado con microfibra</li>
+        <li>✔ Fotos antes y después</li>
+        <li>✔ Aspirado interior completo</li>
+        <li>✔ Encerado protector UV</li>
+      </ul>
+
+      <button class="mt-8 w-full py-3 rounded-xl border border-gray-600 hover:border-cyan-400 transition">
+        Seleccionar
+      </button>
+    </div>
+
+  </div>
+
+</div>
