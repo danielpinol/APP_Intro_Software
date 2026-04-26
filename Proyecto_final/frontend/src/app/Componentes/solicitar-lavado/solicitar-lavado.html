@@ -1,1 +1,119 @@
-<p>solicitar-lavado works!</p>
+ <!-- Navbar -->
+  <nav class="relative z-10 flex items-center px-10 py-3 bg-[#080805]">
+    <a routerLink="/" class="w-1/4 hover:opacity-80 transition-opacity">
+      <img src="logo.png" alt="Uwash logo" class="h-28 w-auto">
+    </a>
+
+    <ul class="flex flex-1 justify-center items-center gap-14 text-base font-black uppercase tracking-widest text-white/70">
+      <li><a routerLink="/solicitar" class="hover:text-[#00E5FF] transition-colors">Solicitar</a></li>
+      <li><a routerLink="/paquetes" class="hover:text-[#00E5FF] transition-colors">Paquetes</a></li>
+      <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
+    </ul>
+
+    <div class="w-1/4 flex justify-end">
+      <button class="px-12 py-5 text-base font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
+        Login
+      </button>
+    </div>
+  </nav>
+
+
+  <div class="min-h-screen bg-gradient-to-br from-black to-[#021b1f] text-white flex justify-center items-center p-6">
+
+  <div class="w-full max-w-3xl bg-white/5 backdrop-blur-md border border-cyan-500/10 rounded-2xl p-8 shadow-lg">
+
+    <h2 class="text-3xl font-bold mb-6 text-center">
+      Solicitar Lavado
+    </h2>
+
+    <!-- DATA -->
+    <form class="space-y-6">
+
+      <!-- Nombre -->
+      <div>
+        <label class="block text-sm text-gray-300 mb-1">Nombre</label>
+        <input type="text"
+          class="w-full p-3 rounded-lg bg-[#0b0f12] border border-gray-700 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none"
+          placeholder="Tu nombre">
+      </div>
+
+      <!-- Tipo de lavado -->
+      <div>
+        <label class="block text-sm text-gray-300 mb-3">Tipo de lavado</label>
+
+        <div class="grid md:grid-cols-3 gap-4">
+
+          <!-- Básico -->
+          <label class="cursor-pointer">
+            <input type="radio" name="lavado" class="hidden peer">
+
+            <div class="p-4 rounded-xl border border-gray-700 bg-[#0b0f12] 
+                        peer-checked:border-cyan-400 peer-checked:shadow-lg peer-checked:shadow-cyan-500/20 
+                        transition">
+
+              <h3 class="font-semibold">Básico</h3>
+              <p class="text-sm text-gray-400">Q65</p>
+            </div>
+          </label>
+
+          <!-- Medium -->
+          <label class="cursor-pointer">
+            <input type="radio" name="lavado" class="hidden peer">
+
+            <div class="p-4 rounded-xl border border-gray-700 bg-[#0b0f12] 
+                        peer-checked:border-cyan-400 peer-checked:shadow-lg peer-checked:shadow-cyan-500/20 
+                        transition">
+
+              <h3 class="font-semibold text-cyan-400">Medium</h3>
+              <p class="text-sm text-gray-400">Q110</p>
+            </div>
+          </label>
+
+          <!-- Premium -->
+          <label class="cursor-pointer">
+            <input type="radio" name="lavado" class="hidden peer">
+
+            <div class="p-4 rounded-xl border border-gray-700 bg-[#0b0f12] 
+                        peer-checked:border-cyan-400 peer-checked:shadow-lg peer-checked:shadow-cyan-500/20 
+                        transition">
+
+              <h3 class="font-semibold">Premium</h3>
+              <p class="text-sm text-gray-400">Q170</p>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+        <!-- Datos del carro -->
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Datos del carro</h3>
+
+        <div class="grid md:grid-cols-2 gap-4">
+
+          <input type="text" placeholder="Marca"
+            class="p-3 rounded-lg bg-[#0b0f12] border border-gray-700 focus:border-cyan-400 outline-none">
+
+          <input type="text" placeholder="Modelo"
+            class="p-3 rounded-lg bg-[#0b0f12] border border-gray-700 focus:border-cyan-400 outline-none">
+
+          <input type="number" placeholder="Año"
+            class="p-3 rounded-lg bg-[#0b0f12] border border-gray-700 focus:border-cyan-400 outline-none">
+
+          <input type="text" placeholder="Placa"
+            class="p-3 rounded-lg bg-[#0b0f12] border border-gray-700 focus:border-cyan-400 outline-none">
+
+        </div>
+      </div>
+
+      <!-- Botón -->
+      <button type="submit"
+        class="w-full py-3 rounded-xl bg-cyan-400 text-black font-semibold hover:bg-cyan-300 transition">
+        Solicitar ahora
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
