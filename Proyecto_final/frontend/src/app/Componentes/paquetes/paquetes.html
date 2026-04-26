@@ -1,108 +1,57 @@
- <!-- Navbar -->
-  <nav class="relative z-10 flex items-center px-10 py-3 bg-[#080805]">
-    <a routerLink="/" class="w-1/4 hover:opacity-80 transition-opacity">
-      <img src="logo.png" alt="Uwash logo" class="h-28 w-auto">
-    </a>
+<div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
 
-    <ul class="flex flex-1 justify-center items-center gap-14 text-base font-black uppercase tracking-widest text-white/70">
-      <li><a routerLink="/solicitar" class="hover:text-[#00E5FF] transition-colors">Solicitar</a></li>
-      <li><a routerLink="/paquetes" class="hover:text-[#00E5FF] transition-colors">Paquetes</a></li>
-      <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
-    </ul>
+  <app-navbar />
 
-    <div class="w-1/4 flex justify-end">
-      <button class="px-12 py-5 text-base font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
-        Login
-      </button>
-    </div>
-  </nav>
+  <!-- Título -->
+  <div class="px-16 pt-10 pb-6">
+    <h1 class="text-5xl font-black uppercase tracking-tight">Planes mensuales</h1>
+    <p class="text-white/40 mt-2 text-lg">Elige el plan que más se adapte a ti.</p>
+  </div>
 
+  <!-- Planes como filas horizontales -->
+  <div class="flex flex-col flex-1 px-16 pb-10 gap-4">
 
-  <!-- Contenido (paquetes basico, medium y premium) -->
-  <div class="min-h-screen bg-gradient-to-br from-black to-[#021b1f] text-white flex items-center justify-center p-6">
+    @for (paquete of paquetes; track paquete.nombre) {
+      <div class="flex-1 flex items-center px-10 rounded-2xl transition-all"
+        [class]="paquete.recomendado
+          ? 'bg-[#00E5FF]/10 border-2 border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.1)]'
+          : 'bg-white/5 border border-white/10 hover:border-white/30'">
 
-  <div class="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
+        <!-- Nombre del plan -->
+        <div class="w-1/4">
+          @if (paquete.recomendado) {
+            <p class="text-xs text-[#00E5FF] font-black uppercase tracking-widest mb-1">★ Más popular</p>
+          }
+          <p class="text-3xl font-black uppercase">{{ paquete.nombre }}</p>
+        </div>
 
-    <!-- BASICO -->
-    <div class="bg-white/5 border border-cyan-500/10 rounded-2xl p-6 backdrop-blur-md 
-                hover:scale-105 transition duration-300">
+        <!-- Lavados -->
+        <div class="w-1/4 flex items-center gap-4">
+          <span class="text-7xl font-black leading-none"
+            [class]="paquete.recomendado ? 'text-[#00E5FF]' : 'text-white'">
+            {{ paquete.lavados }}
+          </span>
+          <span class="text-white/40 text-base leading-snug">lavados<br>al mes</span>
+        </div>
 
-      <p class="text-sm text-gray-400 mb-2">BÁSICO</p>
+        <!-- Precio -->
+        <div class="w-1/4">
+          <p class="text-4xl font-black">{{ paquete.precio | currency:'GTQ':'Q ':'1.0-0' }}</p>
+          <p class="text-white/40 text-sm mt-1">Ahorrás {{ paquete.ahorro | currency:'GTQ':'Q ':'1.0-0' }}</p>
+        </div>
 
-      <h2 class="text-5xl font-bold mb-2">Q 65</h2>
-      <p class="text-gray-400 mb-6">Lavado exterior rápido</p>
+        <!-- Botón -->
+        <div class="w-1/4 flex justify-end">
+          <button class="px-10 py-4 rounded-xl font-black uppercase tracking-widest text-sm transition-colors"
+            [class]="paquete.recomendado
+              ? 'bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0]'
+              : 'border border-white/20 hover:border-[#00E5FF] hover:text-[#00E5FF]'">
+            Suscribirme
+          </button>
+        </div>
 
-      <hr class="border-gray-700 mb-6">
-
-      <ul class="space-y-3 text-sm text-gray-300">
-        <li>✔ Lavado exterior completo</li>
-        <li>✔ Enjuague con agua a presión</li>
-        <li>✔ Secado con microfibra</li>
-        <li>✔ Fotos antes y después</li>
-        <li class="text-gray-600 line-through">✖ Aspirado interior</li>
-        <li class="text-gray-600 line-through">✖ Encerado protector</li>
-      </ul>
-
-      <button class="mt-8 w-full py-3 rounded-xl border border-gray-600 hover:border-cyan-400 transition">
-        Seleccionar
-      </button>
-    </div>
-
-    <!-- MEDIUM -->
-    <div class="relative bg-gradient-to-b from-[#021b1f] to-black border border-cyan-400/40 rounded-2xl p-6 
-                shadow-[0_0_40px_rgba(0,212,212,0.25)] scale-105">
-
-      <!-- Badge -->
-      <span class="absolute top-4 right-4 text-xs bg-cyan-400 text-black px-3 py-1 rounded-full font-semibold">
-        RECOMENDADO
-      </span>
-
-      <p class="text-sm text-cyan-400 mb-2">MEDIUM</p>
-
-      <h2 class="text-5xl font-bold mb-2">Q 110</h2>
-      <p class="text-gray-400 mb-6">Exterior + interior impecable</p>
-
-      <hr class="border-gray-700 mb-6">
-
-      <ul class="space-y-3 text-sm text-gray-300">
-        <li>✔ Lavado exterior completo</li>
-        <li>✔ Enjuague con agua a presión</li>
-        <li>✔ Secado con microfibra</li>
-        <li>✔ Fotos antes y después</li>
-        <li>✔ Aspirado interior completo</li>
-        <li class="text-gray-600 line-through">✖ Encerado protector</li>
-      </ul>
-
-      <button class="mt-8 w-full py-3 rounded-xl bg-cyan-400 text-black font-semibold 
-                     hover:bg-cyan-300 transition shadow-lg shadow-cyan-500/20">
-        Seleccionar
-      </button>
-    </div>
-
-    <!-- PREMIUM -->
-    <div class="bg-white/5 border border-cyan-500/10 rounded-2xl p-6 backdrop-blur-md 
-                hover:scale-105 transition duration-300">
-
-      <p class="text-sm text-gray-400 mb-2">PREMIUM</p>
-
-      <h2 class="text-5xl font-bold mb-2">Q 170</h2>
-      <p class="text-gray-400 mb-6">El tratamiento completo</p>
-
-      <hr class="border-gray-700 mb-6">
-
-      <ul class="space-y-3 text-sm text-gray-300">
-        <li>✔ Lavado exterior completo</li>
-        <li>✔ Enjuague con agua a presión</li>
-        <li>✔ Secado con microfibra</li>
-        <li>✔ Fotos antes y después</li>
-        <li>✔ Aspirado interior completo</li>
-        <li>✔ Encerado protector UV</li>
-      </ul>
-
-      <button class="mt-8 w-full py-3 rounded-xl border border-gray-600 hover:border-cyan-400 transition">
-        Seleccionar
-      </button>
-    </div>
+      </div>
+    }
 
   </div>
 

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Navbar } from '../navbar/navbar';
 
 @Component({
   selector: 'app-solicitar-lavado',
-  imports: [RouterLink],
+  imports: [Navbar],
   templateUrl: './solicitar-lavado.html',
   styleUrl: './solicitar-lavado.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SolicitarLavado { }
+export class SolicitarLavado {}
