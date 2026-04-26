@@ -36,3 +36,51 @@
           class="w-full p-3 rounded-lg bg-[#0b0f12] border border-gray-700 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none"
           placeholder="Tu nombre">
       </div>
+
+      <!-- Tipo de lavado -->
+      <div>
+        <label class="block text-sm text-gray-300 mb-3">Tipo de lavado</label>
+
+        <div class="grid md:grid-cols-3 gap-4">
+
+          <!-- Básico -->
+          <label class="cursor-pointer">
+            <input type="radio" name="lavado" class="hidden peer">
+
+            <div class="p-4 rounded-xl border border-gray-700 bg-[#0b0f12] 
+                        peer-checked:border-cyan-400 peer-checked:shadow-lg peer-checked:shadow-cyan-500/20 
+                        transition">
+
+              <h3 class="font-semibold">Básico</h3>
+              <p class="text-sm text-gray-400">Q65</p>
+            </div>
+          </label>
+
+          <!-- Medium -->
+          <label class="cursor-pointer">
+            <input type="radio" name="lavado" class="hidden peer">
+
+            <div class="p-4 rounded-xl border border-gray-700 bg-[#0b0f12] 
+                        peer-checked:border-cyan-400 peer-checked:shadow-lg peer-checked:shadow-cyan-500/20 
+                        transition">
+
+              <h3 class="font-semibold text-cyan-400">Medium</h3>
+              <p class="text-sm text-gray-400">Q110</p>
+            </div>
+          </label>
+
+          <!-- Premium -->
+          <label class="cursor-pointer">
+            <input type="radio" name="lavado" class="hidden peer">
+
+            <div class="p-4 rounded-xl border border-gray-700 bg-[#0b0f12] 
+                        peer-checked:border-cyan-400 peer-checked:shadow-lg peer-checked:shadow-cyan-500/20 
+                        transition">
+
+              <h3 class="font-semibold">Premium</h3>
+              <p class="text-sm text-gray-400">Q170</p>
+            </div>
+          </label>
+
+        </div>
+      </div>
