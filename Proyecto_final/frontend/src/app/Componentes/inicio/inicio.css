@@ -1,3 +1,14 @@
+
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 25s ease-in-out infinite;
+}
+
+
 @keyframes float {
   0%, 100% { transform: translate(0, 0); }
   50% { transform: translate(60px, 40px); }
@@ -8,10 +19,3 @@
   50% { transform: translate(-60px, -40px); }
 }
 
-.animate-float {
-  animation: float 20s ease-in-out infinite;
-}
-
-.animate-float-reverse {
-  animation: float-reverse 25s ease-in-out infinite;
-}
