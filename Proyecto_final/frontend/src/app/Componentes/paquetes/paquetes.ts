@@ -7,7 +7,7 @@ import { Navbar } from '../navbar/navbar';
   imports: [Navbar, CurrencyPipe],
   templateUrl: './paquetes.html',
   styleUrl: './paquetes.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush // Revisa si hubo algun cambio en los datos dinamicos en el html y lo actualiza
 })
 export class Paquetes {
   paquetes = [
