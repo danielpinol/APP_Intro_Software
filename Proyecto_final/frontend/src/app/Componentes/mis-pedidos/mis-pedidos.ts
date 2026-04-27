@@ -1,6 +1,9 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { Navbar } from '../navbar/navbar';
 
+// Define la estructura de un pedido
+type Pedido = { nombre: string; placa: string; tipo: string; estado: string };
+
 @Component({
   selector: 'app-mis-pedidos',
   imports: [Navbar],
@@ -20,9 +23,9 @@ export class MisPedidos {
 
   pasos = ['Recibido', 'En proceso', 'Finalizado'];
 
-  pedidoEncontrado = signal<{ nombre: string; placa: string; tipo: string; estado: string } | null>(null);
-  //signal es una variable inteligente, cuando cambia la pantalla se actualiza sola
-  buscado = signal(false);
+  pedidoEncontrado = signal<Pedido | null>(null);
+  // signal es una variable inteligente, cuando cambia la pantalla se actualiza sola. Pedido | null significa que puede tener un pedido o estar vacio
+  buscado = signal(false); // Controla si el usuario ya presiono buscar o no
 
   buscar(nombre: string) {
     const found = this.pedidos.find(p => p.nombre.toLowerCase() === nombre.toLowerCase());
