@@ -32,6 +32,7 @@
         <div>
           <p class="text-white/40 text-sm font-black uppercase tracking-widest">Tu lavado</p>
           <p class="text-3xl font-black mt-2">{{ pedido.tipo }} · {{ pedido.placa }}</p>
+          <p class="text-[#00E5FF] text-sm font-black uppercase tracking-widest mt-2">{{ pedido.estado | estadoPedido }}</p>
         </div>
 
         <!-- Tracker de pasos -->
