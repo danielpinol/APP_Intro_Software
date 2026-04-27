@@ -2,50 +2,37 @@
 
   <app-navbar />
 
-  <!-- Título -->
   <div class="px-16 pt-10 pb-6">
     <h1 class="text-5xl font-black uppercase tracking-tight">Planes mensuales</h1>
     <p class="text-white/40 mt-2 text-lg">Elige el plan que más se adapte a ti.</p>
   </div>
 
-  <!-- Planes como filas horizontales -->
   <div class="flex flex-col flex-1 px-16 pb-10 gap-4">
 
+    <!-- Para cada paquete de la lista crea todo este bloque y repitelo -->
     @for (paquete of paquetes; track paquete.nombre) {
-      <div class="flex-1 flex items-center px-10 rounded-2xl transition-all"
-        [class]="paquete.recomendado
-          ? 'bg-[#00E5FF]/10 border-2 border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.1)]'
-          : 'bg-white/5 border border-white/10 hover:border-white/30'">
+      <!-- track trackea cada paquete por su nombre: Starter, Frecuente, Pro, Élite -->
 
-        <!-- Nombre del plan -->
+      <div class="flex-1 flex items-center px-10 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 transition-all">
+
         <div class="w-1/4">
-          @if (paquete.recomendado) {
-            <p class="text-xs text-[#00E5FF] font-black uppercase tracking-widest mb-1">★ Más popular</p>
-          }
           <p class="text-3xl font-black uppercase">{{ paquete.nombre }}</p>
         </div>
 
-        <!-- Lavados -->
         <div class="w-1/4 flex items-center gap-4">
-          <span class="text-7xl font-black leading-none"
-            [class]="paquete.recomendado ? 'text-[#00E5FF]' : 'text-white'">
-            {{ paquete.lavados }}
-          </span>
+          <span class="text-7xl font-black leading-none">{{ paquete.lavados }}</span>
           <span class="text-white/40 text-base leading-snug">lavados<br>al mes</span>
         </div>
+        <!-- leading-snug es el espacio vertical entre lineas de texto (Gap es entre elementos)
+         text-base es el tamano de texto normal -->
 
-        <!-- Precio -->
         <div class="w-1/4">
           <p class="text-4xl font-black">{{ paquete.precio | currency:'GTQ':'Q ':'1.0-0' }}</p>
           <p class="text-white/40 text-sm mt-1">Ahorrás {{ paquete.ahorro | currency:'GTQ':'Q ':'1.0-0' }}</p>
         </div>
 
-        <!-- Botón -->
         <div class="w-1/4 flex justify-end">
-          <button class="px-10 py-4 rounded-xl font-black uppercase tracking-widest text-sm transition-colors"
-            [class]="paquete.recomendado
-              ? 'bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0]'
-              : 'border border-white/20 hover:border-[#00E5FF] hover:text-[#00E5FF]'">
+          <button class="px-10 py-4 rounded-xl font-black uppercase tracking-widest text-sm border border-white/20 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors">
             Suscribirme
           </button>
         </div>

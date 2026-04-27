@@ -11,9 +11,9 @@ import { Navbar } from '../navbar/navbar';
 })
 export class Paquetes {
   paquetes = [
-    { nombre: 'Starter',   lavados: 4,  precio: 220,  ahorro: 40,  recomendado: false },
-    { nombre: 'Frecuente', lavados: 8,  precio: 400,  ahorro: 120, recomendado: true  },
-    { nombre: 'Pro',       lavados: 15,  precio: 720,  ahorro: 160, recomendado: false },
-    { nombre: 'Élite',     lavados: 20, precio: 1400, ahorro: 300, recomendado: false },
+    { nombre: 'Starter',   lavados: 4,  precio: 220,  ahorro: 40  },
+    { nombre: 'Frecuente', lavados: 8,  precio: 400,  ahorro: 120 },
+    { nombre: 'Pro',       lavados: 15, precio: 720,  ahorro: 160 },
+    { nombre: 'Élite',     lavados: 20, precio: 1400, ahorro: 300 },
   ];
 }
