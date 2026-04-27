@@ -1,0 +1,31 @@
+
+/* GENERAL STYLES */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Color base of the landing */ 
+body {
+  background-color: #080805;
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HERO SECTION */
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #ffffff, #a1a1aa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

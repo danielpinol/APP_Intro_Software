@@ -1,0 +1,52 @@
+<div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+
+  <app-navbar />
+
+  <main class="flex-1 flex items-center justify-center px-8">
+
+    <div class="w-full max-w-xl bg-white/5 border border-white/10 rounded-2xl p-14 flex flex-col gap-8">
+
+      <div class="flex flex-col gap-2">
+        <h2 class="text-5xl font-black uppercase tracking-tight">Bienvenido</h2>
+        <p class="text-white/40 text-lg">Accede a tu cuenta para continuar.</p>
+      </div>
+
+      <form class="flex flex-col gap-6">
+
+        <!-- Correo -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-black uppercase tracking-widest text-white/40">Correo</label>
+          <input type="email" placeholder="correo@ejemplo.com"
+            class="bg-white/5 border border-white/10 rounded-xl px-6 py-5 text-lg text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+        </div>
+
+        <!-- Contraseña -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-black uppercase tracking-widest text-white/40">Contraseña</label>
+          <div class="relative">
+            <input
+              [type]="mostrarPassword ? 'text' : 'password'"
+              placeholder="••••••••"
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-5 pr-28 text-lg text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+            <button
+              type="button"
+              (click)="togglePassword()"
+              class="absolute right-5 top-1/2 -translate-y-1/2 text-sm font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
+              {{ mostrarPassword ? 'Ocultar' : 'Mostrar' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Botón -->
+        <button type="submit"
+          class="w-full py-6 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-lg hover:bg-[#00c8e0] transition-colors mt-2">
+          Iniciar sesión
+        </button>
+
+      </form>
+
+    </div>
+
+  </main>
+
+</div>

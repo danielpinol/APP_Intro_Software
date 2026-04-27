@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -24,12 +24,10 @@
     <!-- Escogemos extended porque queremos agregar mas clases a las que ya hay -->
      <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         background: '#080805',
-                        foreground: '#ffffff',
                         accent: '#00E5FF',
                     },
                     fontFamily: {
@@ -50,21 +48,7 @@
                             '0%, 100%': { opacity: '0.3', filter: 'blur(15px)' },
                             '50%': { opacity: '0.6', filter: 'blur(25px)' },
                         },
-                        drip: {
-                            '0%': { transform: 'translateY(-10px) scale(0.9)', opacity: '0' },
-                            '30%': { transform: 'translateY(0) scale(1)', opacity: '1' },
-                            '70%': { transform: 'translateY(5px) scale(1)', opacity: '1' },
-                            '100%': { transform: 'translateY(15px) scale(0.8)', opacity: '0' },
-                        },
-                        splash: {
-                            '0%': { transform: 'scale(1)' },
-                            '50%': { transform: 'scale(1.2) rotate(15deg)' },
-                            '100%': { transform: 'scale(1)' },
-                        },
-                        'spin-slow': {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' },
-                        },
+                    
                         float: {
                             '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
                             '50%': { transform: 'translate(100px, 50px) scale(1.1)' },
@@ -116,8 +100,6 @@
             class="absolute inset-0 grid-bg opacity-50">
         </div>
 
-<!-- JS Particles Container -->
-        <div id="particles-container"></div>
     </div>
 
 
@@ -136,8 +118,10 @@
         <div class="flex items-center gap-2.5 z-10">
 
 <!-- Logo + nombre -->
-            <div class="w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(0,229,255,0.4)]"></div>
-            <span class="font-bold text-xl tracking-wide text-white">Uwash</span>
+            <a href="#top" class="flex items-center gap-2.5">
+                <div class="w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(0,229,255,0.4)]"></div>
+                <span class="font-bold text-xl tracking-wide text-white">Uwash</span>
+            </a>
         </div>
 
 <!-- Center: Links -->
@@ -159,11 +143,11 @@
             <div class="hidden md:block w-[1px] h-4 bg-white/20"></div>
 
             <!-- Botón Login -->
-            <a href="#" class="hover:text-accent transition-colors flex items-center gap-2">
+            <a href="#" class="hover:text-accent transition-colors flex items-center gap-2 group">
                 <!--group = permite efecto en hijos-->
 
                 <iconify-icon icon="solar:user-linear"
-                    class="text-lg text-accent transition-transform"></iconify-icon>
+                    class="text-lg text-accent group-hover:-translate-y-1 transition-all "></iconify-icon>
                 Log in
             </a> <!-- iconify-icon libreria para mostrar iconos-->
 
@@ -179,6 +163,59 @@
     </nav>
 </div>
 
+<!-- HERO SECTION -->
+<main
+    class="relative z-10 w-full min-h-screen flex items-center justify-center px-6 md:px-16 pt-20 overflow-hidden">
+     <!-- capa 10, todo el ancho, mínimo altura de toda la pantalla, md = desktop, overflow = lo que se salga desaparezca -->
+
+<!-- Background Video (solo Hero) -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+        <source src="bg-video.mp4" type="video/mp4">
+    </video>
+     <!-- playsinline = En IOS no lo pone en pantalla completa
+      objetc-cover = cubre toda el area sin deformarse -->
+
+
+<!-- Oscurece un poco el video para que el texto de encima sea visible -->
+    <div class="absolute inset-0 bg-background/70 z-[1]"></div> <!-- z-[1] = una capa especifica para que quede arriba del video  -->
+
+    <!--(Caja de todo el texto)-->
+    <div class="relative z-10 w-full max-w-[1600px] flex flex-col items-center text-center gap-8">
+
+        <!-- Centered Text  -->
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight w-full ">
+            Tu auto limpio<br>
+            <span class="text-gradient">mientras estudias.</span>
+        </h1>
+        <p class="text-lg md:text-2xl text-white/60 font-light max-w-4xl mt-6 mb-8 mx-auto">
+            Agenda tu lavado desde el app, nosotros vamos a tu parqueo y te dejamos el auto brillante.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
+            <!-- PRIMARY CTA: App Download -->
+            <a href="http://localhost:4200"
+                target="_blank"
+                class="bg-accent text-background px-10 py-5 rounded-full font-bold text-lg hover:bg-white transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto shadow-[0_0_30px_rgba(0,229,255,0.3)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.5)]">
+                <iconify-icon icon="solar:smartphone-linear" class="text-2xl"></iconify-icon>
+                Obtén la App
+            </a>
+            <!-- SECONDARY CTA: Web Booking -->
+            <a href="#"
+                class="w-full sm:w-auto text-white/70 hover:text-white flex items-center justify-center gap-2.5 font-medium transition-all duration-300 px-6 py-4 group">
+                Agendar por Web
+                <iconify-icon icon="solar:arrow-right-linear"
+                    class="text-xl text-accent group-hover:translate-x-1 transition-transform"></iconify-icon>
+            </a>
+        </div>
+        <!-- UFM Badge Moved Here -->
+        <div class="mt-12 inline-flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
+            <span class="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.8)]"></span>
+            <span class="text-white text-xs font-light tracking-widest uppercase">Servicio exclusivo para <span
+                    class="font-bold">sótanos UFM</span></span>
+        </div>
+    </div>
+</main>
+
+
 <!-- === SECCION COMO FUNCIONA === -->
 <section id="como-funciona" class="relative z-10 w-full py-32 md:py-40 px-6 md:px-16">
     <!-- relative para controlar capas, el z-10 sirve para que el elemento esta encima del fondo, w-full ocupa todo el ancho del contenedor
@@ -190,10 +227,10 @@
 
 
         <!-- Título de Sección -->
-        <div class="mb-20 md:mb-28 text-center" data-scroll-reveal>
+        <div class="mb-20 md:mb-28 text-center">
             <!-- mb: espacio debajo del elemento (diferente a padding), text-center: todo centrado, data-scroll-reveal: activa animación al hacer scroll -->
 
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15]">
+            <h2 class="text-5xl sm:text-6xl md:text-8xl font-bold">
                 <!-- Título principal responsive, fonto-bold texto en negritas, tracking-tight espacio reducido entre letras, 
                  leading controla el espacio entre lines de texto -->
 
@@ -202,7 +239,7 @@
                 <!-- Parte resaltada con color -->
             </h2>
 
-            <p class="mt-4 text-white/40 text-sm md:text-base font-mono tracking-widest">// no te tienes que mover</p>
+            <p class="mt-6 text-white/50 text-base md:text-xl font-mono tracking-widest italic">// no te tienes que mover</p>
             <!-- estilo "código" con font-mono, mt es margin top, text y todo lo relacionado es responsive y el texto es blanco con opacidad de 40,
                 tracking-widest: letras separadas
             -->
@@ -212,34 +249,26 @@
             <div class="relative">
                 <!-- Permite que las lineas puedan posicionarse en un bloque (relative) -->
 
-                <!-- Línea Conectora SVG (solo desktop) -->
-                <svg class="connector-line hidden md:block absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 z-0 pointer-events-none"
-                    viewBox="0 0 1400 2" preserveAspectRatio="none" data-scroll-reveal>
-                    <line x1="0" y1="1" x2="1400" y2="1" stroke="#00E5FF" stroke-width="2" stroke-opacity="0.2"
-                        stroke-dasharray="1400" stroke-dashoffset="1400" class="connector-path" /></svg>
-                <!-- svg se usa para un formato de imagen vectorial o sea para dibujar lineas o iconos en este caso una linea, 
-                 hidden para que la linea no aparezca, absolute para posicionarlo dentro del relative, top-1/2 la baja a la mitad de la altura del contenedor
+                <!-- Línea Conectora (solo desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 z-0 pointer-events-none bg-[#00E5FF] opacity-20"></div>
+                <!-- hidden para que la linea no aparezca en mobile, absolute para posicionarlo dentro del relative, top-1/2 la baja a la mitad de la altura del contenedor
                 left-0 la pega al borde izquierdo, h-[2px] altura de 2 píxeles, 
                 translate-y-1/2 corrige la posición para arriba para centrarla bien, 
                 z-0 La linea se posiciona detras de otro elementos, pointer-events-none la linea no bloquea clics ni hover-->
                 
-                <!-- Viewbox define el espacio del svg, preserve aspect ratio se adapta al ancho del bloque, line define el inicio y final de la linea
-                 strokes y todo lo relacionado: color grosor opacidad dibujada oculta al inicio toda la linea. -->
 
             <!-- Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 relative z-10">
                         <!-- Defini el numero de columnas (tambien es responsive) y el espacio entre ellas -->
                 
                 <!-- PASO 01 -->
-                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
-                        data-scroll-reveal data-delay="0.3">
-                        <!-- overflow-hidden oculta cualquier contenido afuera del elemento, rounded borde redondeado, 
+                    <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]">
+                        <!-- overflow-hidden oculta cualquier contenido afuera del elemento, rounded borde redondeado,
                          bg-white background blanco, blur borroso, transition efecto smooth, hover cambia todo cuanto interactua con el cursor, bg-clip-text solo aplica el fondo al texto -->
 
                         <!-- Número Gigante de Fondo -->
                         <span
-                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
-                            data-scroll-reveal data-delay="0.6">01</span>
+                            class="absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent">01</span>
                             <!-- pointer no recibe clicks, bg-gradient gradiente vertical-->
 
                         <!-- Icono -->
@@ -255,7 +284,8 @@
                         <div class="relative z-10">
                             <p class="text-accent text-xs font-semibold tracking-widest uppercase mb-3">Solicitá</p>
                             <h3 class="text-xl md:text-2xl font-bold mb-4 leading-snug">45 segundos para pedir</h3>
-                            <!-- leading-snug altura de linea de texto mas compacta -->
+                            <!-- leading-snug = altura de linea de texto mas compacta -->
+
                             <p class="text-white/50 text-sm md:text-base leading-relaxed font-light">
                                 <!-- leading-relaxed mas espacio y font-light texto mas delgado -->
                                 Abrís la app, elegís tu ubicación (Sótano 1-2), tipo de lavado, y listo. Pago automático
@@ -265,12 +295,10 @@
                     </div>
 
                 <!-- PASO 02 -->
-                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
-                        data-scroll-reveal data-delay="0.7">
+                    <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]">
 
                         <span
-                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
-                            data-scroll-reveal data-delay="1.0">02</span>
+                            class="absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent">02</span>
 
                         <div class="relative z-10 mb-8">
                             <div
@@ -291,12 +319,11 @@
                     </div>
                 
                 <!-- PASO 03 -->
-                    <div class="step-card group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]"
-                        data-scroll-reveal data-delay="1.1">
+                    <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 transition-all duration-500 hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_40px_rgba(0,229,255,0.08)]">
 
                         <span
-                            class="step-number absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none opacity-0 bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent"
-                            data-scroll-reveal data-delay="1.4">03</span>
+                            class="absolute -top-6 -left-2 text-[120px] md:text-[180px] font-extrabold font-mono leading-none select-none pointer-events-none bg-gradient-to-b from-accent/[0.06] to-transparent bg-clip-text text-transparent">
+                            03</span>
 
                         <div class="relative z-10 mb-8">
                             <div
@@ -322,6 +349,420 @@
 
         </div>
     </section>
+
+<section id="precios" class="relative z-10 w-full pt-48 pb-32 md:pt-60 md:pb-40 px-6 md:px-16 overflow-hidden">
+<!-- ID precios = ancla el link de precios -->
+
+
+        <div class="w-full max-w-[1400px] mx-auto relative z-10">
+
+            <!-- Título de Sección -->
+            <div class="mb-16 md:mb-24 text-center">
+                <h2 class="text-5xl sm:text-6xl md:text-8xl font-bold ">
+                    Elige tu <span class="text-accent">nivel de brillo.</span>
+                </h2>
+                <p class="mt-6 text-white/50 text-base md:text-xl font-mono tracking-widest italic">// precios en
+                    quetzales</p>
+            </div>
+
+            <!-- Grid de Precios -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-start">
+
+                <!-- ═══ BÁSICO ═══ -->
+                <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-6 md:p-8 transition-all duration-500 hover:border-white/10 hover:shadow-[0_0_40px_rgba(255,255,255,0.03)]">
+
+                    <!-- Header -->
+                    <div class="mb-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-accent/5 border border-accent/10 flex items-center justify-center">
+                                <span class="text-xl">💧</span>
+                            </div>
+                            <span class="text-sm font-bold tracking-[0.1em] uppercase text-white/70">Básico</span>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-white/40 text-lg font-light">Q</span>
+                            <span class="text-5xl md:text-6xl font-bold tracking-tight">65</span>
+                        </div>
+                        <p class="mt-2 text-white/50 text-sm font-medium">Lavado exterior rápido</p>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="w-full h-[1px] bg-white/5 mb-6"></div>
+
+                    <!-- Features -->
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Lavado exterior completo
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Enjuague con agua a presión
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Secado con microfibra
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Fotos antes y después
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/30 line-through">
+                            <iconify-icon icon="solar:close-circle-linear"
+                                class="text-white/15 text-lg flex-shrink-0"></iconify-icon>
+                            Aspirado interior
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/30 line-through">
+                            <iconify-icon icon="solar:close-circle-linear"
+                                class="text-white/15 text-lg flex-shrink-0"></iconify-icon>
+                            Encerado protector
+                        </li>
+                    </ul>
+
+                    <!-- CTA -->
+                    <button
+                        class="w-full py-4 rounded-full border border-white/10 text-white/70 text-sm font-semibold hover:bg-white/5 hover:border-white/20 transition-all duration-300">
+                        Seleccionar
+                    </button>
+                </div>
+
+                <!-- ═══ MEDIUM (RECOMENDADO) ═══ -->
+                <div class=" relative overflow-hidden rounded-3xl border border-accent/40 bg-accent/[0.02] backdrop-blur-md p-6 md:p-8 transition-all duration-500 hover:border-accent/60 hover:shadow-[0_0_80px_rgba(0,229,255,0.15)] md:-mt-4 md:mb-[-16px]">
+
+                    <!-- Premium Glow Effect -->
+                    <div
+                        class="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] bg-accent/5 rounded-full blur-[60px] pointer-events-none animate-glow-pulse">
+                    </div>
+
+                    <!-- Shimmer Line Effect -->
+                    <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+                        <div
+                            class="w-full h-full bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -skew-x-12 translate-x-[-100%] animate-shimmer">
+                        </div>
+                    </div>
+
+                    <!-- Aviso de mas recomendado -->
+                    <div class="absolute top-4 right-4 z-20">
+                        <div
+                            class="flex items-center gap-2 bg-gradient-to-r from-accent to-[#0055ff] text-background px-3 py-1 rounded-full shadow-[0_0_20px_rgba(0,229,255,0.3)] border border-white/20">
+                            <iconify-icon icon="solar:star-bold" class="text-[10px]"></iconify-icon>
+                            <span class="text-[8px] font-black tracking-[0.1em] uppercase">Recommended</span>
+                        </div>
+                    </div>
+
+                    <!-- Header -->
+                    <div class="mb-6 mt-2 relative z-10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
+                                <span class="text-xl">💦</span>
+                            </div>
+                            <span class="text-sm font-bold tracking-[0.1em] uppercase text-accent">Medium</span>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-accent/60 text-lg font-light">Q</span>
+                            <span class="text-5xl md:text-6xl font-bold tracking-tight text-white">110</span>
+                        </div>
+                        <p class="mt-2 text-white/60 text-sm font-medium">Exterior + interior impecable</p>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="w-full h-[1px] bg-accent/10 mb-6 relative z-10"></div>
+
+                    <!-- Features -->
+                    <ul class="space-y-3 mb-8 relative z-10">
+                        <li class="flex items-center gap-3 text-sm text-white/70">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-accent text-lg flex-shrink-0"></iconify-icon>
+                            Lavado exterior completo
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/70">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-accent text-lg flex-shrink-0"></iconify-icon>
+                            Enjuague con agua a presión
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/70">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-accent text-lg flex-shrink-0"></iconify-icon>
+                            Secado con microfibra
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/70">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-accent text-lg flex-shrink-0"></iconify-icon>
+                            Fotos antes y después
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/70">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-accent text-lg flex-shrink-0"></iconify-icon>
+                            Aspirado interior completo
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/30 line-through">
+                            <iconify-icon icon="solar:close-circle-linear"
+                                class="text-white/15 text-lg flex-shrink-0"></iconify-icon>
+                            Encerado protector
+                        </li>
+                    </ul>
+
+                    <!-- CTA (Destacado) -->
+                    <button
+                        class="w-full py-4 rounded-full bg-accent text-background text-sm font-bold hover:bg-white transition-all duration-300 shadow-[0_0_25px_rgba(0,229,255,0.25)] hover:shadow-[0_10px_40px_rgba(255,255,255,0.4)] relative z-10">
+                        Seleccionar
+                    </button>
+                </div>
+
+                <!-- ═══ PREMIUM ═══ -->
+                <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-6 md:p-8 transition-all duration-500 hover:border-white/10 hover:shadow-[0_0_40px_rgba(255,255,255,0.03)]">
+
+                    <!-- Header -->
+                    <div class="mb-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-accent/5 border border-accent/10 flex items-center justify-center">
+                                <span class="text-xl">✨</span>
+                            </div>
+                            <span class="text-sm font-bold tracking-[0.1em] uppercase text-white/70">Premium</span>
+                        </div>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-white/40 text-lg font-light">Q</span>
+                            <span class="text-5xl md:text-6xl font-bold tracking-tight">170</span>
+                        </div>
+                        <p class="mt-2 text-white/50 text-sm font-medium">El tratamiento completo</p>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="w-full h-[1px] bg-white/5 mb-6"></div>
+
+                    <!-- Features -->
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Lavado exterior completo
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Enjuague con agua a presión
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Secado con microfibra
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Fotos antes y después
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Aspirado interior completo
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white/60">
+                            <iconify-icon icon="solar:check-circle-linear"
+                                class="text-white/30 text-lg flex-shrink-0"></iconify-icon>
+                            Encerado protector UV
+                        </li>
+                    </ul>
+
+                    <!-- CTA -->
+                    <button
+                        class="w-full py-4 rounded-full border border-white/10 text-white/70 text-sm font-semibold hover:bg-white/5 hover:border-white/20 transition-all duration-300">
+                        Seleccionar
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Nota al pie -->
+            <div class="mt-16 text-center">
+                <p class="text-white/25 text-xs tracking-wider">Todos los precios incluyen IVA • Pago con tarjeta desde
+                    la app</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- === SECCIÓN: BENEFICIOS === -->
+
+    <section id="beneficios" class="relative z-10 w-full py-32 md:py-40 px-6 md:px-16 bg-white/[0.01]">
+        <div class="w-full max-w-[1400px] mx-auto">
+            <!-- py incluye el padding-bottom y el padding-top -->
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+                <!-- Columna Izquierda: Texto -->
+                <div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15] mb-8">
+                        ¿Por qué elegir<br><span class="text-accent">Uwash?</span>
+                        <!-- br para que el texto continúe en la siguiente línea -->
+                    </h2>
+                    <p class="text-white/50 text-lg font-light leading-relaxed mb-10 max-w-lg">
+                        Diseñamos una experiencia pensada exclusivamente para la comunidad universitaria. Eficiencia,
+                        tecnología y sostenibilidad en un solo lugar.
+                    </p>
+                    <!-- max-w-lg ancho maximo del texto -->
+
+                    <div class="flex flex-col gap-6">
+                        <div class="flex items-start gap-4 group">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                                <iconify-icon icon="solar:shield-check-linear"
+                                    class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Confianza Total</h4>
+                                <p class="text-white/30 text-sm">Personal capacitado y verificado operando en sótanos
+                                    seguros.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 group">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                                <iconify-icon icon="solar:leaf-linear" class="text-accent text-2xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-1">Eco-Responsable</h4>
+                                <p class="text-white/30 text-sm">Ahorramos hasta 150L de agua por lavado usando
+                                    tecnología biodegradable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: cartas con texto e iconos -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                        <div class="p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:border-accent/30 transition-all duration-500 group">
+                            <iconify-icon icon="solar:clock-circle-linear"
+                                class="text-accent text-3xl mb-6 group-hover:scale-110 transition-transform"></iconify-icon>
+                            <h3 class="text-lg font-bold mb-3">Tu tiempo es oro</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">No pierdas una hora en un car wash tradicional.
+                                Nosotros trabajamos mientras tú aprendes.</p>
+                        </div>
+
+                        <div class="p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:border-accent/30 transition-all duration-500 group">
+                            <iconify-icon icon="solar:star-linear"
+                                class="text-accent text-3xl mb-6 group-hover:scale-110 transition-transform"></iconify-icon>
+                            <h3 class="text-lg font-bold mb-3">Calidad Premium</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">Utilizamos productos de alta gama que protegen
+                                y realzan el brillo de la pintura.</p>
+                        </div>
+
+                        <div class="p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:border-accent/30 transition-all duration-500 group">
+                            <iconify-icon icon="solar:mask-happly-linear"
+                                class="text-accent text-3xl mb-6 group-hover:scale-110 transition-transform"></iconify-icon>
+                            <h3 class="text-lg font-bold mb-3">Cero Estrés</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">Agenda, paga y recibe notificaciones todo desde
+                                tu smartphone. Sin efectivo, sin filas.</p>
+                        </div>
+
+                        <div class="p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:border-accent/30 transition-all duration-500 group">
+                            <iconify-icon icon="solar:magic-stick-3-linear"
+                                class="text-accent text-3xl mb-6 group-hover:scale-110 transition-transform"></iconify-icon>
+                            <h3 class="text-lg font-bold mb-3">Resultados Pro</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">Nuestros expertos cuidan cada detalle para que
+                                tu auto luzca como nuevo siempre.</p>
+                        </div>
+
+                    </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==== FOOTER ==== -->
+    <footer class="relative z-10 w-full pt-20 pb-10 px-6 md:px-16 border-t border-white/5">
+        <div class="w-full max-w-[1400px] mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+                <!-- border-t es borde solo en el top,  -->
+
+                <!-- Logo y Info -->
+                <div class="max-w-xs">
+                    <div class="flex items-center gap-2.5 mb-6">
+                        <div class="w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_rgba(0,229,255,0.4)]"></div>
+                        <span class="font-bold text-xl tracking-wide text-white">Uwash</span>
+                    </div>
+                    <p class="text-white/40 text-sm leading-relaxed mb-6">
+                        La nueva era del car wash universitario. Innovación y conveniencia directo a tu parqueo en la
+                        UFM.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent/10 hover:border-accent/20 transition-all group">
+                            <iconify-icon icon="solar:camera-linear"
+                                class="text-white/40 group-hover:text-accent"></iconify-icon>
+                        </a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent/10 hover:border-accent/20 transition-all group">
+                            <iconify-icon icon="solar:letter-linear"
+                                class="text-white/40 group-hover:text-accent"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="grid grid-cols-2 gap-16 md:gap-24">
+                    <div>
+                        <h5 class="text-white text-xs font-bold tracking-widest uppercase mb-6">Navegación</h5>
+                        <ul class="space-y-4">
+                            <li><a href="#como-funciona"
+                                    class="text-white/30 text-sm hover:text-accent transition-colors">Cómo
+                                    funciona</a></li>
+                            <li><a href="#beneficios"
+                                    class="text-white/30 text-sm hover:text-accent transition-colors">Beneficios</a>
+                            </li>
+                            <li><a href="#precios"
+                                    class="text-white/30 text-sm hover:text-accent transition-colors">Precios</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white text-xs font-bold tracking-widest uppercase mb-6">Legal</h5>
+                        <ul class="space-y-4">
+                            <li><a href="#"
+                                    class="text-white/30 text-sm hover:text-accent transition-colors">Privacidad</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-white/30 text-sm hover:text-accent transition-colors">Términos</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-white/30 text-sm hover:text-accent transition-colors">Soporte</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            <!-- Status -->
+                <div class="bg-white/[0.03] border border-white/5 p-6 rounded-3xl">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-white/70 text-xs font-semibold uppercase tracking-widest">Sistema
+                            Activo</span>
+                    </div>
+                    <p class="text-white/30 text-[10px] leading-tight">Servicio disponible para
+                        la Universidad Francisco Marroquín.</p>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/15 text-[10px] tracking-widest uppercase">2026 Uwash Guatemala • Todos los
+                    derechos reservados</p>
+                <p class="text-white/15 text-[10px] tracking-widest uppercase">Diseñado para la excelencia tecnológica
+                </p>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
