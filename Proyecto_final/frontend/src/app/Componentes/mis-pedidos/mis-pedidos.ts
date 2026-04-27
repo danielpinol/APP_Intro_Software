@@ -1,12 +1,13 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { Navbar } from '../navbar/navbar';
+import { EstadoPedidoPipe } from '../../Pipes/estado-pedido.pipe';
 
 // Define la estructura de un pedido
 type Pedido = { nombre: string; placa: string; tipo: string; estado: string };
 
 @Component({
   selector: 'app-mis-pedidos',
-  imports: [Navbar],
+  imports: [Navbar, EstadoPedidoPipe],
   templateUrl: './mis-pedidos.html',
   styleUrl: './mis-pedidos.css',
   changeDetection: ChangeDetectionStrategy.OnPush // Revisa si hubo algun cambio en los datos dinamicos en el html y lo actualiza
