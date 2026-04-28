@@ -2,37 +2,33 @@
 
   <app-navbar />
 
-  <div class="px-16 pt-10 pb-6">
-    <h1 class="text-5xl font-black uppercase tracking-tight">Planes mensuales</h1>
-    <p class="text-white/40 mt-2 text-lg">Elige el plan que más se adapte a ti.</p>
+  <div class="px-10 pt-6 pb-4">
+    <h1 class="text-3xl font-black uppercase tracking-tight">Planes mensuales</h1>
+    <p class="text-white/40 mt-1 text-sm">Elige el plan que más se adapte a ti.</p>
   </div>
 
-  <div class="flex flex-col flex-1 px-16 pb-10 gap-4">
+  <div class="flex flex-col flex-1 px-10 pb-6 gap-3">
 
-    <!-- Para cada paquete de la lista crea todo este bloque y repitelo -->
     @for (paquete of paquetes; track paquete.nombre) {
-      <!-- track trackea cada paquete por su nombre: Starter, Frecuente, Pro, Élite -->
 
-      <div class="flex-1 flex items-center px-10 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 transition-all">
-
-        <div class="w-1/4">
-          <p class="text-3xl font-black uppercase">{{ paquete.nombre }}</p>
-        </div>
-
-        <div class="w-1/4 flex items-center gap-4">
-          <span class="text-7xl font-black leading-none">{{ paquete.lavados }}</span>
-          <span class="text-white/40 text-base leading-snug">lavados<br>al mes</span>
-        </div>
-        <!-- leading-snug es el espacio vertical entre lineas de texto (Gap es entre elementos)
-         text-base es el tamano de texto normal -->
+      <div class="flex-1 flex items-center px-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 transition-all">
 
         <div class="w-1/4">
-          <p class="text-4xl font-black">{{ paquete.precio | currency:'GTQ':'Q ':'1.0-0' }}</p>
-          <p class="text-white/40 text-sm mt-1">Ahorrás {{ paquete.ahorro | currency:'GTQ':'Q ':'1.0-0' }}</p>
+          <p class="text-xl font-black uppercase">{{ paquete.nombre }}</p>
+        </div>
+
+        <div class="w-1/4 flex items-center gap-3">
+          <span class="text-4xl font-black leading-none">{{ paquete.lavados }}</span>
+          <span class="text-white/40 text-xs leading-snug">lavados<br>al mes</span>
+        </div>
+
+        <div class="w-1/4">
+          <p class="text-2xl font-black">{{ paquete.precio | currency:'GTQ':'Q ':'1.0-0' }}</p>
+          <p class="text-white/40 text-xs mt-1">Ahorrás {{ paquete.ahorro | currency:'GTQ':'Q ':'1.0-0' }}</p>
         </div>
 
         <div class="w-1/4 flex justify-end">
-          <button class="px-10 py-4 rounded-xl font-black uppercase tracking-widest text-sm border border-white/20 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors">
+          <button class="px-6 py-2.5 rounded-xl font-black uppercase tracking-widest text-xs border border-white/20 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors">
             Suscribirme
           </button>
         </div>
