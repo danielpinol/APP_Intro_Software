@@ -3,16 +3,21 @@ import { RouterLink } from '@angular/router';
 import { Navbar } from '../navbar/navbar';
 
 @Component({
-  selector: 'app-log-in',
+  selector: 'app-sign-up',
   imports: [Navbar, RouterLink],
-  templateUrl: './log-in.html',
-  styleUrl: './log-in.css',
-  changeDetection: ChangeDetectionStrategy.OnPush // Revisa si hubo algun cambio en los datos dinamicos en el html y lo actualiza
+  templateUrl: './sign-up.html',
+  styleUrl: './sign-up.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LogIn {
+export class SignUp {
   mostrarPassword = false;
+  mostrarConfirmar = false;
 
   togglePassword() {
     this.mostrarPassword = !this.mostrarPassword;
+  }
+
+  toggleConfirmar() {
+    this.mostrarConfirmar = !this.mostrarConfirmar;
   }
 }
