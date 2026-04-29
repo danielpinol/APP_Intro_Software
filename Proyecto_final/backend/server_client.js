@@ -14,10 +14,20 @@ app.get('/api/pedidos', (req, res) => {
     const data = fs.readFileSync('pedidos.json', 'utf-8');
     const pedidos = JSON.parse(data);
 
-    res.send(JSON.stringify(pedidos, null, 2));
+    res.json(pedidos);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error leyendo pedidos' });
+  }
+});
+
+app.get('/api/paquetes', (req, res) => {
+  try {
+    const data = fs.readFileSync('paquetes.json', 'utf-8');
+    const paquetes = JSON.parse(data);
+    res.json(paquetes);
+  } catch (error) {
+    res.status(500).json({ error: 'Error leyendo paquetes' });
   }
 });
 
