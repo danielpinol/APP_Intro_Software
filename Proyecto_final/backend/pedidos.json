@@ -34,5 +34,15 @@
     "precio": 110,
     "estado": "Finalizado",
     "fecha": "2026-04-28"
+  },
+  {
+    "id": 4,
+    "nombre": "ERICK LOPEZ",
+    "marca": "BMW",
+    "modelo": "X3",
+    "anio": 2026,
+    "placa": "455HHH",
+    "estado": "Recibido",
+    "fecha": "2026-04-30"
   }
 ]

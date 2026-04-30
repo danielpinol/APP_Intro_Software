@@ -21,6 +21,31 @@ app.get('/api/pedidos', (req, res) => {
   }
 });
 
+
+app.post('/api/pedidos', (req, res) => {
+  try {
+    const data = fs.readFileSync('pedidos.json', 'utf-8');
+    const pedidos = JSON.parse(data);
+
+    const nuevoPedido = {
+      id: pedidos.length + 1,
+      ...req.body,
+      estado: 'Recibido',
+      fecha: new Date().toISOString().split('T')[0]
+    };
+
+    pedidos.push(nuevoPedido);
+
+    fs.writeFileSync('pedidos.json', JSON.stringify(pedidos, null, 2));
+
+    res.json({ mensaje: 'Pedido guardado correctamente' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error guardando pedido' });
+  }
+});
+
 app.get('/api/paquetes', (req, res) => {
   try {
     const data = fs.readFileSync('paquetes.json', 'utf-8');
