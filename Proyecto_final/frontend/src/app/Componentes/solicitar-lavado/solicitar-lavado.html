@@ -6,12 +6,12 @@
 
     <h1 class="text-3xl font-black uppercase tracking-tight">Solicitar lavado</h1>
 
-    <form class="flex-1 flex flex-col gap-5">
+    <form (ngSubmit)="enviar()" class="flex-1 flex flex-col gap-5">
 
       <!-- Nombre -->
       <div class="flex flex-col gap-1.5">
         <label class="text-xs font-black uppercase tracking-widest text-white/40">Nombre</label>
-        <input type="text" placeholder="Tu nombre completo"
+        <input type="text" [(ngModel)]="form.nombre" name="nombre" placeholder="Tu nombre completo"
           class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
       </div>
 
@@ -29,13 +29,13 @@
       <div class="flex flex-col gap-3">
         <label class="text-xs font-black uppercase tracking-widest text-white/40">Datos del carro</label>
         <div class="grid grid-cols-4 gap-3">
-          <input type="text" placeholder="Marca"
+          <input type="text" [(ngModel)]="form.marca" name="marca" placeholder="Marca"
             class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-          <input type="text" placeholder="Modelo"
+          <input type="text" [(ngModel)]="form.modelo" name="modelo" placeholder="Modelo"
             class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-          <input type="number" placeholder="Año"
+          <input type="number" [(ngModel)]="form.anio" name="anio" placeholder="Año"
             class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-          <input type="text" placeholder="Placa"
+          <input type="text" [(ngModel)]="form.placa" name="placa" placeholder="Placa"
             class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
         </div>
       </div>

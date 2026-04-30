@@ -1,0 +1,96 @@
+<div class="min-h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+
+  <app-navbar />
+
+  <main class="flex-1 flex items-center justify-center px-6 py-6">
+
+    <div class="w-full max-w-xl bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-5">
+
+      <div class="flex flex-col gap-1.5">
+        <h2 class="text-3xl font-black uppercase tracking-tight">Crear cuenta</h2>
+        <p class="text-white/40 text-sm">Regístrate para comenzar.</p>
+      </div>
+
+      <form class="flex flex-col gap-4">
+
+        <!-- Fila 1: Nombre completo + Nombre de usuario -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Nombre completo</label>
+            <input type="text" placeholder="Tu nombre completo"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Nombre de usuario</label>
+            <input type="text" placeholder="@usuario"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+        </div>
+
+        <!-- Fila 2: Gmail + Teléfono -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Gmail</label>
+            <input type="email" placeholder="correo@gmail.com"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Teléfono</label>
+            <input type="tel" placeholder="+502 0000 0000"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+        </div>
+
+        <!-- Fila 3: Contraseña + Confirmar -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Contraseña</label>
+            <div class="relative">
+              <input
+                [type]="mostrarPassword ? 'text' : 'password'"
+                placeholder="••••••••"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+              <button
+                type="button"
+                (click)="togglePassword()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
+                {{ mostrarPassword ? 'Ocultar' : 'Mostrar' }}
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Confirmar contraseña</label>
+            <div class="relative">
+              <input
+                [type]="mostrarConfirmar ? 'text' : 'password'"
+                placeholder="••••••••"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+              <button
+                type="button"
+                (click)="toggleConfirmar()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
+                {{ mostrarConfirmar ? 'Ocultar' : 'Mostrar' }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ya tienes cuenta -->
+        <p class="text-xs text-white/40">
+          ¿Ya tienes cuenta?
+          <a routerLink="/login" class="text-[#00E5FF] font-black hover:underline">Inicia sesión</a>
+        </p>
+
+        <!-- Botón -->
+        <button type="submit"
+          class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm hover:bg-[#00c8e0] transition-colors mt-1">
+          Crear cuenta
+        </button>
+
+      </form>
+
+    </div>
+
+  </main>
+
+</div>

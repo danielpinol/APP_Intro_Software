@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Navbar } from '../navbar/navbar';
 
 @Component({
   selector: 'app-log-in',
-  imports: [Navbar],
+  imports: [Navbar, RouterLink],
   templateUrl: './log-in.html',
   styleUrl: './log-in.css',
   changeDetection: ChangeDetectionStrategy.OnPush // Revisa si hubo algun cambio en los datos dinamicos en el html y lo actualiza

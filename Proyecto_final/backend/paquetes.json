@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Pack Básico",
+    "lavados": 4,
+    "precio": 220,
+    "ahorro": 40
+  },
+  {
+    "id": 2,
+    "nombre": "Pack Medium",
+    "lavados": 4,
+    "precio": 380,
+    "ahorro": 60
+  },
+  {
+    "id": 3,
+    "nombre": "Pack Premium",
+    "lavados": 4,
+    "precio": 580,
+    "ahorro": 100
+  }
+]
