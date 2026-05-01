@@ -1,1 +1,91 @@
-<p>admin works!</p>
+<div class="min-h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+
+  <app-navbar />
+
+  <main class="flex-1 flex flex-col px-10 py-6 gap-6">
+
+    <h1 class="text-3xl font-black uppercase tracking-tight">PEDIDOS</h1>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col gap-1">
+        <p class="text-xs font-black uppercase tracking-widest text-white/40">Total pedidos</p>
+        <p class="text-4xl font-black">{{ totalPedidos }}</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col gap-1">
+        <p class="text-xs font-black uppercase tracking-widest text-white/40">Total generado</p>
+        <p class="text-4xl font-black">Q{{ totalGenerado }}</p>
+      </div>
+    </div>
+
+    <!-- Lista de pedidos -->
+    <div class="flex flex-col gap-3">
+      <p class="text-xs font-black uppercase tracking-widest text-white/40">Pedidos</p>
+
+      @for (pedido of pedidos; track pedido.id) {
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col gap-4">
+
+          <!-- Info del cliente y carro -->
+          <div class="grid grid-cols-2 gap-x-8 gap-y-1">
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Cliente</p>
+              <p class="font-black">{{ pedido.nombre }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Fecha</p>
+              <p class="font-black">{{ pedido.fecha }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Vehículo</p>
+              <p class="font-black">{{ pedido.marca }} {{ pedido.modelo }} {{ pedido.anio }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Placa</p>
+              <p class="font-black">{{ pedido.placa }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Tipo de lavado</p>
+              <p class="font-black">{{ pedido.tipo }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Precio</p>
+              <p class="font-black text-[#00E5FF]">Q{{ pedido.precio }}</p>
+            </div>
+          </div>
+
+          <!-- Estado y botones -->
+          <div class="flex items-center justify-between border-t border-white/10 pt-4">
+            <div class="flex items-center gap-2">
+              <p class="text-xs text-white/40 uppercase tracking-widest">Estado:</p>
+              @if (pedido.estado === 'Recibido') {
+                <span class="text-xs font-black px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400">Recibido</span>
+              }
+              @if (pedido.estado === 'En proceso') {
+                <span class="text-xs font-black px-3 py-1 rounded-full bg-[#00E5FF]/10 text-[#00E5FF]">En proceso</span>
+              }
+              @if (pedido.estado === 'Finalizado') {
+                <span class="text-xs font-black px-3 py-1 rounded-full bg-green-500/10 text-green-400">Finalizado</span>
+              }
+            </div>
+            <div class="flex gap-2">
+              <button
+                (click)="cambiarEstado(pedido.id, 'En proceso')"
+                [class]="pedido.estado === 'En proceso' ? 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805]' : 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border border-white/10 text-white/40 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors'">
+                En proceso
+              </button>
+              <button
+                (click)="cambiarEstado(pedido.id, 'Finalizado')"
+                [class]="pedido.estado === 'Finalizado' ? 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest bg-green-500 text-[#080805]' : 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border border-white/10 text-white/40 hover:border-green-500 hover:text-green-400 transition-colors'">
+                Finalizado
+              </button>
+            </div>
+          </div>
+
+        </div>
+      }
+
+    </div>
+
+  </main>
+
+</div>
