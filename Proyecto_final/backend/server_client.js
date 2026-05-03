@@ -60,5 +60,10 @@ app.get('/api/paquetes', (req, res) => {
 const PORT = 3000;
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}/api/pedidos`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}\n`);
+
+  console.log('Endpoints disponibles:');
+  console.log(`GET  |  PEDIDOS |  http://localhost:${PORT}/api/pedidos`);
+  console.log(`POST |  PEDIDOS |  http://localhost:${PORT}/api/pedidos`);
+  console.log(`GET  | PAQUETES |  http://localhost:${PORT}/api/paquetes`);
 });
