@@ -44,5 +44,15 @@
     "placa": "455HHH",
     "estado": "Recibido",
     "fecha": "2026-04-30"
+  },
+  {
+    "id": 5,
+    "nombre": "Tom Cruise",
+    "marca": "Ferrari",
+    "modelo": "F40",
+    "anio": 1992,
+    "placa": "281KGG",
+    "estado": "Recibido",
+    "fecha": "2026-05-03"
   }
 ]

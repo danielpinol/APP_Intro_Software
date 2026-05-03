@@ -1,46 +1,89 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Navbar } from '../navbar/navbar';
 import { EstadoPedidoPipe } from '../../Pipes/estado-pedido.pipe';
 
-// Define la estructura de un pedido
-type Pedido = { nombre: string; placa: string; tipo: string; estado: string };
+
+// Data del pedido 
+type Pedido = {
+  id: number;
+  nombre: string;
+  marca: string;
+  modelo: string;
+  anio: number;
+  placa: string;
+  tipo: string;
+  precio: number;
+  estado: string;
+  fecha: string;
+};
+
 
 @Component({
   selector: 'app-mis-pedidos',
-  imports: [Navbar, EstadoPedidoPipe],
+  standalone: true, // indica que este componente es independiente
+  imports: [Navbar, EstadoPedidoPipe, HttpClientModule],
   templateUrl: './mis-pedidos.html',
-  styleUrl: './mis-pedidos.css',
-  changeDetection: ChangeDetectionStrategy.OnPush // Revisa si hubo algun cambio en los datos dinamicos en el html y lo actualiza
+  styleUrl: './mis-pedidos.css', 
+
+  // OnPush mejora rendimiento (solo actualiza cuando hay cambios controlados)
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 
-export class MisPedidos {
-  private pedidos = [
-    { nombre: 'Daniel', placa: 'P069CPP', tipo: 'Premium', estado: 'Finalizado' },
-    { nombre: 'Alex', placa: 'P601KPB', tipo: 'Medium',  estado: 'En proceso' },
-    { nombre: 'Maria',  placa: 'P302YSJ', tipo: 'Básico',  estado: 'Recibido'   },
-  ];
-  // Mini base de datos
+export class MisPedidos implements OnInit {
 
+  // Aquí guardamos todos los pedidos que vienen del backend
+  // signal = variable reactiva (cuando cambia, la vista se actualiza)
+  pedidos = signal<Pedido[]>([]);
+
+  // Pasos del estado del pedido 
   pasos = ['Recibido', 'En proceso', 'Finalizado'];
 
+  // Aquí guardamos el pedido que el usuario busca
+  // Puede ser un pedido o null si no encuentra nada
   pedidoEncontrado = signal<Pedido | null>(null);
-  // signal es una variable inteligente, cuando cambia la pantalla se actualiza sola. Pedido | null significa que puede tener un pedido o estar vacio
-  buscado = signal(false); // Controla si el usuario ya presiono buscar o no
 
-  buscar(nombre: string) {
-    const found = this.pedidos.find(p => p.nombre.toLowerCase() === nombre.toLowerCase());
-    // Busca si esta el nombre adentro de pedidos
+  // Variable para saber si ya se hizo una búsqueda
+  buscado = signal(false);
 
-    this.pedidoEncontrado.set(found ?? null);
-    // Guarda el resultado
+  // Inyección del servicio HttpClient para hacer requests al backend
+  constructor(private http: HttpClient) {}
 
-    this.buscado.set(true);
-    // Marca que ya hizo la busqueda
+
+  // ngOnInit se ejecuta automáticamente cuando el componente carga
+  ngOnInit() {
+
+    // Hace una petición GET al backend para obtener los pedidos
+    this.http.get<Pedido[]>('http://localhost:3000/api/pedidos')
+      .subscribe(data => {
+
+        // Guardamos los datos en el signal pedidos
+        // Esto actualiza automáticamente la vista
+        this.pedidos.set(data);
+      });
   }
 
+
+  // Función para buscar un pedido por nombre
+  buscar(nombre: string) {
+
+    // Busca dentro del array de pedidos (convertido desde signal)
+    const found = this.pedidos().find(
+      p => p.nombre.toLowerCase() === nombre.toLowerCase()
+    );
+
+    this.pedidoEncontrado.set(found ?? null); // Guarda el resultado (si no encuentra, guarda null)
+
+    // Marca que ya se realizó una búsqueda
+    this.buscado.set(true);
+  }
+
+
+  // Convierte el estado del pedido en un índice numérico
+  // Ejemplo: "Recibido" → 0, "En proceso" → 1, "Finalizado" → 2
   pasoIndex(): number {
+
     return this.pasos.indexOf(this.pedidoEncontrado()?.estado ?? '');
   }
 }
-// Pasoindex convierte texto a numeros entonces recibido = 0 ...
