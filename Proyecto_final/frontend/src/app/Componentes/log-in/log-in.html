@@ -39,6 +39,11 @@
           </div>
         }
 
+        @if (bienvenida) {
+          <div class="bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-3">
+            <p class="text-sm text-green-400 font-black">✔ {{ bienvenida }}</p>
+          </div>
+}
         <p class="text-xs text-white/40 text-left">
           ¿No tienes cuenta?
           <a routerLink="/signup" class="text-[#00E5FF] font-black hover:underline">Sign up</a>
