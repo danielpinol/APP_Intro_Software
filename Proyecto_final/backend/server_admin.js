@@ -60,8 +60,37 @@ app.delete('/api/pedidos/:id', (req, res) => {
   }
 });
 
+app.get('/api/usuarios', (req, res) => {
+  try {
+    const usuarios = JSON.parse(fs.readFileSync('usuarios.json', 'utf-8'));
+
+    // Quitamos password
+    const usuariosSeguros = usuarios.map(u => ({
+      id: u.id,
+      nombre: u.nombre,
+      usuario: u.usuario,
+      gmail: u.gmail,
+      telefono: u.telefono
+    }));
+
+    res.json(usuariosSeguros);
+
+  } catch (error) {
+    res.status(500).json({ error: 'Error leyendo usuarios' });
+  }
+});
+
 const PORT = 3001;
 
 app.listen(PORT, () => {
-  console.log(`Servidor admin corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}\n`);
+
+  console.log('Endpoints disponibles:');
+
+  console.log(`GET     http://localhost:${PORT}/api/pedidos`);
+  console.log(`GET     http://localhost:${PORT}/api/paquetes`);
+  console.log(`GET     http://localhost:${PORT}/api/usuarios`);
+
+  console.log(`PATCH   http://localhost:${PORT}/api/pedidos/:id`);
+  console.log(`DELETE  http://localhost:${PORT}/api/pedidos/:id\n`);
 });

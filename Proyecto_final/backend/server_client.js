@@ -106,5 +106,13 @@ app.post('/api/login', (req, res) => {
 const PORT = 3000;
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}/api/pedidos`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}\n`);
+
+  console.log('Endpoints disponibles:');
+  console.log(`GET     http://localhost:${PORT}/api/pedidos`);
+  console.log(`GET     http://localhost:${PORT}/api/paquetes`);
+
+  console.log(`POST    http://localhost:${PORT}/api/pedidos`);
+  console.log(`POST    http://localhost:${PORT}/api/registro`);
+  console.log(`POST    http://localhost:${PORT}/api/login`);
 });
