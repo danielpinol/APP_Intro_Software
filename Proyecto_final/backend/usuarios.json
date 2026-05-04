@@ -22,5 +22,13 @@
     "gmail": "joaquinceta@gmail.com",
     "telefono": "45788124",
     "password": "Segovia"
+  },
+  {
+    "id": 4,
+    "nombre": "Ricardo Farfan",
+    "usuario": "ricardo10",
+    "gmail": "ricar@gmail.com",
+    "telefono": "21213454",
+    "password": "Perro"
   }
 ]

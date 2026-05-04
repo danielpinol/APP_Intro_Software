@@ -1,51 +1,51 @@
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
+// Importamos los módulos necesarios
+const express = require('express');  // Framework para crear el servidor y definir rutas
+const cors = require('cors');        // Permite que el frontend (en otro puerto) pueda hablar con este servidor
+const fs = require('fs');            // Módulo de Node para leer y escribir archivos del disco
 
 const app = express();
 
-// Middlewares
-app.use(cors());
-app.use(express.json());
+// Middlewares — código que corre en cada petición antes de llegar a las rutas
+app.use(cors());          // Sin esto el navegador bloquea las peticiones del frontend
+app.use(express.json());  // Le decimos al servidor que entienda JSON en el cuerpo de las peticiones
 
-// RUTA
+// GET /api/pedidos — devuelve todos los pedidos (el cliente los usa para rastrear su lavado)
 app.get('/api/pedidos', (req, res) => {
   try {
-    const data = fs.readFileSync('pedidos.json', 'utf-8');
-    const pedidos = JSON.parse(data);
-
-    res.json(pedidos);
+    const data = fs.readFileSync('pedidos.json', 'utf-8'); // Leemos el archivo como texto
+    const pedidos = JSON.parse(data); // Convertimos el texto a array de objetos
+    res.json(pedidos); // Enviamos el array al frontend
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error leyendo pedidos' });
   }
 });
 
-
+// POST /api/pedidos — crea un pedido nuevo cuando el cliente llena el formulario de solicitar lavado
 app.post('/api/pedidos', (req, res) => {
   try {
     const data = fs.readFileSync('pedidos.json', 'utf-8');
     const pedidos = JSON.parse(data);
 
     const nuevoPedido = {
-      id: pedidos.length + 1,
-      ...req.body,
-      estado: 'Recibido',
-      fecha: new Date().toISOString().split('T')[0]
+      id: pedidos.length + 1, // El id es simplemente el siguiente número en la lista
+      ...req.body,             // ... (spread) copia todos los campos que mandó el frontend (nombre, marca, modelo, etc.)
+      estado: 'Recibido',      // El estado inicial siempre es "Recibido"
+      fecha: new Date().toISOString().split('T')[0] // Fecha de hoy en formato YYYY-MM-DD (split corta en la T y toma la parte de la fecha)
     };
 
-    pedidos.push(nuevoPedido);
+    pedidos.push(nuevoPedido); // Agregamos el nuevo pedido al final del array
 
-    fs.writeFileSync('pedidos.json', JSON.stringify(pedidos, null, 2));
+    fs.writeFileSync('pedidos.json', JSON.stringify(pedidos, null, 2)); // Guardamos el archivo con formato bonito
 
     res.json({ mensaje: 'Pedido guardado correctamente' });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error guardando pedido' });
   }
 });
 
+// GET /api/paquetes — devuelve los paquetes disponibles (Básico, Medium, Premium)
 app.get('/api/paquetes', (req, res) => {
   try {
     const data = fs.readFileSync('paquetes.json', 'utf-8');
@@ -56,19 +56,16 @@ app.get('/api/paquetes', (req, res) => {
   }
 });
 
-// POST /api/registro → recibe los datos del formulario y guarda el usuario nuevo
+// POST /api/registro — recibe los datos del formulario y guarda el usuario nuevo
 app.post('/api/registro', (req, res) => {
-  // Leemos el archivo de usuarios y lo convertimos a array
-  const usuarios = JSON.parse(fs.readFileSync('usuarios.json', 'utf-8'));
+  const usuarios = JSON.parse(fs.readFileSync('usuarios.json', 'utf-8')); // Leemos el archivo de usuarios
 
-  // Buscamos si ya existe alguien con ese gmail (find devuelve el objeto o undefined)
+  // find() busca el primer usuario con ese gmail — devuelve el objeto si lo encuentra, o undefined si no existe
   const existe = usuarios.find(u => u.gmail === req.body.gmail);
   if (existe) {
-    // status(400) = Bad Request, le decimos al frontend que hubo un error
-    return res.status(400).json({ error: 'Ya existe una cuenta con ese gmail' });
+    return res.status(400).json({ error: 'Ya existe una cuenta con ese gmail' }); // 400 = Bad Request
   }
 
-  // Armamos el objeto del nuevo usuario con los datos que llegaron en req.body
   const nuevoUsuario = {
     id: usuarios.length + 1,
     nombre: req.body.nombre,
@@ -84,26 +81,24 @@ app.post('/api/registro', (req, res) => {
   res.json({ mensaje: 'Usuario creado correctamente' });
 });
 
-// POST /api/login → recibe gmail y password, verifica si existe ese usuario
+// POST /api/login — verifica si el gmail y la contraseña son correctos
 app.post('/api/login', (req, res) => {
   const usuarios = JSON.parse(fs.readFileSync('usuarios.json', 'utf-8'));
 
-  // Buscamos un usuario que tenga ese gmail Y esa password al mismo tiempo
+  // find() busca un usuario que tenga ese gmail Y esa password al mismo tiempo (ambas deben coincidir)
   const usuario = usuarios.find(
     u => u.gmail === req.body.gmail && u.password === req.body.password
   );
 
   if (!usuario) {
-    // status(401) = Unauthorized, las credenciales son incorrectas
-    return res.status(401).json({ error: 'Gmail o contraseña incorrectos' });
+    return res.status(401).json({ error: 'Gmail o contraseña incorrectos' }); // 401 = Unauthorized (credenciales incorrectas)
   }
 
-  // Si lo encontramos, respondemos con el nombre para mostrarlo en el frontend
+  // Si lo encontramos, mandamos el nombre para mostrarlo en el frontend
   res.json({ mensaje: 'Login exitoso', nombre: usuario.nombre });
 });
 
-// Puerto
-const PORT = 3000;
+const PORT = 3000; // Puerto del servidor cliente
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}/api/pedidos`);
