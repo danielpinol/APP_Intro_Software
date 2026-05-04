@@ -13,13 +13,19 @@
         class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
     </div>
 
-    <!-- Tipo de lavado -->
+    <!-- Tipo de lavado — al hacer click se guarda el tipo y precio seleccionado -->
     <div class="flex flex-col gap-3">
       <label class="text-xs font-black uppercase tracking-widest text-white/40">Tipo de lavado</label>
       <div class="grid grid-cols-3 gap-3">
-        <app-tipo-lavado-card nombre="Básico"  [precio]="65"  />
-        <app-tipo-lavado-card nombre="Medium"  [precio]="110" />
-        <app-tipo-lavado-card nombre="Premium" [precio]="170" />
+        @for (tipo of tipos; track tipo.nombre) {
+          <button type="button" (click)="seleccionar(tipo)"
+            [class]="tipoSeleccionado.nombre === tipo.nombre
+              ? 'rounded-xl p-4 flex flex-col gap-1 border bg-[#00E5FF]/10 border-[#00E5FF] text-left'
+              : 'rounded-xl p-4 flex flex-col gap-1 border bg-white/5 border-white/10 hover:border-white/30 transition-colors text-left'">
+            <p class="font-black text-sm">{{ tipo.nombre }}</p>
+            <p class="text-xs text-white/40">Q{{ tipo.precio }}</p>
+          </button>
+        }
       </div>
     </div>
 
@@ -38,7 +44,6 @@
       </div>
     </div>
 
-    <!-- Botón — le pasamos el .value de cada input -->
     <div class="mt-auto">
       <button type="button"
         (click)="enviar(nombre.value, marca.value, modelo.value, anio.value, placa.value)"
