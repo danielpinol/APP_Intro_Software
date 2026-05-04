@@ -8,20 +8,8 @@
     "placa": "455HHH",
     "tipo": "Premium",
     "precio": 170,
-    "estado": "Finalizado",
-    "fecha": "2026-04-30"
-  },
-  {
-    "id": 2,
-    "nombre": "Tom Cruise",
-    "marca": "Ferrari",
-    "modelo": "F40",
-    "anio": 1992,
-    "placa": "281KGG",
-    "tipo": "Premium",
-    "precio": 170,
     "estado": "En proceso",
-    "fecha": "2026-05-03"
+    "fecha": "2026-04-30"
   },
   {
     "id": 3,
