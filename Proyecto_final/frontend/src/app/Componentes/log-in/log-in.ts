@@ -20,17 +20,22 @@ export class LogIn {
   // Alterna entre mostrar y ocultar la contraseña
   togglePassword() { this.mostrarPassword = !this.mostrarPassword; }
 
+  bienvenida = '';
+
   // Recibimos los valores directamente desde los inputs del HTML con .value
   login(gmail: string, password: string) {
     this.http.post<{ nombre: string }>('http://localhost:3000/api/login', {
       gmail, password
     }).subscribe({
       next: (res) => {
-        // localStorage guarda datos en el navegador de forma persistente — sobrevive al recargar la página
-        // Así otras páginas (como el navbar) saben quién está logueado
-        localStorage.setItem('usuario', res.nombre);
-        this.router.navigate(['/']); // Redirigimos al inicio
-      },
+  this.bienvenida = `Bienvenido ${res.nombre} !`;
+  localStorage.setItem('usuario', res.nombre);
+
+  // Espera 3 segundos y redirige
+  setTimeout(() => {
+  this.router.navigate(['/']);
+}, 3000); // 3 segundos
+},
       error: () => {
         this.error = 'Gmail o contraseña incorrectos';
       }

@@ -42,17 +42,14 @@ app.delete('/api/pedidos/:id', async (req, res) => {
   }
 });
 
-app.listen(3001, () => console.log('Servidor admin corriendo en http://localhost:3001'));
+const PORT = 3001;
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}\n`);
+  console.log(`Servidor admin corriendo en http://localhost:${PORT}\n`);
 
   console.log('Endpoints disponibles:');
-
   console.log(`GET     http://localhost:${PORT}/api/pedidos`);
-  console.log(`GET     http://localhost:${PORT}/api/paquetes`);
   console.log(`GET     http://localhost:${PORT}/api/usuarios`);
-
   console.log(`PATCH   http://localhost:${PORT}/api/pedidos/:id`);
-  console.log(`DELETE  http://localhost:${PORT}/api/pedidos/:id\n`);
+  console.log(`DELETE  http://localhost:${PORT}/api/pedidos/:id`);
 });
