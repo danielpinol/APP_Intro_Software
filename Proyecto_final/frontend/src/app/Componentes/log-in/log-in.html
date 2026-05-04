@@ -11,45 +11,46 @@
         <p class="text-white/40 text-sm">Accede a tu cuenta para continuar.</p>
       </div>
 
-      <form class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4">
 
-        <!-- Correo -->
         <div class="flex flex-col gap-1.5">
-          <label class="text-xs font-black uppercase tracking-widest text-white/40">Correo</label>
-          <input type="email" placeholder="correo@ejemplo.com"
+          <label class="text-xs font-black uppercase tracking-widest text-white/40">Gmail</label>
+          <!-- #gmail es una referencia al input — con esto leemos su valor desde el botón -->
+          <input #gmail type="email" placeholder="correo@gmail.com"
             class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
         </div>
 
-        <!-- Contraseña -->
         <div class="flex flex-col gap-1.5">
           <label class="text-xs font-black uppercase tracking-widest text-white/40">Contraseña</label>
           <div class="relative">
-            <input
-              [type]="mostrarPassword ? 'text' : 'password'"
-              placeholder="••••••••"
+            <input #password [type]="mostrarPassword ? 'text' : 'password'" placeholder="••••••••"
               class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-            <button
-              type="button"
-              (click)="togglePassword()"
+            <button type="button" (click)="togglePassword()"
               class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
               {{ mostrarPassword ? 'Ocultar' : 'Mostrar' }}
             </button>
           </div>
         </div>
 
-        <!-- Sign up -->
+        <!-- Mensaje de error — solo aparece si la variable error tiene texto -->
+        @if (error) {
+          <div class="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+            <p class="text-sm text-red-400 font-black">⚠ {{ error }}</p>
+          </div>
+        }
+
         <p class="text-xs text-white/40 text-left">
           ¿No tienes cuenta?
           <a routerLink="/signup" class="text-[#00E5FF] font-black hover:underline">Sign up</a>
         </p>
 
-        <!-- Botón -->
-        <button type="submit"
+        <!-- Le pasamos el .value de cada input a la función login() -->
+        <button type="button" (click)="login(gmail.value, password.value)"
           class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm hover:bg-[#00c8e0] transition-colors mt-1">
           Iniciar sesión
         </button>
 
-      </form>
+      </div>
 
     </div>
 

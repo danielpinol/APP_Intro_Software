@@ -6,49 +6,46 @@
 
     <h1 class="text-3xl font-black uppercase tracking-tight">Solicitar lavado</h1>
 
-    <form (ngSubmit)="enviar()" class="flex-1 flex flex-col gap-5">
+    <!-- Nombre -->
+    <div class="flex flex-col gap-1.5">
+      <label class="text-xs font-black uppercase tracking-widest text-white/40">Nombre</label>
+      <input #nombre type="text" placeholder="Nombre completo"
+        class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+    </div>
 
-      <!-- Nombre -->
-      <div class="flex flex-col gap-1.5">
-        <label class="text-xs font-black uppercase tracking-widest text-white/40">Nombre</label>
-        <input type="text" [(ngModel)]="form.nombre" name="nombre" placeholder="Tu nombre completo"
+    <!-- Tipo de lavado -->
+    <div class="flex flex-col gap-3">
+      <label class="text-xs font-black uppercase tracking-widest text-white/40">Tipo de lavado</label>
+      <div class="grid grid-cols-3 gap-3">
+        <app-tipo-lavado-card nombre="Básico"  [precio]="65"  />
+        <app-tipo-lavado-card nombre="Medium"  [precio]="110" />
+        <app-tipo-lavado-card nombre="Premium" [precio]="170" />
+      </div>
+    </div>
+
+    <!-- Datos del carro -->
+    <div class="flex flex-col gap-3">
+      <label class="text-xs font-black uppercase tracking-widest text-white/40">Datos del carro</label>
+      <div class="grid grid-cols-4 gap-3">
+        <input #marca type="text" placeholder="Marca"
+          class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+        <input #modelo type="text" placeholder="Modelo"
+          class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+        <input #anio type="number" placeholder="Año"
+          class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+        <input #placa type="text" placeholder="Placa"
           class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
       </div>
+    </div>
 
-      <!-- Tipo de lavado -->
-      <div class="flex flex-col gap-3">
-        <label class="text-xs font-black uppercase tracking-widest text-white/40">Tipo de lavado</label>
-        <div class="grid grid-cols-3 gap-3">
-          <app-tipo-lavado-card nombre="Básico"  [precio]="65"  />
-          <app-tipo-lavado-card nombre="Medium"  [precio]="110" />
-          <app-tipo-lavado-card nombre="Premium" [precio]="170" />
-        </div>
-      </div>
-
-      <!-- Datos del carro -->
-      <div class="flex flex-col gap-3">
-        <label class="text-xs font-black uppercase tracking-widest text-white/40">Datos del carro</label>
-        <div class="grid grid-cols-4 gap-3">
-          <input type="text" [(ngModel)]="form.marca" name="marca" placeholder="Marca"
-            class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-          <input type="text" [(ngModel)]="form.modelo" name="modelo" placeholder="Modelo"
-            class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-          <input type="number" [(ngModel)]="form.anio" name="anio" placeholder="Año"
-            class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-          <input type="text" [(ngModel)]="form.placa" name="placa" placeholder="Placa"
-            class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-        </div>
-      </div>
-
-      <!-- Botón -->
-      <div class="mt-auto">
-        <button type="submit"
-          class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm hover:bg-[#00c8e0] transition-colors">
-          Solicitar ahora
-        </button>
-      </div>
-
-    </form>
+    <!-- Botón — le pasamos el .value de cada input -->
+    <div class="mt-auto">
+      <button type="button"
+        (click)="enviar(nombre.value, marca.value, modelo.value, anio.value, placa.value)"
+        class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm hover:bg-[#00c8e0] transition-colors">
+        Solicitar ahora
+      </button>
+    </div>
 
   </main>
 

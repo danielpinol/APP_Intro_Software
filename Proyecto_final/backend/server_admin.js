@@ -50,16 +50,12 @@ app.delete('/api/pedidos/:id', (req, res) => {
       return res.status(404).json({ error: 'Pedido no encontrado' });
     }
 
+    // splice(index, 1) elimina 1 elemento en esa posición y lo devuelve
     const pedidoEliminado = pedidos.splice(index, 1)[0];
 
     fs.writeFileSync('pedidos.json', JSON.stringify(pedidos, null, 2));
-
-    res.json({
-      mensaje: 'Pedido eliminado correctamente',
-      pedido: pedidoEliminado
-    });
+    res.json({ mensaje: 'Pedido eliminado correctamente', pedido: pedidoEliminado });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Error eliminando pedido' });
   }
 });
