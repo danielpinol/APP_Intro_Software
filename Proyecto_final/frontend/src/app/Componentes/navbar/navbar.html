@@ -18,10 +18,44 @@
     <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
   </ul>
 
-  <!-- BTN LOGIN -->
-  <div class="w-1/4 flex justify-end">
-    <a routerLink="/login" class="px-7 py-2.5 text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
-      Login
-    </a>
+  <!-- BTN LOGIN / SALUDO + SIGN OUT -->
+  <div class="w-1/4 flex justify-end items-center gap-3">
+
+    <!-- @if revisa si auth.usuario() tiene valor (nombre del usuario) o es null (no logueado) -->
+    @if (auth.usuario()) {
+
+      <!-- Pill (pastilla) que agrupa avatar + nombre + botón de salir -->
+      <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-1.5">
+
+        <!-- Avatar circular: muestra la primera letra del nombre en mayúscula -->
+        <!-- charAt(0) = primer carácter | toUpperCase() = lo pone en mayúscula -->
+        <div class="w-8 h-8 rounded-full bg-[#00E5FF] flex items-center justify-center text-[#080805] text-xs font-black flex-shrink-0">
+          {{ auth.usuario()!.charAt(0).toUpperCase() }}
+        </div>
+
+        <!-- Texto: "Hola," arriba en gris pequeño, nombre abajo en blanco -->
+        <!-- truncate + max-w-[100px] evita que un nombre muy largo rompa el diseño -->
+        <div class="flex flex-col leading-none">
+          <span class="text-[10px] text-white/40 uppercase tracking-widest">Hola,</span>
+          <span class="text-sm font-bold text-white truncate max-w-[100px]">{{ auth.usuario() }}</span>
+        </div>
+
+        <!-- Botón de Sign out: llama a auth.logout() que borra localStorage y pone usuario en null -->
+        <!-- Al ponerse null, el @if falla y Angular muestra el botón de Login automáticamente -->
+        <button (click)="auth.logout()" title="Cerrar sesión"
+          class="ml-1 p-1.5 rounded-lg text-white/40 hover:text-red-400 hover:bg-red-400/10 transition-colors">
+          <!-- Ícono SVG de flecha saliendo (logout) -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+          </svg>
+        </button>
+      </div>
+
+    } @else {
+      <!-- Si no hay usuario logueado, se muestra el botón normal de Login -->
+      <a routerLink="/login" class="px-7 py-2.5 text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
+        Login
+      </a>
+    }
   </div>
 </nav>
