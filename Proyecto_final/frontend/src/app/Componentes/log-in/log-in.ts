@@ -22,7 +22,6 @@ export class LogIn {
 
   togglePassword() { this.mostrarPassword = !this.mostrarPassword; }
 
-  // Recibimos los valores directamente desde los inputs del HTML con .value
   login(gmail: string, password: string) {
     // Enviamos gmail y password al backend
     this.http.post<{ nombre: string }>('http://localhost:3000/api/login', {
@@ -32,12 +31,7 @@ export class LogIn {
         // auth.login() guarda el nombre en localStorage Y actualiza el signal del navbar
         // Ya no usamos localStorage.setItem directamente — el servicio lo hace por nosotros
         this.auth.login(res.nombre);
-        this.bienvenida = `Bienvenido ${res.nombre} !`;
-
-        // Espera 3 segundos y redirige al inicio
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 3000);
+        this.router.navigate(['/']); // Redirigimos al inicio
       },
       error: () => {
         this.error = 'Gmail o contraseña incorrectos';
