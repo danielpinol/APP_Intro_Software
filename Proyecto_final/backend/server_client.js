@@ -1,17 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-const { Pedido, Usuario } = require('./models');
+const express = require('express');                  // Framework para crear el servidor y definir rutas
+const cors = require('cors');                        // Permite que el frontend se comunique con este servidor
+const { Pedido, Usuario } = require('./models');     // Modelos de la base de datos
 
 const app = express();
-app.use(cors());         // Permite que el frontend se comunique con este servidor
-app.use(express.json()); // Permite recibir datos en formato JSON
+app.use(cors());         // Acepta peticiones desde cualquier origen (sin esto el navegador las bloquea)
+app.use(express.json()); // Entiende JSON en el body — sin esto req.body llegaría vacío
 
-// GET — devuelve todos los pedidos (para que el cliente rastree su lavado)
+// GET — devuelve todos los pedidos para que el cliente rastree su lavado
+// async/await: pausa la función hasta que MongoDB responda — sin await, pedidos llegaría vacío
 app.get('/api/pedidos', async (req, res) => {
   try {
-    const pedidos = await Pedido.find();
-    res.json(pedidos);
+    const pedidos = await Pedido.find(); // find() sin filtros trae todos los documentos
+    res.json(pedidos);                   // res.json() envía la respuesta al frontend en formato JSON
   } catch (error) {
+    // catch atrapa cualquier error del try — así el servidor no se rompe, sino que responde con un mensaje controlado
+    // res.status(500) define el código HTTP: 500 = error del servidor, 400 = datos incorrectos, 401 = no autorizado, 404 = no encontrado
     res.status(500).json({ error: 'Error leyendo pedidos' });
   }
 });
