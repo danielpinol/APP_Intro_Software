@@ -1,1 +1,99 @@
-<p>admin works!</p>
+<div class="min-h-screen bg-[#080805] text-white" style="font-family: 'Inter', sans-serif;">
+
+  <!-- Header del admin -->
+  <header class="border-b border-white/10 px-10 py-5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-2 h-2 rounded-full bg-[#00E5FF]"></div>
+      <span class="text-xs font-black uppercase tracking-widest text-white/40">Admin Panel</span>
+    </div>
+    <span class="text-xs font-black uppercase tracking-widest text-white/20">uWash</span>
+  </header>
+
+  <main class="px-10 py-8 flex flex-col gap-8">
+
+    <!-- Título -->
+    <h1 class="text-4xl font-black uppercase tracking-tight">Pedidos</h1>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-2">
+        <p class="text-xs font-black uppercase tracking-widest text-white/40">Total pedidos</p>
+        <p class="text-5xl font-black">{{ totalPedidos }}</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-2">
+        <p class="text-xs font-black uppercase tracking-widest text-white/40">Total generado</p>
+        <p class="text-5xl font-black text-[#00E5FF]">Q{{ totalGenerado }}</p>
+      </div>
+    </div>
+
+    <!-- Lista de pedidos -->
+    <div class="flex flex-col gap-3">
+      <p class="text-xs font-black uppercase tracking-widest text-white/40">Lista de pedidos</p>
+
+      @for (pedido of pedidos; track pedido.id) {
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-5 hover:border-white/20 transition-colors">
+
+          <!-- Encabezado del pedido -->
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-lg font-black">{{ pedido.nombre }}</p>
+              <p class="text-xs text-white/40 mt-0.5">{{ pedido.fecha }}</p>
+            </div>
+            @if (pedido.estado === 'Recibido') {
+              <span class="text-xs font-black px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Recibido</span>
+            }
+            @if (pedido.estado === 'En proceso') {
+              <span class="text-xs font-black px-3 py-1 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20">En proceso</span>
+            }
+            @if (pedido.estado === 'Finalizado') {
+              <span class="text-xs font-black px-3 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">Finalizado</span>
+            }
+          </div>
+
+          <!-- Info del vehículo -->
+          <div class="grid grid-cols-4 gap-4">
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Vehículo</p>
+              <p class="font-black mt-0.5">{{ pedido.marca }} {{ pedido.modelo }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Año</p>
+              <p class="font-black mt-0.5">{{ pedido.anio }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Placa</p>
+              <p class="font-black mt-0.5">{{ pedido.placa }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-white/40 uppercase tracking-widest">Precio</p>
+              <p class="font-black mt-0.5 text-[#00E5FF]">Q{{ pedido.precio }}</p>
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="flex gap-2 border-t border-white/10 pt-4">
+            <button
+              (click)="cambiarEstado(pedido.id, 'En proceso')"
+              [class]="pedido.estado === 'En proceso' ? 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805]' : 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border border-white/10 text-white/40 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors'">
+              En proceso
+            </button>
+            <button
+              (click)="cambiarEstado(pedido.id, 'Finalizado')"
+              [class]="pedido.estado === 'Finalizado' ? 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest bg-green-500 text-[#080805]' : 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border border-white/10 text-white/40 hover:border-green-500 hover:text-green-400 transition-colors'">
+              Finalizado
+            </button>
+            <button
+              (click)="eliminar(pedido.id)"
+              class="ml-auto px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border border-white/10 text-white/40 hover:border-red-500 hover:text-red-400 transition-colors">
+              Eliminar
+            </button>
+          </div>
+
+        </div>
+      }
+
+    </div>
+
+  </main>
+
+</div>

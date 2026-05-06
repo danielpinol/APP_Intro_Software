@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { Navbar } from '../navbar/navbar';
 
@@ -6,10 +6,10 @@ import { Navbar } from '../navbar/navbar';
   selector: 'app-paquetes',
   imports: [Navbar, CurrencyPipe],
   templateUrl: './paquetes.html',
-  styleUrl: './paquetes.css',
-  changeDetection: ChangeDetectionStrategy.OnPush // Revisa si hubo algun cambio en los datos dinamicos en el html y lo actualiza
+  styleUrl: './paquetes.css'
 })
 export class Paquetes {
+  // Lista de paquetes de lavado con su precio y cuánto ahorra el cliente
   paquetes = [
     { nombre: 'Starter',   lavados: 4,  precio: 220,  ahorro: 40  },
     { nombre: 'Frecuente', lavados: 8,  precio: 400,  ahorro: 120 },

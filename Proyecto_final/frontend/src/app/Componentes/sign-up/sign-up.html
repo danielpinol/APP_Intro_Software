@@ -1,0 +1,93 @@
+<div class="min-h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+
+  <app-navbar />
+
+  <main class="flex-1 flex items-center justify-center px-6 py-6">
+
+    <div class="w-full max-w-xl bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-5">
+
+      <div class="flex flex-col gap-1.5">
+        <h2 class="text-3xl font-black uppercase tracking-tight">Crear cuenta</h2>
+        <p class="text-white/40 text-sm">Regístrate para comenzar.</p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Nombre completo</label>
+            <!-- #nombre es una referencia al input — con esto podemos leer su valor desde el botón -->
+            <input #nombre type="text" placeholder="Nombre completo"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Nombre de usuario</label>
+            <input #usuario type="text" placeholder="usuario"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Gmail</label>
+            <input #gmail type="email" placeholder="correo@gmail.com"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Teléfono</label>
+            <input #telefono type="tel" placeholder="0000 0000"
+              class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Contraseña</label>
+            <div class="relative">
+              <input #password [type]="mostrarPassword ? 'text' : 'password'" placeholder="••••••••"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+              <button type="button" (click)="togglePassword()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
+                {{ mostrarPassword ? 'Ocultar' : 'Mostrar' }}
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-black uppercase tracking-widest text-white/40">Confirmar contraseña</label>
+            <div class="relative">
+              <input #confirmar [type]="mostrarConfirmar ? 'text' : 'password'" placeholder="••••••••"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+              <button type="button" (click)="toggleConfirmar()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
+                {{ mostrarConfirmar ? 'Ocultar' : 'Mostrar' }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error visible solo si algo falla (contraseñas distintas o gmail ya registrado) -->
+        @if (error) {
+          <div class="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+            <p class="text-sm text-red-400 font-black">⚠ {{ error }}</p>
+          </div>
+        }
+
+        <p class="text-xs text-white/40">
+          ¿Ya tienes cuenta?
+          <a routerLink="/login" class="text-[#00E5FF] font-black hover:underline">Inicia sesión</a>
+        </p>
+
+        <!-- Le pasamos el .value de cada input a la función registrar() -->
+        <button type="button"
+          (click)="registrar(nombre.value, usuario.value, gmail.value, telefono.value, password.value, confirmar.value)"
+          class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm hover:bg-[#00c8e0] transition-colors mt-1">
+          Crear cuenta
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>

@@ -2,48 +2,60 @@
 
   <app-navbar />
 
-  <main class="flex-1 flex items-center justify-center px-8">
+  <main class="flex-1 flex items-center justify-center px-6">
 
-    <div class="w-full max-w-xl bg-white/5 border border-white/10 rounded-2xl p-14 flex flex-col gap-8">
+    <div class="w-full max-w-sm bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-5">
 
-      <div class="flex flex-col gap-2">
-        <h2 class="text-5xl font-black uppercase tracking-tight">Bienvenido</h2>
-        <p class="text-white/40 text-lg">Accede a tu cuenta para continuar.</p>
+      <div class="flex flex-col gap-1.5">
+        <h2 class="text-3xl font-black uppercase tracking-tight">Bienvenido</h2>
+        <p class="text-white/40 text-sm">Accede a tu cuenta para continuar.</p>
       </div>
 
-      <form class="flex flex-col gap-6">
+      <div class="flex flex-col gap-4">
 
-        <!-- Correo -->
-        <div class="flex flex-col gap-2">
-          <label class="text-sm font-black uppercase tracking-widest text-white/40">Correo</label>
-          <input type="email" placeholder="correo@ejemplo.com"
-            class="bg-white/5 border border-white/10 rounded-xl px-6 py-5 text-lg text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-black uppercase tracking-widest text-white/40">Gmail</label>
+          <!-- #gmail es una referencia al input — con esto leemos su valor desde el botón -->
+          <input #gmail type="email" placeholder="correo@gmail.com"
+            class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
         </div>
 
-        <!-- Contraseña -->
-        <div class="flex flex-col gap-2">
-          <label class="text-sm font-black uppercase tracking-widest text-white/40">Contraseña</label>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-black uppercase tracking-widest text-white/40">Contraseña</label>
           <div class="relative">
-            <input
-              [type]="mostrarPassword ? 'text' : 'password'"
-              placeholder="••••••••"
-              class="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-5 pr-28 text-lg text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
-            <button
-              type="button"
-              (click)="togglePassword()"
-              class="absolute right-5 top-1/2 -translate-y-1/2 text-sm font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
+            <input #password [type]="mostrarPassword ? 'text' : 'password'" placeholder="••••••••"
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+            <button type="button" (click)="togglePassword()"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-black uppercase tracking-widest text-white/40 hover:text-[#00E5FF] transition-colors">
               {{ mostrarPassword ? 'Ocultar' : 'Mostrar' }}
             </button>
           </div>
         </div>
 
-        <!-- Botón -->
-        <button type="submit"
-          class="w-full py-6 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-lg hover:bg-[#00c8e0] transition-colors mt-2">
+        <!-- Mensaje de error — solo aparece si la variable error tiene texto -->
+        @if (error) {
+          <div class="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3">
+            <p class="text-sm text-red-400 font-black">⚠ {{ error }}</p>
+          </div>
+        }
+
+        @if (bienvenida) {
+          <div class="bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-3">
+            <p class="text-sm text-green-400 font-black">✔ {{ bienvenida }}</p>
+          </div>
+}
+        <p class="text-xs text-white/40 text-left">
+          ¿No tienes cuenta?
+          <a routerLink="/signup" class="text-[#00E5FF] font-black hover:underline">Sign up</a>
+        </p>
+
+        <!-- Le pasamos el .value de cada input a la función login() -->
+        <button type="button" (click)="login(gmail.value, password.value)"
+          class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm hover:bg-[#00c8e0] transition-colors mt-1">
           Iniciar sesión
         </button>
 
-      </form>
+      </div>
 
     </div>
 
