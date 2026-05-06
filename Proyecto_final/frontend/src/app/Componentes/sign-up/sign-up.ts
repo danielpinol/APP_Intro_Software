@@ -33,7 +33,7 @@ export class SignUp {
 
     this.error = ''; // Limpiamos cualquier error anterior
 
-    this.http.post('http://localhost:3000/api/registro', {
+    this.http.post('https://uwash-backend.vercel.app/api/registro', {
       nombre, usuario, gmail, telefono, password
     }).subscribe({
       next: () => {

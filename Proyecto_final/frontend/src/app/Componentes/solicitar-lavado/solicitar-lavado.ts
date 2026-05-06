@@ -29,7 +29,7 @@ export class SolicitarLavado {
 
   // Recibimos los valores de los inputs directamente desde el HTML con .value
   enviar(nombre: string, marca: string, modelo: string, anio: string, placa: string) {
-    this.http.post('http://localhost:3000/api/pedidos', {
+    this.http.post('https://uwash-backend.vercel.app/api/pedidos', {
       nombre, marca, modelo, anio, placa,
       tipo: this.tipoSeleccionado.nombre,   // Tipo del paquete seleccionado
       precio: this.tipoSeleccionado.precio  // Precio correspondiente al tipo

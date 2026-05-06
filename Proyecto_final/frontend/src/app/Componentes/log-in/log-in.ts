@@ -35,7 +35,7 @@ export class LogIn {
 
     // post() envía gmail y password al backend (servidor) en formato JSON
     // <{ nombre: string }> le dice a TypeScript que el servidor nos va a responder con un objeto { nombre: "..." }
-    this.http.post<{ nombre: string }>('http://localhost:3000/api/login', { gmail, password })
+    this.http.post<{ nombre: string }>('https://uwash-backend.vercel.app/api/login', { gmail, password })
 
       // subscribe() espera la respuesta del servidor — como escuchar el resultado de una llamada
       .subscribe({

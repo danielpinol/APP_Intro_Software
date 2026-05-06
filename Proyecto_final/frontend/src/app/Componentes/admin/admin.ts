@@ -27,7 +27,7 @@ export class Admin implements OnInit {
 
   // ngOnInit corre automáticamente cuando el componente aparece en pantalla
   ngOnInit() {
-    this.http.get<any[]>('http://localhost:3001/api/pedidos').subscribe(data => {
+    this.http.get<any[]>('https://uwash-backend.vercel.app/api/pedidos').subscribe(data => {
       this.pedidos = data;
       this.cdr.markForCheck(); // Necesario porque Angular no detecta cambios automáticos dentro de subscribe()
     });
@@ -36,7 +36,7 @@ export class Admin implements OnInit {
   // Cambia el estado de un pedido (Recibido → En proceso → Finalizado)
   cambiarEstado(id: number, estado: string) {
     // PATCH actualiza solo un campo — no necesitamos mandar todo el pedido completo
-    this.http.patch(`http://localhost:3001/api/pedidos/${id}`, { estado }).subscribe(() => {
+    this.http.patch(`https://uwash-backend.vercel.app/api/pedidos/${id}`, { estado }).subscribe(() => {
       const pedido = this.pedidos.find(p => p.id === id); // Buscamos el pedido en el array local
       if (pedido) pedido.estado = estado; // Lo actualizamos localmente para no tener que recargar todo
       this.cdr.markForCheck();
@@ -45,7 +45,7 @@ export class Admin implements OnInit {
 
   // Elimina un pedido de la lista
   eliminar(id: number) {
-    this.http.delete(`http://localhost:3001/api/pedidos/${id}`).subscribe(() => {
+    this.http.delete(`https://uwash-backend.vercel.app/api/pedidos/${id}`).subscribe(() => {
       // filter() crea un array nuevo que excluye el pedido eliminado
       this.pedidos = this.pedidos.filter(p => p.id !== id);
       this.cdr.markForCheck();

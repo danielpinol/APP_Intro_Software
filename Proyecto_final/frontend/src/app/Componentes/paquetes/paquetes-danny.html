@@ -1,0 +1,99 @@
+<div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+
+  <app-navbar />
+
+  <div class="px-10 pt-6 pb-4">
+    <h1 class="text-3xl font-black uppercase tracking-tight">Planes mensuales</h1>
+    <p class="text-white/40 mt-1 text-sm">Elige el plan que más se adapte a ti.</p>
+  </div>
+
+  <div class="flex flex-col flex-1 px-10 pb-6 gap-3">
+
+    <!-- @for recorre la lista paquetes y dibuja una fila por cada uno -->
+    <!-- track paquete.nombre le dice a Angular cómo identificar cada fila para actualizarlas eficientemente -->
+    @for (paquete of paquetes; track paquete.nombre) {
+
+      <div class="flex-1 flex items-center px-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 transition-all">
+
+        <div class="w-1/4">
+          <p class="text-xl font-black uppercase">{{ paquete.nombre }}</p>
+        </div>
+
+        <div class="w-1/4 flex items-center gap-3">
+          <span class="text-4xl font-black leading-none">{{ paquete.lavados }}</span>
+          <span class="text-white/40 text-xs leading-snug">lavados<br>al mes</span>
+        </div>
+
+        <div class="w-1/4">
+          <!-- currency:'GTQ':'Q ':'1.0-0' formatea el número como precio en quetzales sin decimales -->
+          <p class="text-2xl font-black">{{ paquete.precio | currency:'GTQ':'Q ':'1.0-0' }}</p>
+          <p class="text-white/40 text-xs mt-1">Ahorrás {{ paquete.ahorro | currency:'GTQ':'Q ':'1.0-0' }}</p>
+        </div>
+
+        <div class="w-1/4 flex justify-end">
+          <!-- Al hacer clic llama a abrir() con el paquete de esta fila — guarda el paquete y abre el modal -->
+          <button (click)="abrir(paquete)" class="px-6 py-2.5 rounded-xl font-black uppercase tracking-widest text-xs border border-white/20 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors">
+            Suscribirme
+          </button>
+        </div>
+
+      </div>
+    }
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<!-- @if solo muestra este bloque cuando seleccionado() tiene un paquete (no es null) -->
+@if (seleccionado()) {
+
+  <!-- Fondo oscuro semitransparente que cubre toda la pantalla — fixed inset-0 significa que ocupa todo -->
+  <!-- z-50 asegura que aparezca encima de todo lo demás — text-white porque el modal está fuera del div principal -->
+  <div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center text-white">
+
+    <!-- Caja blanca del modal centrada en pantalla -->
+    <div class="bg-[#0f0f0d] border border-white/10 rounded-2xl p-8 w-full max-w-sm flex flex-col gap-6">
+
+      <!-- VISTA 1: confirmación — se muestra cuando suscrito() es false (todavía no ha pagado) -->
+      @if (!suscrito()) {
+
+        <div class="flex flex-col gap-1">
+          <h2 class="text-xl font-black uppercase">Confirmar pago</h2>
+          <!-- seleccionado()! — el ! le avisa a TypeScript que aquí sabemos que no es null -->
+          <p class="text-white/40 text-sm">Paquete {{ seleccionado()!.nombre }}</p>
+        </div>
+
+        <p class="text-4xl font-black">{{ seleccionado()!.precio | currency:'GTQ':'Q ':'1.0-0' }}</p>
+
+        <div class="flex gap-3">
+          <!-- Pagar llama a pagar() → suscrito se pone en true → Angular muestra la Vista 2 -->
+          <button (click)="pagar()"
+            class="flex-1 py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-xs hover:bg-[#00c8e0] transition-colors">
+            Pagar
+          </button>
+          <!-- Cancelar llama a cancelar() → seleccionado se pone en null → el @if cierra el modal -->
+          <button (click)="cancelar()"
+            class="flex-1 py-3 rounded-xl border border-white/20 font-black uppercase tracking-widest text-xs hover:border-white/40 transition-colors">
+            Cancelar
+          </button>
+        </div>
+
+      <!-- VISTA 2: éxito — se muestra cuando suscrito() es true (ya pagó) -->
+      } @else {
+
+        <div class="flex flex-col gap-4 items-center text-center">
+          <p class="text-2xl font-black uppercase">¡Estás suscrito!</p>
+          <p class="text-white/40 text-sm">al paquete {{ seleccionado()!.nombre }}</p>
+          <!-- Cerrar llama a cancelar() que limpia todo y cierra el modal -->
+          <button (click)="cancelar()"
+            class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-xs hover:bg-[#00c8e0] transition-colors">
+            Cerrar
+          </button>
+        </div>
+
+      }
+
+    </div>
+  </div>
+}

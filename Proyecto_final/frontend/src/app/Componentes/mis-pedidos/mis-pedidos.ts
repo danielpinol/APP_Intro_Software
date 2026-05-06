@@ -24,7 +24,7 @@ export class MisPedidos implements OnInit {
 
   // ngOnInit corre automáticamente cuando el componente aparece en pantalla
   ngOnInit() {
-    this.http.get<any[]>('http://localhost:3000/api/pedidos').subscribe(data => {
+    this.http.get<any[]>('https://uwash-backend.vercel.app/api/pedidos').subscribe(data => {
       this.pedidos = data;
       this.cdr.markForCheck(); // Necesario porque Angular no detecta cambios automáticos dentro de subscribe()
     });
