@@ -24,13 +24,12 @@ const pedidoSchema = new mongoose.Schema({
   estado:  String,
   fecha:   String,
 }, {
+  versionKey: false,  // Evita que Mongoose guarde __v en MongoDB
+  timestamps: true,   // Agrega createdAt y updatedAt automáticamente
   toJSON: {
-    // Cada documento en MongoDB tiene un campo "_id" — aquí lo renombramos a "id"
-    // para que el frontend lo reciba igual que antes
     transform(doc, ret) {
-      ret.id = ret._id;
+      ret.id = ret._id; // Renombra _id a id para el frontend
       delete ret._id;
-      delete ret.__v; // __v es un campo interno de mongoose que no necesitamos
     }
   }
 });
@@ -42,6 +41,9 @@ const usuarioSchema = new mongoose.Schema({
   gmail:    String,
   telefono: String,
   password: String,
+}, {
+  versionKey: false,  // Evita que Mongoose guarde __v en MongoDB
+  timestamps: true,   // Agrega createdAt y updatedAt automáticamente
 });
 
 // model() registra el schema y crea la colección en MongoDB si no existe
