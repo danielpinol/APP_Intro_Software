@@ -6,23 +6,23 @@
 
 <nav class="relative z-10 bg-[#080805]" style="font-family: 'Inter', sans-serif;">
 
-  <!-- Fila principal -->
-  <div class="flex items-center justify-between px-4 py-2 md:px-8">
+  <!-- Fila principal — relative para poder centrar los links con absolute -->
+  <div class="relative flex items-center justify-between px-4 py-2 md:px-8">
 
-    <!-- LOGO — w-1/4 para que los links del centro queden exactamente centrados -->
-    <a routerLink="/" class="w-1/4 hover:opacity-80 transition-opacity">
+    <!-- LOGO -->
+    <a routerLink="/" class="hover:opacity-80 transition-opacity">
       <img src="logo.png" alt="Uwash logo" class="h-12 md:h-16 w-auto">
     </a>
 
-    <!-- LINKS — solo visible en desktop -->
-    <ul class="hidden md:flex flex-1 justify-center items-center gap-8 text-xs font-black uppercase tracking-widest text-white/70">
+    <!-- LINKS — absolute + left-1/2 + -translate-x-1/2 = siempre centrado en pantalla -->
+    <ul class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-xs font-black uppercase tracking-widest text-white/70">
       <li><a routerLink="/solicitar" class="hover:text-[#00E5FF] transition-colors">Solicitar</a></li>
       <li><a routerLink="/paquetes" class="hover:text-[#00E5FF] transition-colors">Paquetes</a></li>
       <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
     </ul>
 
     <!-- BTN LOGIN — solo visible en desktop -->
-    <div class="hidden md:flex justify-end items-center gap-3 w-1/4">
+    <div class="hidden md:flex justify-end items-center gap-3">
       @if (auth.usuario()) {
         <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-1.5">
           <div class="w-8 h-8 rounded-full bg-[#00E5FF] flex items-center justify-center text-[#080805] text-xs font-black flex-shrink-0">
