@@ -4,10 +4,8 @@
   "description": "",
   "main": "server_client.js",
   "scripts": {
-    "start": "node server_client.js",
-    "admin": "node server_admin.js",
-    "dev": "nodemon server_client.js",
-    "dev:admin": "nodemon server_admin.js"
+    "client": "nodemon server_client.js",
+    "admin": "nodemon server_admin.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
     "express": "^4.21.2",
     "mongoose": "^9.6.1"
   },

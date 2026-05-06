@@ -67,7 +67,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT_CLIENT || 3000; // Lee el puerto del .env, si no existe usa 3000 por defecto
 
 app.listen(PORT, () => {
   console.log(`Servidor cliente corriendo en http://localhost:${PORT}\n`);

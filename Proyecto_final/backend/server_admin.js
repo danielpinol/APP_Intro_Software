@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config(); // Carga las variables del archivo .env para usarlas con process.env
 const { Pedido } = require('./models');
 
 const app = express();
@@ -42,7 +43,7 @@ app.delete('/api/pedidos/:id', async (req, res) => {
   }
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT_ADMIN || 3001; // Lee el puerto del .env, si no existe usa 3001 por defecto
 
 app.listen(PORT, () => {
   console.log(`Servidor admin corriendo en http://localhost:${PORT}\n`);

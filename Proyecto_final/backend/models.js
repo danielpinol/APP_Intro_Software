@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const dns = require('dns');
+require('dotenv').config(); // Carga las variables del archivo .env para usarlas con process.env
 
 // Usamos el DNS de Google porque algunos routers bloquean las consultas que necesita MongoDB
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
-// Dirección de conexión a nuestra base de datos en MongoDB Atlas (la nube)
-const MONGO_URI = 'mongodb+srv://danielpinol_db_user:sEEEs1Yas1TOgPdU@uwash-cluster.wu0joxu.mongodb.net/uwash?appName=uwash-cluster';
+// Leemos la dirección de conexión desde el archivo .env — así la contraseña no queda en el código
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('Conectado a MongoDB Atlas'))
