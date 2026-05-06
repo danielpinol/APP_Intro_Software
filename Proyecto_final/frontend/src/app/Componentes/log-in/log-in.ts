@@ -43,7 +43,9 @@ export class LogIn {
         // next se ejecuta si el servidor respondió bien (login correcto)
         // "res" es la respuesta del servidor, contiene res.nombre
         next: (res) => {
-          this.auth.login(res.nombre);              // Guarda el nombre en memoria y en localStorage
+          // auth.login() guarda el nombre en localStorage Y actualiza el signal del navbar
+          // Ya no usamos localStorage.setItem directamente — el servicio lo hace por nosotros
+          this.auth.login(res.nombre);
           this.bienvenida = `Bienvenido ${res.nombre}!`; // Muestra mensaje de bienvenida en pantalla
 
           // setTimeout espera 3000 milisegundos (3 segundos) y luego ejecuta lo que está adentro
