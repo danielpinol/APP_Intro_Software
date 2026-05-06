@@ -31,15 +31,6 @@ app.post('/api/pedidos', async (req, res) => {
   }
 });
 
-// GET — devuelve los paquetes disponibles (son fijos, no necesitan base de datos)
-app.get('/api/paquetes', (req, res) => {
-  res.json([
-    { nombre: 'Básico',  precio: 65,  descripcion: 'Lavado exterior básico' },
-    { nombre: 'Medium',  precio: 110, descripcion: 'Lavado exterior e interior' },
-    { nombre: 'Premium', precio: 170, descripcion: 'Lavado completo + encerado' },
-  ]);
-});
-
 // POST — registra un usuario nuevo
 app.post('/api/registro', async (req, res) => {
   try {
@@ -74,7 +65,6 @@ app.listen(PORT, () => {
 
   console.log('Endpoints disponibles:');
   console.log(`GET     http://localhost:${PORT}/api/pedidos`);
-  console.log(`GET     http://localhost:${PORT}/api/paquetes`);
   console.log(`POST    http://localhost:${PORT}/api/pedidos`);
   console.log(`POST    http://localhost:${PORT}/api/registro`);
   console.log(`POST    http://localhost:${PORT}/api/login`);

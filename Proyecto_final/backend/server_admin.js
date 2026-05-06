@@ -50,7 +50,6 @@ app.listen(PORT, () => {
 
   console.log('Endpoints disponibles:');
   console.log(`GET     http://localhost:${PORT}/api/pedidos`);
-  console.log(`GET     http://localhost:${PORT}/api/usuarios`);
   console.log(`PATCH   http://localhost:${PORT}/api/pedidos/:id`);
   console.log(`DELETE  http://localhost:${PORT}/api/pedidos/:id`);
 });
