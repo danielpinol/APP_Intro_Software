@@ -1,27 +1,27 @@
-<div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+<div class="min-h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
 
   <app-navbar />
 
-  <main class="flex-1 flex flex-col items-center justify-center px-6 gap-6">
+  <main class="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 gap-6 py-8">
 
     <div class="text-center">
-      <h1 class="text-4xl font-black uppercase tracking-tight">Rastrear mi lavado</h1>
+      <h1 class="text-3xl sm:text-4xl font-black uppercase tracking-tight">Rastrear mi lavado</h1>
       <p class="text-white/40 mt-2 text-sm">Ingresa tu nombre para ver el estado.</p>
     </div>
 
     <!-- Búsqueda -->
     <div class="w-full max-w-xl flex gap-3">
       <input #nombreInput type="text" placeholder="Tu nombre completo"
-        class="flex-1 bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-base text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
+        class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 sm:px-5 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
       <button (click)="buscar(nombreInput.value)"
-        class="px-7 py-3 bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm rounded-xl hover:bg-[#00c8e0] transition-colors">
+        class="px-4 sm:px-7 py-3 bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm rounded-xl hover:bg-[#00c8e0] transition-colors whitespace-nowrap">
         Buscar
       </button>
     </div>
 
-    <!-- Resultado encontrado — pedidoEncontrado es null si no hay resultado -->
+    <!-- Resultado encontrado -->
     @if (pedidoEncontrado) {
-      <div class="w-full max-w-xl bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-6">
+      <div class="w-full max-w-xl bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
 
         <div>
           <p class="text-white/40 text-xs font-black uppercase tracking-widest">Tu lavado</p>
@@ -29,23 +29,23 @@
           <p class="text-[#00E5FF] text-xs font-black uppercase tracking-widest mt-1">{{ pedidoEncontrado.estado | estadoPedido }}</p>
         </div>
 
-        <!-- Tracker de pasos -->
-        <div class="flex items-center">
+        <!-- Tracker de pasos — scrollable en mobile si no cabe -->
+        <div class="flex items-center overflow-x-auto pb-1">
           @for (paso of pasos; track paso; let i = $index) {
 
-            <div class="flex flex-col items-center gap-2">
-              <div class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-black text-sm"
+            <div class="flex flex-col items-center gap-2 flex-shrink-0">
+              <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 flex items-center justify-center font-black text-sm"
                 [class]="i <= pasoIndex() ? 'bg-[#00E5FF] border-[#00E5FF] text-[#080805]' : 'border-white/20 text-white/20'">
                 {{ i + 1 }}
               </div>
-              <p class="text-xs font-black uppercase tracking-widest text-center"
+              <p class="text-xs font-black uppercase tracking-widest text-center whitespace-nowrap"
                 [class]="i <= pasoIndex() ? 'text-[#00E5FF]' : 'text-white/20'">
                 {{ paso }}
               </p>
             </div>
 
             @if (i < pasos.length - 1) {
-              <div class="flex-1 h-0.5 mx-4 mb-5"
+              <div class="flex-1 min-w-[2rem] h-0.5 mx-3 mb-5 flex-shrink-0"
                 [class]="i < pasoIndex() ? 'bg-[#00E5FF]' : 'bg-white/10'"></div>
             }
 
@@ -55,7 +55,7 @@
       </div>
     }
 
-    <!-- No encontrado — solo aparece si ya se buscó y no hay resultado -->
+    <!-- No encontrado -->
     @if (buscado && !pedidoEncontrado) {
       <p class="text-white/40 text-sm font-black uppercase tracking-widest">No encontramos tu pedido.</p>
     }

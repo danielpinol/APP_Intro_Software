@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
-const dns = require('dns');
-require('dotenv').config(); // Carga las variables del archivo .env para usarlas con process.env
+require('dotenv').config();
 
-// Usamos el DNS de Google porque algunos routers bloquean las consultas que necesita MongoDB
-dns.setServers(['8.8.8.8', '8.8.4.4']);
-
-// Leemos la dirección de conexión desde el archivo .env — así la contraseña no queda en el código
 const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('Conectado a MongoDB Atlas'))
-  .catch(err => console.error('Error conectando:', err));
+// Cache global: Vercel reutiliza instancias calientes, así evitamos reconectar en cada request
+let cachedConn = global._mongoConn ?? null;
+
+if (!cachedConn) {
+  cachedConn = global._mongoConn = mongoose.connect(MONGO_URI)
+    .then(() => { console.log('Conectado a MongoDB Atlas'); })
+    .catch(err => { console.error('Error conectando:', err); global._mongoConn = null; });
+}
 
 // Schema = estructura que deben tener los documentos en la colección "pedidos"
 const pedidoSchema = new mongoose.Schema({

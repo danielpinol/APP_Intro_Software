@@ -1,4 +1,4 @@
-<div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+<div class="min-h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
 
   <app-navbar />
 
@@ -11,8 +11,8 @@
       Car wash · Guatemala
     </span>
 
-    <!-- Título -->
-    <h1 class="text-6xl font-black uppercase leading-none tracking-tight max-w-2xl">
+    <!-- Título — más pequeño en mobile, grande en desktop -->
+    <h1 class="text-4xl sm:text-6xl font-black uppercase leading-none tracking-tight max-w-2xl">
       Tu carro,
       <span class="text-[#00E5FF]"> limpio</span>
       <br>cuando quieras.
@@ -23,14 +23,14 @@
       Sin filas. Sin efectivo. Pide tu lavado desde aquí en segundos.
     </p>
 
-    <!-- Botones -->
-    <div class="flex items-center gap-3 mt-6">
+    <!-- Botones — apilados en mobile, lado a lado en desktop -->
+    <div class="flex flex-col sm:flex-row items-center gap-3 mt-6 w-full sm:w-auto">
       <a routerLink="/solicitar"
-        class="px-6 py-3 bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest rounded-xl hover:bg-[#00c8e0] transition-colors text-sm">
+        class="w-full sm:w-auto px-6 py-3 bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest rounded-xl hover:bg-[#00c8e0] transition-colors text-sm text-center">
         Solicitar ahora
       </a>
       <a routerLink="/paquetes"
-        class="px-6 py-3 border border-white/20 text-white font-black uppercase tracking-widest rounded-xl hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors text-sm">
+        class="w-full sm:w-auto px-6 py-3 border border-white/20 text-white font-black uppercase tracking-widest rounded-xl hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors text-sm text-center">
         Ver paquetes
       </a>
     </div>

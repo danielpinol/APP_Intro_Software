@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-[#080805] text-white" style="font-family: 'Inter', sans-serif;">
 
   <!-- Header del admin -->
-  <header class="border-b border-white/10 px-10 py-5 flex items-center justify-between">
+  <header class="border-b border-white/10 px-4 sm:px-10 py-5 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <div class="w-2 h-2 rounded-full bg-[#00E5FF]"></div>
       <span class="text-xs font-black uppercase tracking-widest text-white/40">Admin Panel</span>
@@ -9,20 +9,19 @@
     <span class="text-xs font-black uppercase tracking-widest text-white/20">uWash</span>
   </header>
 
-  <main class="px-10 py-8 flex flex-col gap-8">
+  <main class="px-4 sm:px-10 py-8 flex flex-col gap-8">
 
-    <!-- Título -->
     <h1 class="text-4xl font-black uppercase tracking-tight">Pedidos</h1>
 
-    <!-- Stats -->
+    <!-- Stats — 2 columnas siempre (son simples, caben bien) -->
     <div class="grid grid-cols-2 gap-4">
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-2">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col gap-2">
         <p class="text-xs font-black uppercase tracking-widest text-white/40">Total pedidos</p>
-        <p class="text-5xl font-black">{{ totalPedidos }}</p>
+        <p class="text-4xl sm:text-5xl font-black">{{ totalPedidos }}</p>
       </div>
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-2">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col gap-2">
         <p class="text-xs font-black uppercase tracking-widest text-white/40">Total generado</p>
-        <p class="text-5xl font-black text-[#00E5FF]">Q{{ totalGenerado }}</p>
+        <p class="text-4xl sm:text-5xl font-black text-[#00E5FF]">Q{{ totalGenerado }}</p>
       </div>
     </div>
 
@@ -31,7 +30,7 @@
       <p class="text-xs font-black uppercase tracking-widest text-white/40">Lista de pedidos</p>
 
       @for (pedido of pedidos; track pedido.id) {
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col gap-5 hover:border-white/20 transition-colors">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col gap-5 hover:border-white/20 transition-colors">
 
           <!-- Encabezado del pedido -->
           <div class="flex items-start justify-between">
@@ -50,8 +49,8 @@
             }
           </div>
 
-          <!-- Info del vehículo -->
-          <div class="grid grid-cols-4 gap-4">
+          <!-- Info del vehículo — 2 columnas en mobile, 4 en desktop -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div>
               <p class="text-xs text-white/40 uppercase tracking-widest">Vehículo</p>
               <p class="font-black mt-0.5">{{ pedido.marca }} {{ pedido.modelo }}</p>
@@ -71,7 +70,7 @@
           </div>
 
           <!-- Botones -->
-          <div class="flex gap-2 border-t border-white/10 pt-4">
+          <div class="flex flex-wrap gap-2 border-t border-white/10 pt-4">
             <button
               (click)="cambiarEstado(pedido.id, 'En proceso')"
               [class]="pedido.estado === 'En proceso' ? 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805]' : 'px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border border-white/10 text-white/40 hover:border-[#00E5FF] hover:text-[#00E5FF] transition-colors'">

@@ -1,8 +1,8 @@
-<div class="h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
+<div class="min-h-screen bg-[#080805] text-white flex flex-col" style="font-family: 'Inter', sans-serif;">
 
   <app-navbar />
 
-  <main class="flex-1 flex flex-col px-10 py-6 gap-5">
+  <main class="flex-1 flex flex-col px-4 sm:px-10 py-6 gap-5">
 
     <h1 class="text-3xl font-black uppercase tracking-tight">Solicitar lavado</h1>
 
@@ -13,10 +13,11 @@
         class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
     </div>
 
-    <!-- Tipo de lavado — al hacer click se guarda el tipo y precio seleccionado -->
+    <!-- Tipo de lavado -->
     <div class="flex flex-col gap-3">
       <label class="text-xs font-black uppercase tracking-widest text-white/40">Tipo de lavado</label>
-      <div class="grid grid-cols-3 gap-3">
+      <!-- 3 columnas en desktop, 1 en mobile -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         @for (tipo of tipos; track tipo.nombre) {
           <button type="button" (click)="seleccionar(tipo)"
             [class]="tipoSeleccionado.nombre === tipo.nombre
@@ -29,10 +30,10 @@
       </div>
     </div>
 
-    <!-- Datos del carro -->
+    <!-- Datos del carro — 2 columnas en mobile, 4 en desktop -->
     <div class="flex flex-col gap-3">
       <label class="text-xs font-black uppercase tracking-widest text-white/40">Datos del carro</label>
-      <div class="grid grid-cols-4 gap-3">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <input #marca type="text" placeholder="Marca"
           class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/20 focus:border-[#00E5FF] focus:outline-none transition-colors">
         <input #modelo type="text" placeholder="Modelo"
@@ -44,7 +45,7 @@
       </div>
     </div>
 
-    <div class="mt-auto">
+    <div class="mt-auto pt-4">
       <button type="button"
         (click)="enviar(nombre.value, marca.value, modelo.value, anio.value, placa.value)"
         class="w-full py-3 rounded-xl bg-[#00E5FF] text-[#080805] font-black uppercase tracking-widest text-sm hover:bg-[#00c8e0] transition-colors">

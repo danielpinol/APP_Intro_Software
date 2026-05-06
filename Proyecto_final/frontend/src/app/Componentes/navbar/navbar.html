@@ -1,58 +1,95 @@
-
-  <!-- Orbs de fondo -->
+<!-- Orbs de fondo -->
 <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
   <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#00E5FF] opacity-[0.07] blur-[150px] animate-float"></div>
   <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0055ff] opacity-[0.06] blur-[180px] animate-float-reverse"></div>
 </div>
 
-<nav class="relative z-10 flex items-center px-8 py-2 bg-[#080805]" style="font-family: 'Inter', sans-serif;">
-  <!-- LOGO UWASH -->
-  <a routerLink="/" class="w-1/4 hover:opacity-80 transition-opacity">
-    <img src="logo.png" alt="Uwash logo" class="h-16 w-auto">
-  </a>
+<nav class="relative z-10 bg-[#080805]" style="font-family: 'Inter', sans-serif;">
 
-  <!-- LINKS -->
-  <ul class="flex flex-1 justify-center items-center gap-8 text-xs font-black uppercase tracking-widest text-white/70">
-    <li><a routerLink="/solicitar" class="hover:text-[#00E5FF] transition-colors">Solicitar</a></li>
-    <li><a routerLink="/paquetes" class="hover:text-[#00E5FF] transition-colors">Paquetes</a></li>
-    <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
-  </ul>
+  <!-- Fila principal -->
+  <div class="flex items-center justify-between px-4 py-2 md:px-8">
 
-  <!-- BTN LOGIN / SALUDO + SIGN OUT -->
-  <div class="w-1/4 flex justify-end items-center gap-3">
+    <!-- LOGO -->
+    <a routerLink="/" class="hover:opacity-80 transition-opacity">
+      <img src="logo.png" alt="Uwash logo" class="h-12 md:h-16 w-auto">
+    </a>
 
-    <!-- @if revisa si auth.usuario() tiene valor (nombre del usuario) o es null (no logueado) -->
-    @if (auth.usuario()) {
+    <!-- LINKS — solo visible en desktop -->
+    <ul class="hidden md:flex flex-1 justify-center items-center gap-8 text-xs font-black uppercase tracking-widest text-white/70">
+      <li><a routerLink="/solicitar" class="hover:text-[#00E5FF] transition-colors">Solicitar</a></li>
+      <li><a routerLink="/paquetes" class="hover:text-[#00E5FF] transition-colors">Paquetes</a></li>
+      <li><a routerLink="/mi-orden" class="hover:text-[#00E5FF] transition-colors">Mi orden</a></li>
+    </ul>
 
-      <!-- Pill (pastilla) que agrupa avatar + nombre + botón de salir -->
-      <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-1.5">
-
-        <!-- Avatar circular: muestra la primera letra del nombre en mayúscula -->
-        <!-- charAt(0) = primer carácter | toUpperCase() = lo pone en mayúscula -->
-        <div class="w-8 h-8 rounded-full bg-[#00E5FF] flex items-center justify-center text-[#080805] text-xs font-black flex-shrink-0">
-          {{ auth.usuario()!.charAt(0).toUpperCase() }}
+    <!-- BTN LOGIN — solo visible en desktop -->
+    <div class="hidden md:flex justify-end items-center gap-3 w-1/4">
+      @if (auth.usuario()) {
+        <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-1.5">
+          <div class="w-8 h-8 rounded-full bg-[#00E5FF] flex items-center justify-center text-[#080805] text-xs font-black flex-shrink-0">
+            {{ auth.usuario()!.charAt(0).toUpperCase() }}
+          </div>
+          <div class="flex flex-col leading-none">
+            <span class="text-[10px] text-white/40 uppercase tracking-widest">Hola,</span>
+            <span class="text-sm font-bold text-white truncate max-w-[100px]">{{ auth.usuario() }}</span>
+          </div>
+          <button (click)="auth.logout()"
+            class="ml-1 px-2 py-1 rounded-lg text-xs font-black uppercase tracking-widest text-white/40 hover:text-red-400 hover:bg-red-400/10 transition-colors">
+            Salir
+          </button>
         </div>
+      } @else {
+        <a routerLink="/login" class="px-7 py-2.5 text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
+          Login
+        </a>
+      }
+    </div>
 
-        <!-- Texto: "Hola," arriba en gris pequeño, nombre abajo en blanco -->
-        <!-- truncate + max-w-[100px] evita que un nombre muy largo rompa el diseño -->
-        <div class="flex flex-col leading-none">
-          <span class="text-[10px] text-white/40 uppercase tracking-widest">Hola,</span>
-          <span class="text-sm font-bold text-white truncate max-w-[100px]">{{ auth.usuario() }}</span>
-        </div>
+    <!-- HAMBURGER — solo visible en mobile -->
+    <button (click)="toggleMenu()" class="md:hidden p-2 text-white/70 hover:text-white transition-colors" aria-label="Menú">
+      @if (menuAbierto()) {
+        <!-- Icono X para cerrar -->
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      } @else {
+        <!-- Icono hamburguesa -->
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      }
+    </button>
 
-        <!-- Botón de Sign out: llama a auth.logout() que borra localStorage y pone usuario en null -->
-        <!-- Al ponerse null, el @if falla y Angular muestra el botón de Login automáticamente -->
-        <button (click)="auth.logout()"
-          class="ml-1 px-2 py-1 rounded-lg text-xs font-black uppercase tracking-widest text-white/40 hover:text-red-400 hover:bg-red-400/10 transition-colors">
-          Salir
-        </button>
-      </div>
-
-    } @else {
-      <!-- Si no hay usuario logueado, se muestra el botón normal de Login -->
-      <a routerLink="/login" class="px-7 py-2.5 text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
-        Login
-      </a>
-    }
   </div>
+
+  <!-- MENÚ DESPLEGABLE MOBILE — visible solo cuando menuAbierto es true -->
+  @if (menuAbierto()) {
+    <div class="md:hidden flex flex-col border-t border-white/10 px-4 pb-4 pt-3 gap-1">
+      <a routerLink="/solicitar" (click)="toggleMenu()" class="py-2.5 text-xs font-black uppercase tracking-widest text-white/70 hover:text-[#00E5FF] transition-colors">Solicitar</a>
+      <a routerLink="/paquetes"  (click)="toggleMenu()" class="py-2.5 text-xs font-black uppercase tracking-widest text-white/70 hover:text-[#00E5FF] transition-colors">Paquetes</a>
+      <a routerLink="/mi-orden"  (click)="toggleMenu()" class="py-2.5 text-xs font-black uppercase tracking-widest text-white/70 hover:text-[#00E5FF] transition-colors">Mi orden</a>
+
+      <div class="border-t border-white/10 pt-3 mt-1">
+        @if (auth.usuario()) {
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-full bg-[#00E5FF] flex items-center justify-center text-[#080805] text-xs font-black">
+                {{ auth.usuario()!.charAt(0).toUpperCase() }}
+              </div>
+              <span class="text-sm font-bold text-white">{{ auth.usuario() }}</span>
+            </div>
+            <button (click)="auth.logout(); toggleMenu()"
+              class="px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest text-white/40 hover:text-red-400 hover:bg-red-400/10 transition-colors">
+              Salir
+            </button>
+          </div>
+        } @else {
+          <a routerLink="/login" (click)="toggleMenu()"
+            class="block w-full py-2.5 text-center text-xs font-black uppercase tracking-widest bg-[#00E5FF] text-[#080805] hover:bg-[#00c8e0] transition-colors rounded-lg">
+            Login
+          </a>
+        }
+      </div>
+    </div>
+  }
+
 </nav>
