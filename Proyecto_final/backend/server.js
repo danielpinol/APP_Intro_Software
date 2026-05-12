@@ -29,7 +29,7 @@ app.post('/api/pedidos', async (req, res) => {
     await nuevoPedido.save();
     res.json({ mensaje: 'Pedido guardado correctamente' });
   } catch (error) {
-    res.status(500).json({ error: 'Error guardando pedido' });
+    res.status(500).json({ error: 'Error guardando pedido', error });
   }
 });
 
