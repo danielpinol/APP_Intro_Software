@@ -3,13 +3,20 @@ require('dotenv').config();
 
 const MONGO_URI = process.env.MONGO_URI;
 
-// Cache global: Vercel reutiliza instancias calientes, así evitamos reconectar en cada request
-let cachedConn = global._mongoConn ?? null;
+// Guardamos la promesa de conexión en global para reutilizarla entre requests en Vercel
+// Sin esto, cada request en cold start falla porque MongoDB todavía no está listo
+let connectionPromise = global._mongoPromise ?? null;
 
-if (!cachedConn) {
-  cachedConn = global._mongoConn = mongoose.connect(MONGO_URI)
-    .then(() => { console.log('Conectado a MongoDB Atlas'); })
-    .catch(err => { console.error('Error conectando:', err); global._mongoConn = null; });
+function connectDB() {
+  // readyState 1 = ya conectado, no hace falta reconectar
+  if (mongoose.connection.readyState === 1) return Promise.resolve();
+  // Si ya hay una conexión en progreso, reutilizamos esa misma promesa
+  if (!connectionPromise) {
+    connectionPromise = global._mongoPromise = mongoose.connect(MONGO_URI)
+      .then(() => console.log('Conectado a MongoDB Atlas'))
+      .catch(err => { console.error('Error conectando:', err); connectionPromise = global._mongoPromise = null; });
+  }
+  return connectionPromise;
 }
 
 // Schema = estructura que deben tener los documentos en la colección "pedidos"
@@ -50,5 +57,5 @@ const usuarioSchema = new mongoose.Schema({
 const Pedido  = mongoose.model('Pedido',  pedidoSchema);
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 
-// Exportamos los modelos para usarlos en los servidores
-module.exports = { Pedido, Usuario };
+// Exportamos los modelos Y connectDB para que server.js pueda esperar la conexión
+module.exports = { Pedido, Usuario, connectDB };

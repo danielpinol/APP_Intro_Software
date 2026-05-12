@@ -1,10 +1,17 @@
 const express = require('express');
 const cors = require('cors');
-const { Pedido, Usuario } = require('./models');
+const { Pedido, Usuario, connectDB } = require('./models');
 
 const app = express();
 app.use(cors());         // Permite peticiones desde el frontend
 app.use(express.json()); // Lee el body como JSON
+
+// Middleware que corre antes de CADA petición — espera a que MongoDB esté conectado
+// Esto soluciona el cold start de Vercel donde la conexión todavía no está lista
+app.use(async (req, res, next) => {
+  await connectDB();
+  next(); // next() le dice a Express que continúe con la ruta correspondiente
+});
 
 // ── CLIENTE ────────────────────────────────────────────────────
 

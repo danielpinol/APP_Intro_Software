@@ -39,12 +39,13 @@
               <p class="text-xs text-white/40 mt-0.5">{{ pedido.fecha }}</p>
             </div>
 
-            <!-- Botón de subir fotos en la esquina superior derecha de cada pedido -->
-            <!-- El input está oculto (hidden) — el label lo activa al hacer clic porque tiene el mismo [for] e [id] -->
-            <!-- [id] usa el id del pedido para que cada input sea único y no se mezclen entre pedidos -->
             <div class="flex items-center gap-2">
-              <input type="file" accept="image/*" multiple [id]="'fotos-' + pedido.id" class="hidden">
-              <label [for]="'fotos-' + pedido.id"
+              <!-- accept="image/*": filtra el explorador para mostrar solo imágenes, no documentos ni videos -->
+              <!-- multiple: permite elegir varias fotos a la vez; sin esto solo se podría elegir una -->
+              <!-- class="hidden": oculta el input feo del navegador — el label de abajo lo sustituye visualmente -->
+              <input type="file" accept="image/*" multiple id="fotos" class="hidden">
+              <!-- [for] conecta este label con el input del mismo id — al hacer clic en "+ Fotos" se abre el explorador de archivos -->
+              <label for="fotos"
                 class="cursor-pointer text-[10px] font-black uppercase tracking-widest text-white hover:text-[#00E5FF] transition-colors">
                 + Fotos
               </label>
