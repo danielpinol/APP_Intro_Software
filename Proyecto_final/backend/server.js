@@ -40,6 +40,9 @@ app.post('/api/pedidos', async (req, res) => {
   }
 });
 
+
+// –––  USUARIOS  –––––––––––––––––––––––––––––––––––––––––––––––––
+
 // Registra un usuario nuevo (verifica que el gmail no exista antes)
 app.post('/api/registro', async (req, res) => {
   try {
